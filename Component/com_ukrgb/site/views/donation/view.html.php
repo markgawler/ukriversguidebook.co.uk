@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @version		$Id: view.html.php 15 2009-11-02 18:37:15Z chdemko $
- * @package		Joomla16.Tutorials
- * @subpackage	Components
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
- * @author		Christophe Demko
- * @link		http://joomlacode.org/
+ * @version		0.1
+ * @package		UKRGB - Donation
+ * @copyright	Copyright (C) 2012 The UK Rivers Guide Book, All rights reserved.
+ * @author		Mark Gawler
+ * @link		http://www.ukriversguidebook.co.uk
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -24,17 +23,20 @@ class UkrgbViewDonation extends JView
 	// Overwriting JView display method
 	function display($tpl = null) 
 	{
-		$status = $this->get('getTransactionStatus');
-			
+		$status = $this->get('TransactionStatus');
+		//echo "Status:"; 
+		//var_dump($status);
 		switch ($status)
 		{
 		case UkrgbTxState::Good:
 			
-			$this->status =  $this->data["payment_status"];
+			$this->status = $this->get('PaymentStatus');
 			if ($status = 'Complete')
 			{
-				$this->value = $this->data["mc_gross"];
-				$this->name = $this->data["first_name"];
+				$this->value = $this->get('Amount');
+				$this->name = $this->get('Name');
+				$this->returnUrl = "/forum/viewforum.php?f=" . $this->get('ForumId');
+				$this->linkText = $this->get('ForumName');
 				
 				// Check for errors.
 				if (count($errors = $this->get('Errors')))
@@ -50,6 +52,8 @@ class UkrgbViewDonation extends JView
 			break;
 		case UkrgbTxState::Error:
 			$tpl = 'problem';
+			$this->errorMsg = $this->get('ErrorMsg');
+			$this->responceCode = $this->get('ResponceCode');
 			break;
 	
 		case UkrgbTxState::None:

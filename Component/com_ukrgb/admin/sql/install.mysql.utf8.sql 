@@ -19,7 +19,7 @@ CREATE TABLE `#__ukrgb_doantion` (
   `custom`  varchar (20),
   `payer_status` varchar (20),
   `business` varchar(40),
-  `quantity`  mediumint(8) ,
+  `quantity`  mediumint(8),
   `payer_email` varchar(40),
   `txn_id` varchar(30),
   `payment_type` varchar (20),
@@ -42,4 +42,3 @@ CREATE TABLE `#__ukrgb_doantion` (
 
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
-

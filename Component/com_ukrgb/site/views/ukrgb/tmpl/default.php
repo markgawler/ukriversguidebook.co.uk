@@ -13,10 +13,7 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <h1>The UK Rivers Guidebook</h1>
-
-
-<p>Default template</p>
-<p><?php echo $this->name; ?> donated <?php echo $this->value; ?></p>
+<p><?php echo $this->name; ?></p>
 
 
 
