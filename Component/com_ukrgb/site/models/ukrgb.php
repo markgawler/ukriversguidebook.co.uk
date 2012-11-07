@@ -21,11 +21,9 @@ class UkrgbModelUkrgb extends JModelItem
 	 */
 	public function getMsg()
 	{
-		echo "Ukrgb Model";
-		echo "<br>";
 		if (!isset($this->msg))
 		{
-			$this->msg = 'UKRGB Blogs!';
+			$this->msg = 'Nothing to see here!';
 		}
 
 		return $this->msg;

@@ -1,4 +1,13 @@
 <?php
+/**
+ * @version		0.1
+ * @package		UKRGB - Donation
+ * @copyright	Copyright (C) 2012 The UK Rivers Guide Book, All rights reserved.
+ * @author		Mark Gawler
+ * @link		http://www.ukriversguidebook.co.uk
+ * @license		License GNU General Public License version 2 or later
+ */
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
@@ -24,10 +33,17 @@ class UkrgbModelDonation extends JModelItem
 	 * @var int $status;
 	 */
 	protected $status;
+	
 	/**
-	 * @var int $status;
+	 * @var array $data;
 	 */
 	protected $data;
+	
+	/**
+	 * @var $responce
+	 */
+	protected $responce;
+	
 	
 	/**
 	 * Returns a reference to the a Table object, always creating it.
@@ -49,7 +65,6 @@ class UkrgbModelDonation extends JModelItem
 		$this->status = UkrgbTxState::None;
 		
 		$input = JFactory::getApplication()->input;
-		echo "Get Transaction <br>";
 		/*
 		 * http://area51.ukriversguidebook.co.uk/?option=com_ukrgb&task=donation
 		* &tx=8KD08645R4242620M
@@ -61,8 +76,9 @@ class UkrgbModelDonation extends JModelItem
 		* &sig=qpQHTyYtztCgnpUM27DRNcG1v%2ffPoUezS1jFfYTPG%2btJx2EggoqGt5exMziA2G7LsdndWEuTXj%2bsdfoFMz8ULjxqVoAAipxpaT5JchBfQDYkF%2f8p8WYsm%2bGzgeinyGRXI2%2fCV%2fF8v8BM6Pu57Ypl4CJjYxgmZlxrM6Elzdr8eYg%3d
 		*
 		*/
-		$transaction = $input->get ('tx','none');
+		$transaction = $input->get ('tx');
 		$sig = $input->get ('sig'); // not uses yet
+		$message = $input->get('cm'); // this seems to contain the 'custom' value.
 		
 		if (!isset($transaction))
 		{
@@ -70,8 +86,6 @@ class UkrgbModelDonation extends JModelItem
 			return $this->status;
 		}
 		
-		echo $transaction;
-		echo "<br>";
 		
 		
 		// Create an instance of a default JHttp object.
@@ -82,14 +96,14 @@ class UkrgbModelDonation extends JModelItem
 			
 		// Create a 'stream' transport.
 		$http = new JHttp($options, $transport);
-			
 					
 		// Prepare the update data.
 		$data = array('cmd' => '_notify-synch', 'tx' => $transaction, 'at' => '0jGo0GXewcK0ovOtA4RILRyRHOOxiLuibwG_ABUKd4JHdB-4wte4LgqARkW');
 			
 		// Invoke the GET request.
 		$response = $http->post('https://www.sandbox.paypal.com/cgi-bin/webscr', $data);
-			
+		$this->responce = $response;
+		
 		if($response->code == 200 AND strpos($response->body, 'SUCCESS') === 0)
 		{
 			// Good response
@@ -115,109 +129,143 @@ class UkrgbModelDonation extends JModelItem
 				$data['charset'] = 'UTF-8';
 			}
 			
+			$data['tx'] = $transaction;
 			// put it in the DB
 			$this->storeTransaction($data);
 			$this->data = $data;
 		}
 		else
 		{
+			$user = JFactory::getUser();
 			$this->status = UkrgbTxState::Error;
-			echo "<p>That didn't work</p>";
-			echo $response->body;
-			echo '<br>';
-			echo $response->code;
+			$data = array(
+					'tx' => $transaction,
+					'user_id' => $user->id,);
+			$this->data = $data;
 		}
 		
 		// return the data to the View
 		return $this->status;
 	}
 	
-	
+	/**
+	 * Get the amount
+	 * @return double the amount of the donation
+	 */
+	public function getAmount()
+	{
+		return $this->data['mc_gross'];
+	}
 	
 	/**
 	 * Get the name
 	 * @return string the First Name of the dorner 
 	 */
+	public function getName()
+	{
+		return $this->data['first_name'];
+	}
 	
 	/**
-	public function getMsg()
+	 * Get the payment status
+	 * @return string payment status
+	 */
+	public function getPaymentStatus()
 	{
-		echo "Donation Model - get";
-		echo "<br>";
-		
-		//if (!is_array($this->msg))
-		//{
-		//	$this->msg = array();
-		//}
-		
-		//if (!isset($this->msg[$id]))
-		//{
-			//request the selected id
-			$id = 1;
-		
-			// Get a TableHelloWorld instance
-			$table = $this->getTable();
-		
-			// Load the message
-			$table->load($id);
-		
-			// Assign the message
-			$this->msg[$id] = $table->name;
-			
-		//}
-		
-		return $this->msg[$id];
-		
+		return $this->data['payment_status'];
 	}
-	*/
 	
-	 
-	
-	public function storeTransaction($ppData)
+	/**
+	 * Get Http Responce Code
+	 */
+	public function getResponceCode()
 	{
-		$user = JFactory::getUser();
-		var_dump ($user);
-		echo " Donation Model - Store Transaction";
-		$data = array(
-				"user_id" => $user->id,
-				"mc_gross" => $ppData["mc_gross"],
-				"protection_eligibility" => $ppData["protection_eligibility"],
-				"payer_id" => $ppData["payer_id"],
-				"tax" => $ppData["tax"],
-				"payment_date" => $ppData["payment_date"],
-				"payment_status" => $ppData["payment_status"],
-				"terminal_id" => $ppData["terminal_id"],
-				"first_name" => $ppData["first_name"],
-				"receipt_reference_number" => $ppData["receipt_reference_number"],
-				"mc_fee" => $ppData["mc_fee"],
-				"custom" => $ppData["custom"],
-				"payer_status" => $ppData["payer_status"],
-				"business" => $ppData["business"],
-				"quantity" => $ppData["quantity"],
-				"payer_email" => $ppData["payer_email"] ,
-				"payment_type" => $ppData["payment_type"], 
-				"last_name" => $ppData["last_name"],
-				"receiver_email" => $ppData["receiver_email"], 
-				"store_id" => $ppData["store_id"],
-				"payment_fee" => $ppData["payment_fee"], 
-				"receiver_id" => $ppData["receiver_id"],
-				"pos_transaction_type" => $ppData["pos_transaction_type"], 
-				"txn_type" =>  $ppData["txn_type"],
-				"item_name" => $ppData["item_name"],
-				"num_offers" => $ppData["num_offers"],
-				"mc_currency" => $ppData["mc_currency"],
-				"item_number" => $ppData["item_number"],
-				"residence_country" => $ppData["residence_country"], 
-				"handling_amount" => $ppData["transaction_subject"],
-				"transaction_subject" => $ppData["transaction_subject"], 
-				"payment_gross" => $ppData["payment_gross"],
-				"shipping" => 	$ppData["shipping"],
-				);
-		
+		return $this->responce->code;
+	}
+	
+	/**
+	 * Get PayPal Error Mgs
+	 */
+	public function getErrorMsg()
+	{
+		return $this->responce->body;
+	}
+	/**
+	 * Get return Forum id
+	 */
+	public function getForumId()
+	{
+		return substr($this->data['custom'],2);
+	}
+	/**
+	 * Get return Forum Name
+	 */
+	public function getForumName()
+	{
+		return $this->data['item_name'];
+	}
+	
+	
+	/**
+	 * Store transaction data in the Database
+	 * @return void 
+	*/
+	private function storeTransaction($ppData)
+	{
 		// Get a Table instance
 		$table = $this->getTable();
-		$table->save($data);
 		
+		// Check this is not caused by a refresh i.e a repeat for the same transaction
+		$db =  $table->getDbo();
+		$query = "SELECT ".$db->nameQuote('tx')." FROM ".$db->nameQuote('#__ukrgb_doantion')." WHERE ".$db->nameQuote('tx')." = ".$db->quote($ppData["tx"]).";";
+		$db->setQuery($query);
+		$indb = $db->loadResult();
+		
+		if (!isset($indb))
+		{
+			$user = JFactory::getUser();
+	
+			//echo " Donation Model - Store Transaction";
+			$data = array(
+					"tx" => $ppData["tx"],
+					"user_id" => $user->id,
+					"phpBB_user_id" => "",
+					"mc_gross" => $ppData["mc_gross"],
+					"protection_eligibility" => $ppData["protection_eligibility"],
+					"payer_id" => $ppData["payer_id"],
+					"tax" => $ppData["tax"],
+					"payment_date" => $ppData["payment_date"],
+					"payment_status" => $ppData["payment_status"],
+					"first_name" => $ppData["first_name"],
+					"receipt_reference_number" => $ppData["receipt_reference_number"],
+					"mc_fee" => $ppData["mc_fee"],
+					"custom" => $ppData["custom"],
+					"payer_status" => $ppData["payer_status"],
+					"business" => $ppData["business"],
+					"quantity" => $ppData["quantity"],
+					"payer_email" => $ppData["payer_email"] ,
+					"payment_type" => $ppData["payment_type"], 
+					"last_name" => $ppData["last_name"],
+					"receiver_email" => $ppData["receiver_email"], 
+					"store_id" => $ppData["store_id"],
+					"payment_fee" => $ppData["payment_fee"], 
+					"receiver_id" => $ppData["receiver_id"],
+					"pos_transaction_type" => $ppData["pos_transaction_type"], 
+					"txn_type" =>  $ppData["txn_type"],
+					"item_name" => $ppData["item_name"],
+					"num_offers" => $ppData["num_offers"],
+					"mc_currency" => $ppData["mc_currency"],
+					"item_number" => $ppData["item_number"],
+					"residence_country" => $ppData["residence_country"], 
+					"handling_amount" => $ppData["transaction_subject"],
+					"transaction_subject" => $ppData["transaction_subject"], 
+					"payment_gross" => $ppData["payment_gross"],
+					"shipping" => 	$ppData["shipping"],
+					);
+	
+	
+			$table->save($data);
+		}		
 	}
 	
 	

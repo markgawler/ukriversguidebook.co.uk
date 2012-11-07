@@ -26,7 +26,6 @@ class UkrgbViewUkrgb extends JView
 	{
 		// Assign data to the view
 		$this->name = $this->get('Msg');
-		$this->value = 9999;
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
