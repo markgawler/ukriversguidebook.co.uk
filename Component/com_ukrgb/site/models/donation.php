@@ -42,7 +42,7 @@ class UkrgbModelDonation extends JModelItem
 	/**
 	 * @var $responce
 	 */
-	protected $responce;
+	protected $response;
 	
 	
 	/**
@@ -103,7 +103,6 @@ class UkrgbModelDonation extends JModelItem
 		// Invoke the GET request.
 		$response = $http->post('https://www.sandbox.paypal.com/cgi-bin/webscr', $data);
 		$this->responce = $response;
-		
 		if($response->code == 200 AND strpos($response->body, 'SUCCESS') === 0)
 		{
 			// Good response
@@ -195,14 +194,16 @@ class UkrgbModelDonation extends JModelItem
 	 */
 	public function getForumId()
 	{
-		return substr($this->data['custom'],2);
+		$bits = explode(":", $this->data['item_name']);
+		return $bits[0];
 	}
 	/**
 	 * Get return Forum Name
 	 */
 	public function getForumName()
 	{
-		return $this->data['item_name'];
+		$bits = explode(":", $this->data['item_name']);
+		return $bits[1];
 	}
 	
 	
@@ -224,8 +225,6 @@ class UkrgbModelDonation extends JModelItem
 		if (!isset($indb))
 		{
 			$user = JFactory::getUser();
-	
-			//echo " Donation Model - Store Transaction";
 			$data = array(
 					"tx" => $ppData["tx"],
 					"user_id" => $user->id,
