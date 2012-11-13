@@ -24,11 +24,14 @@ class UkrgbController extends JController
 	function donation()
 	{
 		$input = JFactory::getApplication()->input;
-		
 		$input->set('view','donation');
-		
-		
-		
+		parent::display();
+	}
+	
+	function map()
+	{
+		$input = JFactory::getApplication()->input;
+		$input->set('view','map');
 		parent::display();
 	}
 }
