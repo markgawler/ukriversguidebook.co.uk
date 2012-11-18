@@ -34,4 +34,11 @@ class UkrgbController extends JController
 		$input->set('view','map');
 		parent::display();
 	}
+	
+	function riverGuide()
+	{
+		$input = JFactory::getApplication()->input;
+		$input->set('view','riverguide');
+		parent::display();
+	}
 }

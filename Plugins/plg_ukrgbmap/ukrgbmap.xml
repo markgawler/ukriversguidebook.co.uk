@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="content">
+	<name>UKRGB-Maps</name>
+	<creationDate>November 2012</creationDate>
+	<author>Mark Gawler</author>
+	<authorEmail>markg@wler.co.uk</authorEmail>
+	<authorUrl>www.ukriversguidebook.co.uk</authorUrl>
+	<copyright>Copyright UKRGB</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>0.0.1-002</version>
+	<description>The UKRGB Map Content plugin, display maps in riverguides</description>
+
+	<files>
+   		<filename plugin="ukrgbmap">ukrgbmap.php</filename>
+	</files>
+</extension>
+

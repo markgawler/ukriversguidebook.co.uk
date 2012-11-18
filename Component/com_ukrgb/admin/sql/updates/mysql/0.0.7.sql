@@ -23,7 +23,7 @@ CREATE TABLE `#__ukrgb_doantion` (
   `payer_email` varchar(40),
   `txn_id` varchar(30),
   `payment_type` varchar (20),
-  `last_name"` varchar(40),
+  `last_name` varchar(40),
   `receiver_email` varchar(40),
   `store_id` varchar(20),
   `payment_fee` DECIMAL(5,2),

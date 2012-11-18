@@ -23,7 +23,7 @@ CREATE TABLE `#__ukrgb_doantion` (
   `payer_email` varchar(40),
   `txn_id` varchar(30),
   `payment_type` varchar (20),
-  `last_name"` varchar(40),
+  `last_name` varchar(40),
   `receiver_email` varchar(40),
   `store_id` varchar(20),
   `payment_fee` DECIMAL(5,2),
@@ -42,3 +42,23 @@ CREATE TABLE `#__ukrgb_doantion` (
 
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `#__ukrgb_maps`;
+CREATE TABLE `#__ukrgb_maps` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`centre_point` POINT NOT NULL,
+`zoom` TINYINT NOT NULL 
+) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+INSERT INTO `#__ukrgb_maps` (centre_point, zoom) VALUES( GeomFromText( 'POINT(51.514 -0.1167)' ), 12);
+
+
+DROP TABLE IF EXISTS `#__ukrgb_riverguides`;
+CREATE TABLE `#__ukrgb_riverguides` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`article_id` INT(11) NOT NULL,
+`map_id` INT(11),
+`putin_geo` POINT,
+`takeout_geo` POINT ,
+`grade` TINYINT NOT NULL
+) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;

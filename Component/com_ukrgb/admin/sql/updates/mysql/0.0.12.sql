@@ -1,0 +1,1 @@
+ALTER TABLE `#__ukrgb_riverguides` ADD `grade` TINYINT NOT NULL ;

@@ -2,7 +2,7 @@
 
 /**
  * @version		0.1
- * @package		UKRGB - Map
+ * @package		UKRGB - RiverGuide
  * @copyright	Copyright (C) 2012 The UK Rivers Guide Book, All rights reserved.
  * @author		Mark Gawler
  * @link		http://www.ukriversguidebook.co.uk
@@ -18,23 +18,18 @@ jimport('joomla.application.component.view');
 /**
  * HTML View class for the Ukrgb Component
  */
-class UkrgbViewMap extends JView
+class UkrgbViewRiverGuide extends JView
 {
 	// Overwriting JView display method
 	function display($tpl = null) 
 	{	
-		JHtml::_('behavior.framework');
-		JHtml::_('script', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js');
-		JHtml::_('script', 'components/com_ukrgb/views/map/js/map.js');
-		JHtml::_('stylesheet', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css');
-		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
-		
-		$url = JURI::base() . 'index.php?option=com_ukrgb&task=map&tmpl=raw&format=json';
-		$document = &JFactory::getDocument();
-		$document->addScriptDeclaration('var url = "' .$url.'";');
 		
 		// Assign data to the view
-		$this->message = "My Map View";
+		$this->message = "My River Guide View";
+		
+		// Get the guide Data
+		$this->data = $this->get('GuideData');
+
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
