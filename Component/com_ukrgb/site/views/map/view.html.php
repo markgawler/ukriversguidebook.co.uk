@@ -29,9 +29,12 @@ class UkrgbViewMap extends JView
 		JHtml::_('stylesheet', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css');
 		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
 		
-		$url = JURI::base() . 'index.php?option=com_ukrgb&task=map&tmpl=raw&format=json';
+		$params = json_encode(array(
+				'url' => JURI::base() . 'index.php?option=com_ukrgb&task=map&tmpl=raw&format=json',
+				'mapid' => '27',));
+				
 		$document = &JFactory::getDocument();
-		$document->addScriptDeclaration('var url = "' .$url.'";');
+		$document->addScriptDeclaration('var params = ' .$params.';');
 		
 		// Assign data to the view
 		$this->message = "My Map View";

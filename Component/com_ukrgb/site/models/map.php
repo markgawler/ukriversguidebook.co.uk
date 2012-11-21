@@ -26,6 +26,10 @@ class UkrgbModelMap extends JModelItem
 	 */
 	public function getBasicMapData()
 	{
+		// What map is being requested
+		$input = JFactory::getApplication()->input;
+		$mapid = $input->get ('mapid');
+		
 		
 		//SELECT X(`centre_point`), Y(`centre_point`), `zoom` FROM `jos_ukrgb_maps` WHERE 1
 		
@@ -34,8 +38,9 @@ class UkrgbModelMap extends JModelItem
 		error_log($table);
 		
 		$db =  $table->getDbo();
-		$query = "SELECT X(".$db->nameQuote('centre_point')."), Y(".$db->nameQuote('centre_point')."), ".$db->nameQuote('zoom')." FROM ".$db->nameQuote('#__ukrgb_maps')." WHERE ".$db->nameQuote('id')." = 1;";
-		//error_log($query);
+		$query = "SELECT X(".$db->nameQuote('centre_point')."), Y(".$db->nameQuote('centre_point')."), ".$db->nameQuote('zoom')." FROM ".
+			$db->nameQuote('#__ukrgb_maps')." WHERE ".$db->nameQuote('id')." = ".$mapid.";";
+		error_log($query);
 		
 		$db->setQuery($query);
 		$result = $db->loadRow();
