@@ -26,11 +26,11 @@ class plgContentUkrgb extends JPlugin {
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
 	{
 		
-
-	$pattern = '/{map\s*.*?}/i';
-	/*
-	 * Insert a map if there is a map tag
-	 * Dont incluse all the JS and CSS unless its needed.*/
+		$pattern = '/{map\s*.*?}/i';
+		/*
+	 	* Insert a map if there is a map tag
+	 	* Dont incluse all the JS and CSS unless its needed.*/
+		
 		if (preg_match($pattern, $article->text) === 1 )
 		{
 			JHtml::_('behavior.framework');
@@ -46,14 +46,9 @@ class plgContentUkrgb extends JPlugin {
 			$document = &JFactory::getDocument();
 			$document->addScriptDeclaration('var params = ' .$params.';');
 				
-			$mapDiv = '<div id="map"></div>';
-			// style="position:relative; height:600px;" oncontextmenu="return false;"></div>';
-				
-				
+			$mapDiv = '<div id="map"></div>';				
 			$article->text = preg_replace($pattern, $mapDiv, $article->text);
 		}
-		
-		
 		
 	}
 	

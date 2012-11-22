@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="ukrgb_riverguide">
+		<fieldset name="ukrgb_riverguide" label="PLG_CONTENT_UKRGB_RIVERGUIDE_SLIDER_LABEL">
+			<field
+				name="putin"
+				type="text"
+				id="putin"
+				description="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_PUTIN_DESC"
+				label="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_PUTIN_LABEL"
+				message="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_PUTIN_MESSAGE"
+				size="30"
+			/>
+			<field
+				name="takeout"
+				type="text"
+				id="takeout"
+				description="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_TAKEOUT_DESC"
+				label="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_TAKEOUT_LABEL"
+				message="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_TAKEOUT_MESSAGE"
+				size="30"
+			/>
+
+		</fieldset>
+	</fields>
+</form>
