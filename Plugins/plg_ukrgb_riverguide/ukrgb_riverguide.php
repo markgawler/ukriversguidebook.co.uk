@@ -49,9 +49,10 @@ class plgContentUkrgbRiverguide extends JPlugin
 			if (!isset($data->riverguide) and $articleId > 0)
 			{
 				// Load the profile data from the database.
+				
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
-				$query->select('putin_geo, takeout_geo');
+				$query->select(array('putin_geo', 'takeout_geo'));
 				$query->from('#__ukrgb_riverguides');
 				$query->where('article_id = ' . $db->Quote($articleId));
 				$db->setQuery($query);
@@ -126,18 +127,22 @@ class plgContentUkrgbRiverguide extends JPlugin
 			try
 			{
 				$db = JFactory::getDbo();
+				// TODO - well delete
+				//$query = $db->getQuery(true);
+				//$query->delete('#__ukrgb_riverguides');
+				//$query->where('article_id = ' . $db->Quote($articleId));
+				//$db->setQuery($query);
+				//if (!$db->query()) {
+				//	throw new Exception($db->getErrorMsg());
+				//}
 
-				$query = $db->getQuery(true);
-				$query->delete('#__ukrgb_riverguides');
-				$query->where('article_id = ' . $db->Quote($articleId));
-				$db->setQuery($query);
-				if (!$db->query()) {
-					throw new Exception($db->getErrorMsg());
-				}
-
+				$columns = array('putin_geo', 'takeout_geo');
+				$values = array($article->riverguide->putin, $article->riverguide->takeout);
+				
 				$query->clear();
 				$query->insert('#__ukrgb_riverguides');
-				$query->values(); // TODO
+				$query->columns($db->quoteName($columns)); 
+				$query->values(implode(',', $values)); 
 				$query->where('article_id = ' . $db->Quote($articleId));
 				
 				$db->setQuery($query);
@@ -167,7 +172,7 @@ class plgContentUkrgbRiverguide extends JPlugin
 	 */
 	public function onContentAfterDelete($context, $article)
 	{
-		
+		// TODO
 		$articleId	= $article->id;
 		if ($articleId)
 		{
