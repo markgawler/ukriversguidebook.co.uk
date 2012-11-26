@@ -56,6 +56,8 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
+				// TODO - uses geo points, this may the SQL to be constructed by hand i.e.
+				// SELECT X(`putin_geo`), Y(`putin_geo`), X(`takeout_geo`), Y(`takeout_geo`) FROM `#__ukrgb_riverguides`
 				$query->select(array('putin_geo', 'takeout_geo', 'map_id', 'grade'));
 				$query->from('#__ukrgb_riverguides');
 				$query->where('article_id = ' . $db->Quote($articleId));
@@ -63,9 +65,9 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				$result = $db->loadRow();
 				
 				
-				echo ("<br>------------------------<br>");
-				var_dump($result);
-				echo ("<br>------------------------<br>");
+				//echo ("<br>------------------------<br>");
+				//var_dump($result);
+				//echo ("<br>------------------------<br>");
 				
 				// Check for a database error.
 				if ($db->getErrorNum())
@@ -163,13 +165,11 @@ class plgContentUkrgb_Riverguide extends JPlugin
 
 				//$columns = array('putin_geo', 'takeout_geo', 'map_id', 'grade');
 				//$values = array($article->riverguide['putin'], $article->riverguide['takeout'], $article->riverguide['map_id'], $article->riverguide['grade']);
-				$fields = array(
-						
+				$fields = array(						
 						'map_id = \''.$article->riverguide['map_id'].'\'',
 						'grade = \''.$article->riverguide['grade'].'\''
 						);
-
-								
+		
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
 				$query->update('#__ukrgb_riverguides');
@@ -239,7 +239,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	{		
 		error_log("onContentPrepare");
 		var_dump($article);
-		if (!isset($article->riverguide) || !count($article->rivergiude))
+		if (!isset($article->riverguide) || !count($article->riverguide))
 			return;
 		error_log("<br>--- 1");
 		

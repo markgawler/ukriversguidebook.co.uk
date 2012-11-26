@@ -20,6 +20,24 @@
 				message="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_TAKEOUT_MESSAGE"
 				size="30"
 			/>
+			<field
+				name="mapid"
+				type="text"
+				id="mapid"
+				description="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_MAPID_DESC"
+				label="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_MAPID_LABEL"
+				message="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_MAPID_MESSAGE"
+				size="6"
+			/>
+			<field
+				name="grade"
+				type="text"
+				id="grade"
+				description="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_GRADE_DESC"
+				label="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_GRADE_LABEL"
+				message="PLG_CONTENT_UKRGB_RIVERGUIDE_FIELD_GRADE_MESSAGE"
+				size="6"
+			/>
 
 		</fieldset>
 	</fields>
