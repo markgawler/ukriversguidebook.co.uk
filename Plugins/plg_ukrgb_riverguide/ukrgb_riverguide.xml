@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="plugin" group="content" method="upgrade">
-	<name>plg_content_ukrgb_riverguide</name>
+	<name>UKRGB Riverguide plugin</name>
 	<author>Mark Gawler</author>
 	<creationDate>November 2012</creationDate>
 	<copyright>(C) 2012 Mark Gawler. All rights reserved.</copyright>
@@ -8,7 +8,7 @@
 	<authorEmail>markg@wler.co.uk</authorEmail>
 	<authorUrl>www.ukriversguidebook.co.uk</authorUrl>
 	<version>2.5.0</version>
-	<description>PLG_CONTENT_UKRGB_RIVERGUIDE_XML_DESCRIPTION</description>
+	<description>UKRGB content plugin to a river guide data to articles</description>
 
 	<files>
 		<folder>language</folder>

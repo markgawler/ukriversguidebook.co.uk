@@ -17,7 +17,7 @@ jimport('joomla.utilities.date');
  * @subpackage	River guide
  * @version		0.0.1
  */
-class plgContentUkrgbRiverguide extends JPlugin
+class plgContentUkrgb_Riverguide extends JPlugin
 {
 	/**
 	 * Constructor
@@ -28,7 +28,7 @@ class plgContentUkrgbRiverguide extends JPlugin
 	 * @since       2.5
 	 */
 	public function __construct(& $subject, $config)
-	{
+	{				
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 	}
@@ -43,33 +43,48 @@ class plgContentUkrgbRiverguide extends JPlugin
 	 */
 	function onContentPrepareData($context, $data)
 	{
+		error_log("onContentPrepareData");
 		if (is_object($data))
 		{
 			$articleId = isset($data->id) ? $data->id : 0;
+			
 			if (!isset($data->riverguide) and $articleId > 0)
 			{
+				error_log("-- Load the profile data river data ");
+				
 				// Load the profile data from the database.
 				
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
-				$query->select(array('putin_geo', 'takeout_geo'));
+				$query->select(array('putin_geo', 'takeout_geo', 'map_id', 'grade'));
 				$query->from('#__ukrgb_riverguides');
 				$query->where('article_id = ' . $db->Quote($articleId));
 				$db->setQuery($query);
-				$results = $db->loadRow();
-
+				$result = $db->loadRow();
+				
+				
+				echo ("<br>------------------------<br>");
+				var_dump($result);
+				echo ("<br>------------------------<br>");
+				
 				// Check for a database error.
 				if ($db->getErrorNum())
 				{
 					$this->_subject->setError($db->getErrorMsg());
 					return false;
+
 				}
 
 				// Merge the profile data.
+				echo ("<br> -- Merge<br>");
 				$data->riverguide = array(
 						'putin' => $result[0],
-						'takeout' => $result[1],);
+						'takeout' => $result[1],
+						'map_id' => $result[2],
+						'grade' => $result[3],);
 			} else {
+				error_log("-- Load the form river data ");
+				
 				// load the form
 				JForm::addFormPath(dirname(__FILE__) . '/riverguide');
 				$form = new JForm('com_content.article');
@@ -95,6 +110,7 @@ class plgContentUkrgbRiverguide extends JPlugin
 	 */
 	function onContentPrepareForm($form, $data)
 	{
+		error_log("onContentPrepareForm");
 		if (!($form instanceof JForm))
 		{
 			$this->_subject->setError('JERROR_NOT_A_FORM');
@@ -105,8 +121,11 @@ class plgContentUkrgbRiverguide extends JPlugin
 		// need a seperate directory for the installer not to consider the XML a package when "discovering"
 		JForm::addFormPath(dirname(__FILE__) . '/riverguide');
 		$form->loadFile('ukrgb_riverguide', false);
-
 		return true;
+		
+		
+		
+		
 	}
 
 	/**
@@ -120,13 +139,19 @@ class plgContentUkrgbRiverguide extends JPlugin
 	 * @since	2.5
 	 */
 	public function onContentAfterSave($context, &$article, $isNew)
-	{
+	{	
+		error_log("onContentAfterSave");				
+		
+		//echo ("<br>----------$article--------------<br>");
+		//var_dump($article);
+		//
+		//echo ("<br>----------$article--------------<br>");
+		
 		$articleId = $article->id;
 		if ($articleId && isset($article->riverguide) && (count($article->riverguide)))
 		{
 			try
 			{
-				$db = JFactory::getDbo();
 				// TODO - well delete
 				//$query = $db->getQuery(true);
 				//$query->delete('#__ukrgb_riverguides');
@@ -136,13 +161,19 @@ class plgContentUkrgbRiverguide extends JPlugin
 				//	throw new Exception($db->getErrorMsg());
 				//}
 
-				$columns = array('putin_geo', 'takeout_geo');
-				$values = array($article->riverguide->putin, $article->riverguide->takeout);
-				
-				$query->clear();
-				$query->insert('#__ukrgb_riverguides');
-				$query->columns($db->quoteName($columns)); 
-				$query->values(implode(',', $values)); 
+				//$columns = array('putin_geo', 'takeout_geo', 'map_id', 'grade');
+				//$values = array($article->riverguide['putin'], $article->riverguide['takeout'], $article->riverguide['map_id'], $article->riverguide['grade']);
+				$fields = array(
+						
+						'map_id = \''.$article->riverguide['map_id'].'\'',
+						'grade = \''.$article->riverguide['grade'].'\''
+						);
+
+								
+				$db = JFactory::getDbo();
+				$query = $db->getQuery(true);
+				$query->update('#__ukrgb_riverguides');
+				$query->set($fields); 
 				$query->where('article_id = ' . $db->Quote($articleId));
 				
 				$db->setQuery($query);
@@ -171,7 +202,9 @@ class plgContentUkrgbRiverguide extends JPlugin
 	 * @since   2.5
 	 */
 	public function onContentAfterDelete($context, $article)
-	{
+	{		
+		error_log("onContentAfterDelete");
+		
 		// TODO
 		$articleId	= $article->id;
 		if ($articleId)
@@ -203,10 +236,13 @@ class plgContentUkrgbRiverguide extends JPlugin
 	}
 	
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
-	{
+	{		
+		error_log("onContentPrepare");
+		var_dump($article);
 		if (!isset($article->riverguide) || !count($article->rivergiude))
 			return;
-
+		error_log("<br>--- 1");
+		
 		// add extra css for table
 		$doc = JFactory::getDocument();
 		$doc->addStyleSheet(JURI::base(true).'/plugins/content/ukrgb_riverguide/riverguide/ukrgb_riverguide.css');
