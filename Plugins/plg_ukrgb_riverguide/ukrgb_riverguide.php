@@ -2,7 +2,6 @@
 /**
  * @package		UKRGB
  * @subpackage	plg_content_ukrgb_riverguide
- * @copyright	Copyright (C) 2012 Mark Gawler. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -50,7 +49,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 			
 			if (!isset($data->riverguide) and $articleId > 0)
 			{
-				error_log("-- Load the profile data river data ");
+				//error_log("-- Load the profile data river data ");
 				
 				// Load the profile data from the database.
 				
@@ -65,9 +64,9 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				$result = $db->loadRow();
 				
 				
-				//echo ("<br>------------------------<br>");
-				//var_dump($result);
-				//echo ("<br>------------------------<br>");
+				echo ("<br>------------------------<br>");
+				var_dump($result);
+				echo ("<br>------------------------<br>");
 				
 				// Check for a database error.
 				if ($db->getErrorNum())
@@ -76,27 +75,34 @@ class plgContentUkrgb_Riverguide extends JPlugin
 					return false;
 
 				}
+				
+				//if ($result !== NULL)
+				//{
+					// Merge the profile data.
+					//echo ("<br> -- Merge<br>");
 
-				// Merge the profile data.
-				echo ("<br> -- Merge<br>");
-				$data->riverguide = array(
-						'putin' => $result[0],
-						'takeout' => $result[1],
-						'map_id' => $result[2],
-						'grade' => $result[3],);
+					$data->riverguide = array(
+							'putin' => $result[0],
+							'takeout' => $result[1],
+							'mapid' => $result[2],
+							'grade' => $result[3],);
+				//}
 			} else {
+				//TODO 
 				error_log("-- Load the form river data ");
 				
-				// load the form
+				/* // load the form
 				JForm::addFormPath(dirname(__FILE__) . '/riverguide');
 				$form = new JForm('com_content.article');
 				$form->loadFile('ukrgb_riverguide', false);
 				
 				// Merge the default values
 				$data->riverguide = array();
-				foreach ($form->getFieldset('ukrgb_riverguide') as $field) {
+				foreach ($form->getFieldset('riverguide') as $field) {
 					$data->riverguide[] = array($field->fieldname, $field->value);
-				}
+					}
+				 */
+				
 			}
 		}
 
@@ -142,31 +148,23 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	 */
 	public function onContentAfterSave($context, &$article, $isNew)
 	{	
-		error_log("onContentAfterSave");				
+		error_log("onContentAfterSave  - ");				
 		
-		//echo ("<br>----------$article--------------<br>");
-		//var_dump($article);
-		//
-		//echo ("<br>----------$article--------------<br>");
+		
 		
 		$articleId = $article->id;
 		if ($articleId && isset($article->riverguide) && (count($article->riverguide)))
 		{
+			
+			error_log($article->riverguide['grade']);
 			try
 			{
-				// TODO - well delete
-				//$query = $db->getQuery(true);
-				//$query->delete('#__ukrgb_riverguides');
-				//$query->where('article_id = ' . $db->Quote($articleId));
-				//$db->setQuery($query);
-				//if (!$db->query()) {
-				//	throw new Exception($db->getErrorMsg());
-				//}
-
-				//$columns = array('putin_geo', 'takeout_geo', 'map_id', 'grade');
-				//$values = array($article->riverguide['putin'], $article->riverguide['takeout'], $article->riverguide['map_id'], $article->riverguide['grade']);
+				// TODO - xx
+				
+				//$columns = array('putin_geo', 'takeout_geo', 'mapid', 'grade');
+				//$values = array($article->riverguide['putin'], $article->riverguide['takeout'], $article->riverguide['mapid'], $article->riverguide['grade']);
 				$fields = array(						
-						'map_id = \''.$article->riverguide['map_id'].'\'',
+						'map_id = \''.$article->riverguide['mapid'].'\'',
 						'grade = \''.$article->riverguide['grade'].'\''
 						);
 		
@@ -187,8 +185,9 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				$this->_subject->setError($e->getMessage());
 				return false;
 			}
+			
 		}
-
+			
 		return true;
 	}
 
@@ -203,7 +202,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	 */
 	public function onContentAfterDelete($context, $article)
 	{		
-		error_log("onContentAfterDelete");
+		//error_log("onContentAfterDelete");
 		
 		// TODO
 		$articleId	= $article->id;
@@ -237,16 +236,16 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
 	{		
-		error_log("onContentPrepare");
-		var_dump($article);
-		if (!isset($article->riverguide) || !count($article->riverguide))
+		if (!isset($article->riverguide) || !count($article->riverguide) || $article->riverguide['grade'] === NULL)
+//		if (!isset($article->riverguide) || !count($article->riverguide))
 			return;
-		error_log("<br>--- 1");
+		
+		error_log(count($article->riverguide));
 		
 		// add extra css for table
 		$doc = JFactory::getDocument();
 		$doc->addStyleSheet(JURI::base(true).'/plugins/content/ukrgb_riverguide/riverguide/ukrgb_riverguide.css');
-		
+				
 		// construct a result table on the fly	
 		jimport('joomla.html.grid');
 		$table = new JGrid();

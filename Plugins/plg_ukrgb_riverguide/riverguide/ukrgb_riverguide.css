@@ -1,15 +1,15 @@
-div.ukrgbriverguide {
+div.riverguide {
     display: block;
     float: left;
     padding-right: 10px;
 }
-div.ukrgbriverguide table tr td {
+div.riverguide table tr td {
     margin: 1px !important;
     padding: 2px !important;
 }
-div.ukrgbriverguide table tr.row0  {
+div.riverguide table tr.row0  {
 	background-color:#efefef;
 }
-div.ukrgbriverguide table tr.row1 {
+div.riverguide table tr.row1 {
 	background-color:#ffffff;
 }
