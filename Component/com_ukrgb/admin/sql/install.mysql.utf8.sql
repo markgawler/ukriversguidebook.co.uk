@@ -52,17 +52,23 @@ CREATE TABLE `#__ukrgb_maps` (
 
 INSERT INTO `#__ukrgb_maps` (centre_point, zoom) VALUES( GeomFromText( 'POINT(51.514 -0.1167)' ), 12);
 
-
 DROP TABLE IF EXISTS `#__ukrgb_riverguides`;
 CREATE TABLE `#__ukrgb_riverguides` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `article_id` INT(11) NOT NULL,
 `map_id` INT(11),
-`putin_geo` POINT,
-`takeout_geo` POINT ,
 `grade` TINYINT NOT NULL
 ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+DROP TABLE IF EXISTS `#__ukrgb_map_point`;
+CREATE TABLE `#__ukrgb_map_point` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`point` POINT NOT NULL,
+`type` TINYINT NOT NULL,
+`description` varchar(20)
+) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+DROP TABLE IF EXISTS `#__ukrgb_configuration`;
 CREATE TABLE `#__ukrgb_configuration` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `config_name` varchar(20),

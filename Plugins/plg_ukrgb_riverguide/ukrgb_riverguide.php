@@ -42,26 +42,23 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	 */
 	function onContentPrepareData($context, $data)
 	{
-		error_log("onContentPrepareData");
+		//error_log("onContentPrepareData");
 		if (is_object($data))
 		{
 			$articleId = isset($data->id) ? $data->id : 0;
 			
 			if (!isset($data->riverguide) and $articleId > 0)
 			{
-				//error_log("-- Load the profile data river data ");
-				
 				// Load the profile data from the database.
 				
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
-				// TODO - uses geo points, this may the SQL to be constructed by hand i.e.
-				// SELECT X(`putin_geo`), Y(`putin_geo`), X(`takeout_geo`), Y(`takeout_geo`) FROM `#__ukrgb_riverguides`
-				$query->select(array('putin_geo', 'takeout_geo', 'map_id', 'grade'));
+				$query->select(array('putin_pointid', 'takeout_pointid', 'map_id', 'grade'));
 				$query->from('#__ukrgb_riverguides');
 				$query->where('article_id = ' . $db->Quote($articleId));
 				$db->setQuery($query);
 				$result = $db->loadRow();
+				
 				
 				
 				echo ("<br>------------------------<br>");
@@ -73,20 +70,17 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				{
 					$this->_subject->setError($db->getErrorMsg());
 					return false;
-
 				}
 				
-				//if ($result !== NULL)
-				//{
-					// Merge the profile data.
-					//echo ("<br> -- Merge<br>");
-
-					$data->riverguide = array(
-							'putin' => $result[0],
-							'takeout' => $result[1],
-							'mapid' => $result[2],
-							'grade' => $result[3],);
-				//}
+				// Merge the profile data.
+				$data->riverguide = array(
+						'putin' => '',
+						'takeout' => '',
+						'putin_id' => $result[0],
+						'takeout_id' => $result[1],
+						'mapid' => $result[2],
+						'grade' => $result[3],);
+				
 			} else {
 				//TODO 
 				error_log("-- Load the form river data ");
@@ -130,10 +124,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 		JForm::addFormPath(dirname(__FILE__) . '/riverguide');
 		$form->loadFile('ukrgb_riverguide', false);
 		return true;
-		
-		
-		
-		
+
 	}
 
 	/**
@@ -149,23 +140,18 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	public function onContentAfterSave($context, &$article, $isNew)
 	{	
 		error_log("onContentAfterSave  - ");				
-		
-		
-		
+
 		$articleId = $article->id;
 		if ($articleId && isset($article->riverguide) && (count($article->riverguide)))
 		{
-			
 			error_log($article->riverguide['grade']);
 			try
 			{
-				// TODO - xx
-				
-				//$columns = array('putin_geo', 'takeout_geo', 'mapid', 'grade');
-				//$values = array($article->riverguide['putin'], $article->riverguide['takeout'], $article->riverguide['mapid'], $article->riverguide['grade']);
 				$fields = array(						
 						'map_id = \''.$article->riverguide['mapid'].'\'',
-						'grade = \''.$article->riverguide['grade'].'\''
+						'grade = \''.$article->riverguide['grade'].'\'',
+						'putin_pointid = \''.$article->riverguide['putin'].'\'',
+						'takeout_pointid = \''.$article->riverguide['takeout'].'\''
 						);
 		
 				$db = JFactory::getDbo();
