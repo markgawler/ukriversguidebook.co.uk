@@ -50,15 +50,16 @@ class plgContentUkrgb_Riverguide extends JPlugin
 			if (!isset($data->riverguide) and $articleId > 0)
 			{
 				// Load the profile data from the database.
-				
+					
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
-				$query->select(array('putin_pointid', 'takeout_pointid', 'map_id', 'grade'));
-				$query->from('#__ukrgb_riverguides');
-				$query->where('article_id = ' . $db->Quote($articleId));
+				$query->select(array('a.map_id', 'a.grade', 
+						'X(b.point)', 'Y(b.point)', 'b.type', 'b.description'));
+				$query->from('#__ukrgb_riverguides AS a');
+				$query->join('RIGHT', '#__ukrgb_map_point AS b ON (a.id = b.riverguide)');
+				$query->where('a.article_id = ' . $db->Quote($articleId));
 				$db->setQuery($query);
-				$result = $db->loadRow();
-				
+				$results = $db->loadObjectList();
 				
 				
 				echo ("<br>------------------------<br>");
@@ -76,8 +77,6 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				$data->riverguide = array(
 						'putin' => '',
 						'takeout' => '',
-						'putin_id' => $result[0],
-						'takeout_id' => $result[1],
 						'mapid' => $result[2],
 						'grade' => $result[3],);
 				
