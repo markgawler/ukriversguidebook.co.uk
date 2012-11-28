@@ -56,16 +56,19 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				$query->select(array('a.map_id', 'a.grade', 
 						'X(b.point)', 'Y(b.point)', 'b.type', 'b.description'));
 				$query->from('#__ukrgb_riverguides AS a');
-				$query->join('RIGHT', '#__ukrgb_map_point AS b ON (a.id = b.riverguide)');
+				$query->join('LEFT', '#__ukrgb_map_point AS b ON (a.id = b.riverguide)');
 				$query->where('a.article_id = ' . $db->Quote($articleId));
 				$db->setQuery($query);
 				$results = $db->loadObjectList();
 				
-				
-				echo ("<br>------------------------<br>");
-				var_dump($result);
-				echo ("<br>------------------------<br>");
-				
+				if (count($results) > 0){
+					echo ("<br>------------------------<br>");
+					var_dump($results);
+					echo ("<br>------------------------<br>");
+					
+					$data->riverguide->mapid = $results[0]->map_id;
+					
+				}
 				// Check for a database error.
 				if ($db->getErrorNum())
 				{
@@ -74,11 +77,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				}
 				
 				// Merge the profile data.
-				$data->riverguide = array(
-						'putin' => '',
-						'takeout' => '',
-						'mapid' => $result[2],
-						'grade' => $result[3],);
+
 				
 			} else {
 				//TODO 
@@ -111,7 +110,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	 */
 	function onContentPrepareForm($form, $data)
 	{
-		error_log("onContentPrepareForm");
+		//error_log("onContentPrepareForm");
 		if (!($form instanceof JForm))
 		{
 			$this->_subject->setError('JERROR_NOT_A_FORM');
@@ -138,12 +137,12 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	 */
 	public function onContentAfterSave($context, &$article, $isNew)
 	{	
-		error_log("onContentAfterSave  - ");				
+		//error_log("onContentAfterSave  - ");				
 
 		$articleId = $article->id;
 		if ($articleId && isset($article->riverguide) && (count($article->riverguide)))
 		{
-			error_log($article->riverguide['grade']);
+			//error_log($article->riverguide['grade']);
 			try
 			{
 				$fields = array(						
@@ -221,11 +220,11 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
 	{		
-		if (!isset($article->riverguide) || !count($article->riverguide) || $article->riverguide['grade'] === NULL)
-//		if (!isset($article->riverguide) || !count($article->riverguide))
+//		if (!isset($article->riverguide) || !count($article->riverguide) || $article->riverguide['grade'] === NULL)
+		if (!isset($article->riverguide) || !count($article->riverguide))
 			return;
 		
-		error_log(count($article->riverguide));
+		//error_log(count($article->riverguide));
 		
 		// add extra css for table
 		$doc = JFactory::getDocument();
