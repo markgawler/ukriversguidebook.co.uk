@@ -1,5 +1,12 @@
+
+DROP TABLE IF EXISTS `#__ukrgb_configuration`;
+CREATE TABLE `#__ukrgb_configuration` (
+`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`config_name` varchar(20),
+`config_value` varchar(20)
+) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 DROP TABLE IF EXISTS `#__ukrgb_doantion`;
- 
 CREATE TABLE `#__ukrgb_doantion` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `tx` varchar (20),
@@ -50,7 +57,7 @@ CREATE TABLE `#__ukrgb_maps` (
 `zoom` TINYINT NOT NULL 
 ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-INSERT INTO `#__ukrgb_maps` (centre_point, zoom) VALUES( GeomFromText( 'POINT(51.514 -0.1167)' ), 12);
+/*INSERT INTO `#__ukrgb_maps` (centre_point, zoom) VALUES( GeomFromText( 'POINT(51.514 -0.1167)' ), 12);*/
 
 DROP TABLE IF EXISTS `#__ukrgb_riverguides`;
 CREATE TABLE `#__ukrgb_riverguides` (
@@ -58,20 +65,19 @@ CREATE TABLE `#__ukrgb_riverguides` (
 `article_id` INT(11) NOT NULL,
 `map_id` INT(11),
 `grade` TINYINT NOT NULL
+`river_name` varchar(20),
+`river_section` varchar(100),
+`short_description` varchar(255),
+`gauge_url` varchar(255), /* http://www.environment-agency.gov.uk/homeandleisure/floods/riverlevels/Controls/RiverLevels/StationId=3212&RegionId=5&AreaId=12&CatchmentId=59*/
+`gauge_name` varchar(60),
+`guage_calibration` varchar(200),		/* JSON */  
 ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 DROP TABLE IF EXISTS `#__ukrgb_map_point`;
 CREATE TABLE `#__ukrgb_map_point` (
 `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`riverguide` INT(11),
+`riverguide` INT(11),  /* Id of the river guide */
 `point` POINT NOT NULL,
-`type` TINYINT NOT NULL,
-`description` varchar(20)
-) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-DROP TABLE IF EXISTS `#__ukrgb_configuration`;
-CREATE TABLE `#__ukrgb_configuration` (
-`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`config_name` varchar(20),
-`config_value` varchar(20)
+`type` TINYINT NOT NULL,  /* 1 = putin, 2 = takeout, 3 = alternate */
+`description` varchar(255)
 ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;

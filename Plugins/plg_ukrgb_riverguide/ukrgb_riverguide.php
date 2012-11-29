@@ -53,21 +53,49 @@ class plgContentUkrgb_Riverguide extends JPlugin
 					
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
-				$query->select(array('a.map_id', 'a.grade', 
+				
+				/*$query->select(array('a.map_id', 'a.grade', 
 						'X(b.point)', 'Y(b.point)', 'b.type', 'b.description'));
 				$query->from('#__ukrgb_riverguides AS a');
 				$query->join('LEFT', '#__ukrgb_map_point AS b ON (a.id = b.riverguide)');
 				$query->where('a.article_id = ' . $db->Quote($articleId));
 				$db->setQuery($query);
-				$results = $db->loadObjectList();
+				$results = $db->loadObjectList();*/
 				
-				if (count($results) > 0){
+				$query->select(array('id','map_id', 'grade'));
+				$query->from('#__ukrgb_riverguides');
+				$query->where('article_id = ' . $db->Quote($articleId));
+				$db->setQuery($query);
+				$guide = $db->loadObject();
+				
+				if (!isset($guide)){
 					echo ("<br>------------------------<br>");
-					var_dump($results);
+					var_dump($guide);
 					echo ("<br>------------------------<br>");
 					
-					$data->riverguide->mapid = $results[0]->map_id;
+					$data->riverguide->mapid = $guide->map_id;
+					$data->riverguide->grade = $guide->grade;
+					$data->riverguide->river_name = $guide->river_name;
+					$data->riverguide->river_section = $guide->river_section;
+					$data->riverguide->short_description = $guide->short_description;
 					
+					$query->clear();
+					$query->select(array('X(point)', 'Y(point)', 'type', 'description'));
+					$query->from('#__ukrgb_map_point');
+					$query->where('id = ' . $db->Quote($guide->id));
+					$db->setQuery($query);
+					$points = $db->loadObjectList();
+
+					echo ("<br>------------------------<br>");
+					var_dump($points);
+					echo ("<br>------------------------<br>");
+					
+					if(count($points) > 0){
+						$data->riverguide->points = $points;
+					}
+					
+					
+						
 				}
 				// Check for a database error.
 				if ($db->getErrorNum())
