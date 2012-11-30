@@ -29,7 +29,7 @@ class UkrgbModelMap extends JModelItem
 		// What map is being requested
 		$input = JFactory::getApplication()->input;
 		$mapid = $input->get ('mapid');
-		
+		error_log('Map Request'.$mapid);
 		
 		//SELECT X(`centre_point`), Y(`centre_point`), `zoom` FROM `jos_ukrgb_maps` WHERE 1
 		

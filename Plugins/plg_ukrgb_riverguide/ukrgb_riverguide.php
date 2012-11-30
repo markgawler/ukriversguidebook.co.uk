@@ -62,34 +62,39 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				$db->setQuery($query);
 				$results = $db->loadObjectList();*/
 				
-				$query->select(array('id','map_id', 'grade'));
+				$query->select(array('id','map_id', 'grade','river_name','river_section','short_description','gauge_url','gauge_name'));
 				$query->from('#__ukrgb_riverguides');
 				$query->where('article_id = ' . $db->Quote($articleId));
 				$db->setQuery($query);
 				$guide = $db->loadObject();
 				
-				if (!isset($guide)){
-					echo ("<br>------------------------<br>");
+				
+				
+				if (is_object($guide)){
+/* 					echo ("<br>------------------------<br>");
 					var_dump($guide);
 					echo ("<br>------------------------<br>");
-					
+ */
+										$data->riverguide->guideid = $guide->id;
 					$data->riverguide->mapid = $guide->map_id;
 					$data->riverguide->grade = $guide->grade;
 					$data->riverguide->river_name = $guide->river_name;
 					$data->riverguide->river_section = $guide->river_section;
 					$data->riverguide->short_description = $guide->short_description;
+					$data->riverguide->gauge_url = $guide->gauge_url;
+					$data->riverguide->gauge_name = $guide->gauge_name;
 					
 					$query->clear();
 					$query->select(array('X(point)', 'Y(point)', 'type', 'description'));
 					$query->from('#__ukrgb_map_point');
-					$query->where('id = ' . $db->Quote($guide->id));
+					$query->where('riverguide = ' . $db->Quote($guide->id));
 					$db->setQuery($query);
 					$points = $db->loadObjectList();
 
-					echo ("<br>------------------------<br>");
+/* 					echo ("<br>------------------------<br>");
 					var_dump($points);
 					echo ("<br>------------------------<br>");
-					
+ */					
 					if(count($points) > 0){
 						$data->riverguide->points = $points;
 					}
@@ -248,7 +253,6 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
 	{		
-//		if (!isset($article->riverguide) || !count($article->riverguide) || $article->riverguide['grade'] === NULL)
 		if (!isset($article->riverguide) || !count($article->riverguide))
 			return;
 		

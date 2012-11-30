@@ -24,23 +24,40 @@ class plgContentUkrgbMap extends JPlugin {
 	 * @param	int		The 'page' number
 	 */
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
-	{
+	{		
+		
+		if (!isset($article->riverguide))
+			// || !isset($article->riverguide->mapid))
+			return;
+				
+		
 		JHtml::_('behavior.framework');
 		JHtml::_('script', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js');
 		JHtml::_('script', 'components/com_ukrgb/views/map/js/map.js');
 		JHtml::_('stylesheet', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css');
 		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
-
-		$url = JURI::base() . 'index.php?option=com_ukrgb&task=map&tmpl=raw&format=json';
+		
+		$mapData = json_encode(array(
+				'url' => JURI::base() . 'index.php?option=com_ukrgb&task=map&tmpl=raw&format=json',
+				'mapid' => $article->riverguide->mapid));
+		
 		$document = &JFactory::getDocument();
-		$document->addScriptDeclaration('var url = "' .$url.'";');
+		$document->addScriptDeclaration('var params = ' .$mapData.';');
 		
 		$mapDiv = '<div id="map"></div>';
+		$pattern = '/{map\s*.*?}/i'; 
+		$article->text = preg_replace($pattern, $mapDiv, $article->text);
+		
+		
+		//$url = JURI::base() . 'index.php?option=com_ukrgb&task=map&tmpl=raw&format=json';
+		//$document = &JFactory::getDocument();
+		//$document->addScriptDeclaration('var url = "' .$url.'";');
+		
+		//$mapDiv = '<div id="map"></div>';
 				// style="position:relative; height:600px;" oncontextmenu="return false;"></div>';
 		
-		$pattern = '/{ukrgb\s*.*?}/i';
-  		$words = 'Hello World (Map_)';
- 		$article->text = preg_replace($pattern, $mapDiv, $article->text);
+		//$pattern = '/{map\s*.*?}/i';
+ 		//$article->text = preg_replace($pattern, $mapDiv, $article->text);
 		
 	}
 	
