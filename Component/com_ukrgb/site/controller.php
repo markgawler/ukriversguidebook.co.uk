@@ -31,7 +31,21 @@ class UkrgbController extends JController
 	function map()
 	{
 		$input = JFactory::getApplication()->input;
-		$input->set('view','map');
+		$mapid = $input->get ('mapid');
+		if (isset($mapid)){
+			$input->set('view','map');
+		}
+		parent::display();
+	}
+	
+	function mapPoints()
+	{
+		$input = JFactory::getApplication()->input;
+		$nw = $input->get ('nw');
+		$se = $input->get ('se');	
+		if (isset($nw) && isset($se)){
+			$input->set('view','mappoints');	
+		}
 		parent::display();
 	}
 	

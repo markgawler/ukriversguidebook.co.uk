@@ -38,7 +38,7 @@ class plgContentUkrgbMap extends JPlugin {
 		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
 		
 		$mapData = json_encode(array(
-				'url' => JURI::base() . 'index.php?option=com_ukrgb&task=map&tmpl=raw&format=json',
+				'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
 				'mapid' => $article->riverguide->mapid));
 		
 		$document = &JFactory::getDocument();
@@ -47,18 +47,7 @@ class plgContentUkrgbMap extends JPlugin {
 		$mapDiv = '<div id="map"></div>';
 		$pattern = '/{map\s*.*?}/i'; 
 		$article->text = preg_replace($pattern, $mapDiv, $article->text);
-		
-		
-		//$url = JURI::base() . 'index.php?option=com_ukrgb&task=map&tmpl=raw&format=json';
-		//$document = &JFactory::getDocument();
-		//$document->addScriptDeclaration('var url = "' .$url.'";');
-		
-		//$mapDiv = '<div id="map"></div>';
-				// style="position:relative; height:600px;" oncontextmenu="return false;"></div>';
-		
-		//$pattern = '/{map\s*.*?}/i';
- 		//$article->text = preg_replace($pattern, $mapDiv, $article->text);
-		
+			
 	}
 	
 }

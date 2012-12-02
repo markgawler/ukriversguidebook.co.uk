@@ -5,13 +5,24 @@ window.addEvent("domready", function() {
 	var jsonRequest = new Request.JSON({url: params.url, 
 		onSuccess: function(mapData){
 			map.setView([mapData.lat, mapData.long], mapData.zoom);
+			map.on('zoomend', function(e) {
+				var bounds = map.getBounds();
+				var r = new Request.JSON({url: params.url,
+					onSuccess: function(mapPoints){
+						// mapPoints processing
+					}}).get({'task':'mappoints','nw': bounds.getNorthWest(), 'se': bounds.getSouthEast()});
+			});
 		}
-	}).get({'mapid': params.mapid});
-		
+	}).get({'task':'map','mapid': params.mapid});
+	
+	
+	
 	L.tileLayer('http://{s}.tile.cloudmade.com/9ad2029a7cff49ea8d3445b55352f445/997/256/{z}/{x}/{y}.png', {
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
 		maxZoom: 18
 	}).addTo(map);
 		
+
+	
 		
 });

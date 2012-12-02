@@ -71,11 +71,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				
 				
 				if (is_object($guide)){
-/* 					echo ("<br>------------------------<br>");
-					var_dump($guide);
-					echo ("<br>------------------------<br>");
- */
-										$data->riverguide->guideid = $guide->id;
+					$data->riverguide->guideid = $guide->id;
 					$data->riverguide->mapid = $guide->map_id;
 					$data->riverguide->grade = $guide->grade;
 					$data->riverguide->river_name = $guide->river_name;
@@ -219,9 +215,10 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	 */
 	public function onContentAfterDelete($context, $article)
 	{		
-		//error_log("onContentAfterDelete");
+		error_log("onContentAfterDelete");
 		
 		// TODO
+		/*
 		$articleId	= $article->id;
 		if ($articleId)
 		{
@@ -247,7 +244,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 				return false;
 			}
 		}
-
+		*/
 		return true;
 	}
 	

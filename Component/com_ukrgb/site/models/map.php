@@ -11,38 +11,24 @@ jimport('joomla.application.component.modelitem');
 class UkrgbModelMap extends JModelItem
 {
 	/**
-	 * @var string msg
-	 */
-	//protected $msg;
-
-	public function getTable($type = 'Map', $prefix = 'UkrgbTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-	
-	/**
 	 * Get the basic Data
 	 * @return returns an arry with the basic map data Lat, Long and Zoom
 	 */
 	public function getBasicMapData()
 	{
+		//error_log("Map Model");
+		
 		// What map is being requested
 		$input = JFactory::getApplication()->input;
 		$mapid = $input->get ('mapid');
-		error_log('Map Request'.$mapid);
-		
-		//SELECT X(`centre_point`), Y(`centre_point`), `zoom` FROM `jos_ukrgb_maps` WHERE 1
-		
-		// Get a Table instance
-		$table = $this->getTable();
-		error_log($table);
-		
-		$db =  $table->getDbo();
-		$query = "SELECT X(".$db->nameQuote('centre_point')."), Y(".$db->nameQuote('centre_point')."), ".$db->nameQuote('zoom')." FROM ".
-			$db->nameQuote('#__ukrgb_maps')." WHERE ".$db->nameQuote('id')." = ".$mapid.";";
-		error_log($query);
-		
+				
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select(array('X(centre_point)', 'Y(centre_point)', 'zoom'));
+		$query->from('#__ukrgb_maps');
+		$query->where('id = ' . $db->Quote($mapid));
 		$db->setQuery($query);
+
 		$result = $db->loadRow();
 				
 		$data = array("lat" => $result[0],
