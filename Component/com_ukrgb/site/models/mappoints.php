@@ -30,28 +30,20 @@ class UkrgbModelMapPoints extends JModelItem
 		$query = $db->getQuery(true);
 		$query->select(array($db->quoteName('riverguide'),'X('.$db->quoteName('point').')' ,'Y('.$db->quoteName('point').')' , $db->quoteName('type'),$db->quoteName('description')));
 		$query->from('#__ukrgb_map_point');
-		$query->where('MBRContains(GeomFromText(\'Polygon(('.$n_lat.' '.$w_lng.', '.$n_lat.' '.$e_lng.', '.$s_lat.' '.$e_lng.', '.$s_lat.' '.$w_lng.', '.$n_lat.' '.$w_lng.'))\'),point)');
-		//$query->where('id = ' . $db->Quote($mapid));
+		$query->where('MBRContains(GeomFromText(\'Polygon(('.$n_lat.' '.$w_lng.', '.$n_lat.' '.$e_lng.', '.$s_lat.' '.$e_lng.', '.$s_lat.' '.$w_lng.', '.$n_lat.' '.$w_lng.'))\'),'.$db->quoteName('point').')');
 		error_log($query);
-		
-		
 		$db->setQuery($query); 
 		
 		try {
-			// Execute the query in Joomla 2.5.
 			$result = $db->query();
-			error_log('OK!');
+			//$result = $db->loadObjectList();
 		} catch (Exception $e) {
 			// catch any database errors.
 			error_log($e);
+			$result = null;
 		}
-		
-		
-		//$result = $db->loadObjectList();
-		error_log('-- result');
-		
+		error_log('-- '.$result);
 
-		
 		return true;
 	}
 }

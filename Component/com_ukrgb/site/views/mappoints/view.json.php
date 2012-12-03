@@ -1,6 +1,5 @@
 <?php
 
-
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
@@ -15,7 +14,6 @@ class UkrgbViewMapPoints extends JView
 	// Overwriting JView display method
 	function display($tpl = null)
 	{
-		error_log("Points view");
 		// Set up the data to be sent in the response.
 		$data = $this->get('MapPoints');
 		// Output the JSON data.
