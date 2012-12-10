@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="2.5" type="plugin" group="editors-xtd" method="upgrade">
+	<name>UKRGB Map Editor Button plugin</name>
+	<author>Mark Gawler</author>
+	<creationDate>December 2012</creationDate>
+	<copyright>(C) 2012 Mark Gawler. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>markg@wler.co.uk</authorEmail>
+	<authorUrl>www.ukriversguidebook.co.uk</authorUrl>
+	<version>2.5.0</version>
+	<description>UKRGB editors-xtd plugin to edit maps associated with articles</description>
+
+	<files>
+   		<filename plugin="ukrgbMapEditorButton">ukrgbmapeditorbutton.php</filename>
+	</files>
+
+</extension>
