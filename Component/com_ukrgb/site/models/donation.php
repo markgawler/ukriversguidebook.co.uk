@@ -86,7 +86,20 @@ class UkrgbModelDonation extends JModelItem
 			return $this->status;
 		}
 		
-		
+		// Load the IdentityToken 'at' from the Component configuration
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select(array('value'));
+		$query->from('#__ukrgb_configuration');
+		$query->where('key = \'paypal_identitytoken\'');
+		$db->setQuery($query); 
+
+		try {
+			$identityToken = $db->loadObject();
+		} catch (Exception $e) {
+			// catch any database errors.
+			error_log($e);
+		}		
 		
 		// Create an instance of a default JHttp object.
 		//$http = JHttpFactory::getHttp();  // - not in Platform 11.3?
@@ -98,7 +111,7 @@ class UkrgbModelDonation extends JModelItem
 		$http = new JHttp($options, $transport);
 					
 		// Prepare the update data.
-		$data = array('cmd' => '_notify-synch', 'tx' => $transaction, 'at' => '0jGo0GXewcK0ovOtA4RILRyRHOOxiLuibwG_ABUKd4JHdB-4wte4LgqARkW');
+		$data = array('cmd' => '_notify-synch', 'tx' => $transaction, 'at' => $identityToken);
 			
 		// Invoke the GET request.
 		$response = $http->post('https://www.sandbox.paypal.com/cgi-bin/webscr', $data);
