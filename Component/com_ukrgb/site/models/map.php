@@ -37,3 +37,4 @@ class UkrgbModelMap extends JModelItem
 		return $data;
 	}
 }
+
