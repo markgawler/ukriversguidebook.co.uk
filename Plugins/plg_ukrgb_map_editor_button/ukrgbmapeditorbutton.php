@@ -31,8 +31,12 @@ class plgButtonUkrgbMapEditorButton extends JPlugin {
 	}
 	function onDisplay($name)
 	{
-		if (!isset($article->riverguide))
-			return;
+		error_log("-- button plugin");
+		//error_log($article->riverguide);
+		//if (!isset($article->riverguide))
+		//	return;
+		
+		//error_log("-- button plugin - is river guide");
 		
 		JHtml::_('behavior.framework');
 		JHtml::_('script', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js');
@@ -40,15 +44,16 @@ class plgButtonUkrgbMapEditorButton extends JPlugin {
 		JHtml::_('stylesheet', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css');
 		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
 		
-		$mapData = json_encode(array(
+		/*$mapData = json_encode(array(
 				'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
 				'mapid' => $article->riverguide->mapid,
 				'guideid' => $article->riverguide->guideid));
 		
 		$document = &JFactory::getDocument();
 		$document->addScriptDeclaration('var params = ' .$mapData.';');
-		
+		*/
 		//TODO
+		
 		$js =  "
          function buttonTestClick(editor) {
                              txt = prompt('Please enter something','123');

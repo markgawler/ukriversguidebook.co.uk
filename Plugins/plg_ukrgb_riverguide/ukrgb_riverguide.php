@@ -42,7 +42,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	 */
 	function onContentPrepareData($context, $data)
 	{
-		//error_log("onContentPrepareData");
+		error_log("onContentPrepareData");
 		if (is_object($data))
 		{
 			$articleId = isset($data->id) ? $data->id : 0;
@@ -90,7 +90,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 /* 					echo ("<br>------------------------<br>");
 					var_dump($points);
 					echo ("<br>------------------------<br>");
- */					
+ */					error_log('Number of Map Points: '.count($points));
 					if(count($points) > 0){
 						$data->riverguide->points = $points;
 					}
@@ -139,7 +139,7 @@ class plgContentUkrgb_Riverguide extends JPlugin
 	 */
 	function onContentPrepareForm($form, $data)
 	{
-		//error_log("onContentPrepareForm");
+		error_log("onContentPrepareForm");
 		if (!($form instanceof JForm))
 		{
 			$this->_subject->setError('JERROR_NOT_A_FORM');

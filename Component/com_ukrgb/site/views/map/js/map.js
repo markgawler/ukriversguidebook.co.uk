@@ -3,26 +3,25 @@ window.addEvent("domready", function() {
 	var map = L.map('map');
 	var marker = new Array();
 	
-	var jsonRequest = new Request.JSON({url: params.url, 
-		onSuccess: function(mapData){
-			map.setView([mapData.lat, mapData.long], mapData.zoom);
-			map.on('zoomend', function(e) {
-				var bounds = map.getBounds();
-				var r = new Request.JSON({url: params.url,
-					onSuccess: function(mapPoints){
-						// mapPoints processing
-						for (var i = 0; i < mapPoints.length; i++){
-							var p = mapPoints[i].id;
-							if (marker[p] == null){
-								marker[p] = L.marker([mapPoints[i].X, mapPoints[i].Y]).addTo(map);
-								marker[p].bindPopup(mapPoints[i].description).openPopup();
-							}
-							
-						}
-					}}).get({'task':'mappoints','nw': bounds.getNorthWest(), 'se': bounds.getSouthEast()});
-			});
-		}
-	}).get({'task':'map','mapid': params.mapid});
+
+	mapData = params.mapdata;
+	map.setView([mapData.lat, mapData.long], mapData.zoom);
+	map.on('zoomend', function(e) {
+		var bounds = map.getBounds();
+		
+		var r = new Request.JSON({url: params.url,
+			onSuccess: function(mapPoints){
+				// mapPoints processing
+				for (var i = 0; i < mapPoints.length; i++){
+					var p = mapPoints[i].id;
+					if (marker[p] == null){
+						marker[p] = L.marker([mapPoints[i].X, mapPoints[i].Y]).addTo(map);
+						marker[p].bindPopup(mapPoints[i].description).openPopup();
+					}
+					
+				}
+			}}).get({'task':'mappoints','nw': bounds.getNorthWest(), 'se': bounds.getSouthEast()});
+	});
 	
 	
 	
