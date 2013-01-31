@@ -6,6 +6,7 @@ Created on 10 Jan 2013
 import unittest
 import gridref
 
+
 class Test(unittest.TestCase):
 
 
@@ -32,6 +33,13 @@ class Test(unittest.TestCase):
         '''
         lat,lng = gridref.OSGRtoWGS84('SE 60724 48627')
         print lat,lng 
+        
+    def testGridRef4(self):
+        e = 416291
+        n = 94390
+
+        lat,lng = gridref.OSGB36toWGS84(e,n)
+        print lat,lng
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
