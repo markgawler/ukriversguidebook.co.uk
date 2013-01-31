@@ -30,6 +30,7 @@ class UkrgbController extends JController
 	
 	function map()
 	{
+		error_log("Map Controller");
 		$input = JFactory::getApplication()->input;
 		$mapid = $input->get ('mapid');
 		if (isset($mapid)){
@@ -41,12 +42,15 @@ class UkrgbController extends JController
 	function mapPoints()
 	{
 		$input = JFactory::getApplication()->input;
-		$nw = $input->get ('nw');
-		$se = $input->get ('se');	
-		if (isset($nw) && isset($se)){
-			$input->set('view','mappoints');	
-		}
+		$input->set('view','mappoints');	
 		parent::display();
+	}
+	
+	function mapPointStore()
+	{		
+		$m = JController::getModel('mappoints');
+		$m->setMapPoint();
+		
 	}
 	
 	function riverGuide()

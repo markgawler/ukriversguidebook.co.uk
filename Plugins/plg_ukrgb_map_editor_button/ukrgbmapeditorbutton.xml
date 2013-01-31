@@ -11,7 +11,7 @@
 	<description>UKRGB editors-xtd plugin to edit maps associated with articles</description>
 
 	<files>
-   		<filename plugin="ukrgbMapEditorButton">ukrgbmapeditorbutton.php</filename>
+   		<filename plugin="ukrgbmapeditorbutton">ukrgbmapeditorbutton.php</filename>
 	</files>
 
 </extension>
