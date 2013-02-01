@@ -5,10 +5,13 @@ window.addEvent("domready", function() {
 	
 
 	mapData = params.mapdata;
-	map.setView([mapData.lat, mapData.long], mapData.zoom);
-	map.on('zoomend', function(e) {
-		var bounds = map.getBounds();
-		
+	//map.setView([mapData.lat, mapData.long], mapData.zoom);
+	map.fitBounds([[mapData.w_lat, mapData.s_long], //sw
+	               [mapData.e_lat, mapData.n_long]	//nw
+	           ]);
+	
+	switch (mapData.map_type)  {
+    case 10: // shops
 		var r = new Request.JSON({url: params.url,
 			onSuccess: function(mapPoints){
 				// mapPoints processing
@@ -18,10 +21,29 @@ window.addEvent("domready", function() {
 						marker[p] = L.marker([mapPoints[i].X, mapPoints[i].Y]).addTo(map);
 						marker[p].bindPopup(mapPoints[i].description).openPopup();
 					}
-					
 				}
-			}}).get({'task':'mappoints','nw': bounds.getNorthWest(), 'se': bounds.getSouthEast()});
-	});
+			}}).get({'task':'mappoints','type': mapData.map_type});
+    	break;
+
+    default: 	
+    	map.on('zoomend', function(e) {
+    		var bounds = map.getBounds();
+
+			var r = new Request.JSON({url: params.url,
+				onSuccess: function(mapPoints){
+					// mapPoints processing
+					for (var i = 0; i < mapPoints.length; i++){
+						var p = mapPoints[i].id;
+						if (marker[p] == null){
+							marker[p] = L.marker([mapPoints[i].X, mapPoints[i].Y]).addTo(map);
+							marker[p].bindPopup(mapPoints[i].description).openPopup();
+						}
+					}
+				}}).get({'task':'mappoints','nw': bounds.getNorthWest(), 'se': bounds.getSouthEast()});
+			//TODO: Make consistent the use of corners, ie only use SW and NE corners.
+		});
+  }
+
 	
 	
 	

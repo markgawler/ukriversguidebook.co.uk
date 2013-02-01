@@ -13,10 +13,12 @@ class UkrgbModelMap extends JModelItem
 {
 	/**
 	 * Get the basic Data
-	 * @return returns an aray with the basic map data Lat, Long and Zoom
+	 * @return returns an array with the basic map data.
+	 * (w_Lat, s_Long, E_Lat n_long and map_type)
 	 */
 	public function getBasicMapData()
 	{
+		// Basic map data is the map area to display and the map type.
 		// What map is being requested
 		
 		$input = JFactory::getApplication()->input;

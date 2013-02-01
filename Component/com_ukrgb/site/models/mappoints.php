@@ -1,4 +1,4 @@
-<?php
+x<?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
@@ -32,6 +32,11 @@ class UkrgbModelMapPoints extends JModelItem
 		elseif (isset($guideId))
 		{
 			return UkrgbModelMapPoints::getByGuideId($guideId);
+		}
+		elseif (isset($type))
+		{
+			// handling of special type maps i.e kayak shops.
+			return UkrgbModelMapPoints::getByMapType($type);
 		}
 		else
 		{
@@ -129,4 +134,30 @@ class UkrgbModelMapPoints extends JModelItem
 		return $result;
 	}
 	
+	private function getByMapType($mapType)
+	{
+		error_log("getMapPoints - MapType: " . $mapType);
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select(array(
+				$db->quoteName('id'),
+				$db->quoteName('riverguide'),
+				'X('.$db->quoteName('point').') AS X',
+				'Y('.$db->quoteName('point').') AS Y',
+				$db->quoteName('type'),
+				$db->quoteName('description')));
+		$query->from('#__ukrgb_map_point');
+		$query->where('type = '. $db->Quote($mapType));
+		//error_log($query);
+		$db->setQuery($query);
+	
+		try {
+			$result = $db->loadObjectList();
+		} catch (Exception $e) {
+			// catch any database errors.
+			error_log($e);
+			$result = null;
+		}
+		return $result;
+	}
 }
