@@ -62,6 +62,7 @@ class UkrgbModelDonation extends JModelItem
 	
 	public function getTransactionStatus()
 	{
+		error_log("---Enter getTransactionStatus");
 		$this->status = UkrgbTxState::None;
 		
 		$input = JFactory::getApplication()->input;
@@ -91,11 +92,12 @@ class UkrgbModelDonation extends JModelItem
 		$query = $db->getQuery(true);
 		$query->select(array('value'));
 		$query->from('#__ukrgb_configuration');
-		$query->where('key = \'paypal_identitytoken\'');
+		$query->where('key = ' . $db->Quote('paypal_identitytoken'));
 		$db->setQuery($query); 
 
 		try {
 			$identityToken = $db->loadObject();
+			error_log($identityToken);
 		} catch (Exception $e) {
 			// catch any database errors.
 			error_log($e);

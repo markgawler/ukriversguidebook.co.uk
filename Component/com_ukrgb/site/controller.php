@@ -22,7 +22,8 @@ jimport('joomla.client.http');
 class UkrgbController extends JController
 {
 	function donation()
-	{
+	{	
+		error_log("---- Donation controller");
 		$input = JFactory::getApplication()->input;
 		$input->set('view','donation');
 		parent::display();
