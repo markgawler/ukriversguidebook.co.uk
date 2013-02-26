@@ -24,9 +24,10 @@ class UkrgbViewMap extends JView
 	function display($tpl = null) 
 	{	
 		JHtml::_('behavior.framework');
-		JHtml::_('script', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js');
-		JHtml::_('script', 'components/com_ukrgb/views/map/js/map.js');
-		JHtml::_('stylesheet', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css');
+		JHtml::_('script', 'http://openlayers.org/api/OpenLayers.js');
+		JHtml::_('script', 'components/com_ukrgb/proj4js/lib/proj4js-compressed.js');
+		JHtml::_('script', 'components/com_ukrgb/views/map/js/OpenSpace.js');
+		JHtml::_('script', 'components/com_ukrgb/views/map/js/map-openlayers.js');
 		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
 		
 		//var_dump ($this->get('BasicMapData'));

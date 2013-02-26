@@ -14,6 +14,6 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 <h1>The UK Rivers Guidebook</h1>
 <p><?php echo $this->message; ?></p>
-<div id="map"></div>
+<div id="map" class="ukrgbmap"></div>
 
 

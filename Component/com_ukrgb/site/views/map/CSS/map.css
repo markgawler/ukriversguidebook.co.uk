@@ -1,2 +1,23 @@
 @CHARSET "UTF-8";
-#map { height: 600px; }
+.ukrgbmap {
+	
+    height: 400px;  
+    width: 640px;
+    
+    border: 1px solid #ccc;
+}
+
+.olControlAttribution {
+    bottom: 0px!important;
+}
+
+.olPopup * {
+    margin: 0px;
+    padding:0px;
+    font-size: 12px;
+}
+
+
+/* .olFramedCloudPopupContent {
+	top :10px;
+} */

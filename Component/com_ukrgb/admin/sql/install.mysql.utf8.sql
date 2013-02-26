@@ -61,7 +61,11 @@ CREATE TABLE `#__ukrgb_maps` (
 INSERT INTO `#__ukrgb_maps` (sw_corner, ne_corner, map_type) 
 VALUES( GeomFromText( 'POINT(49.95 -7.8)' ), GeomFromText( 'POINT(59.3 1.9)' ), 0);
 INSERT INTO `#__ukrgb_maps` (sw_corner, ne_corner, map_type) 
+VALUES( GeomFromText( 'POINT(49.95 1.0)' ), GeomFromText( 'POINT(50.0 1.9)' ), 0);
+INSERT INTO `#__ukrgb_maps` (sw_corner, ne_corner, map_type) 
 VALUES( GeomFromText( 'POINT(49.95 -7.8)' ), GeomFromText( 'POINT(59.3 1.9)' ), 10);
+INSERT INTO `#__ukrgb_maps` (sw_corner, ne_corner, map_type) 
+VALUES( GeomFromText( 'POINT(50.3 -4.5)' ), GeomFromText( 'POINT(50.7 -3.5)' ), 0);
 /* Map Type:
  * 0 - Everything
  * 10 - Retailers 

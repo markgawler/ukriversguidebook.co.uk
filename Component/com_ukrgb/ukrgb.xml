@@ -42,8 +42,11 @@
 		<filename>controller.php</filename>
 		<folder>views</folder>
 		<folder>models</folder>
+		<folder>proj4js</folder>
+		
 	</files>
-
+	
+	
 	<administration>
 		<!-- Administration Menu Section -->
 		<menu>UKRGB</menu>
