@@ -1,4 +1,4 @@
-x<?php
+<?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
@@ -16,11 +16,12 @@ class UkrgbModelMapPoints extends JModelItem
 	 */
 	public function getMapPoints()
 	{
-		error_log("getMapPoints");
+		//error_log("getMapPoints");
 		$input = JFactory::getApplication()->input;
 		$nwCorner = $input->get ('nw',null,'array');
 		$seCorner = $input->get ('se',null,'array');
 		$guideId = $input->get ('guideid',null);
+		$type =  $input->get ('type',null,'int');
 		if (isset($nwCorner) && isset($seCorner)) 
 		{
 			return UkrgbModelMapPoints::getByArea(
@@ -49,7 +50,7 @@ class UkrgbModelMapPoints extends JModelItem
 	{
 		//"""INSERT INTO `jos_ukrgb_maps` (centre_point, zoom) VALUES( GeomFromText( 'POINT("""+str(x)+" "+str(y)+""")' ), 15);""")
 		
-		error_log("Set Map Point");		
+		//error_log("Set Map Point");		
 		$input = JFactory::getApplication()->input;
 		$riverguide = $input->get ('guideid');
 		$latlng = $input->get ('latlng',null,'array');
@@ -109,7 +110,7 @@ class UkrgbModelMapPoints extends JModelItem
 	
 	private function getByGuideId($guideId)
 	{
-		error_log("getMapPoints - Guide: " . $guideId);
+		//error_log("getMapPoints - Guide: " . $guideId);
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array(
@@ -136,7 +137,7 @@ class UkrgbModelMapPoints extends JModelItem
 	
 	private function getByMapType($mapType)
 	{
-		error_log("getMapPoints - MapType: " . $mapType);
+		//error_log("getMapPoints - MapType: " . $mapType);
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array(
@@ -158,6 +159,7 @@ class UkrgbModelMapPoints extends JModelItem
 			error_log($e);
 			$result = null;
 		}
+		//error_log($result);
 		return $result;
 	}
 }

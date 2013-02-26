@@ -2,16 +2,16 @@ window.addEvent("domready", function() {
 	// Create a new map instance
 	var map = L.map('map');
 	var marker = new Array();
-	
 
 	mapData = params.mapdata;
-	//map.setView([mapData.lat, mapData.long], mapData.zoom);
-	map.fitBounds([[mapData.w_lat, mapData.s_long], //sw
-	               [mapData.e_lat, mapData.n_long]	//nw
+
+	map.fitBounds([[parseInt(mapData.w_lat) ,parseInt(mapData.s_long)], 
+	               [parseInt(mapData.e_lat) ,parseInt(mapData.n_long)]	
 	           ]);
 	
+	
 	switch (mapData.map_type)  {
-    case 10: // shops
+    case "10" : // shops
 		var r = new Request.JSON({url: params.url,
 			onSuccess: function(mapPoints){
 				// mapPoints processing
@@ -43,8 +43,6 @@ window.addEvent("domready", function() {
 			//TODO: Make consistent the use of corners, ie only use SW and NE corners.
 		});
   }
-
-	
 	
 	
 	L.tileLayer('http://{s}.tile.cloudmade.com/9ad2029a7cff49ea8d3445b55352f445/997/256/{z}/{x}/{y}.png', {

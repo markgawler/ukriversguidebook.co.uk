@@ -29,7 +29,7 @@ class UkrgbViewMap extends JView
 		JHtml::_('stylesheet', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css');
 		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
 		
-		var_dump ($this->get('BasicMapData'));
+		//var_dump ($this->get('BasicMapData'));
 		//var_dump($status);
 		$params = json_encode(array(
 				'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
