@@ -47,20 +47,22 @@ window.addEvent("domready", function() {
     map.addControl(selectControl);
     selectControl.activate();
 
-	//map.addLayers([osmap,vectorLayer]);
-	map.addLayers([osmlayer,vectorLayer]);
+	map.addLayers([osmap,vectorLayer]);
+	//map.addLayers([osmlayer,vectorLayer]);
 	
 	vectorLayer.events.on({
         'featureselected': onFeatureSelect,
         'featureunselected': onFeatureUnselect
         });
 	
-	map.zoomToExtent(new OpenLayers.Bounds(
-			parseInt(mapData.s_long),
-			parseInt(mapData.w_lat),
-            parseInt(mapData.n_long),
-            parseInt(mapData.e_lat)).transform(WGS84Proj, map.getProjectionObject()));
-    
+			
+	var area = new OpenLayers.Bounds(
+			parseFloat(mapData.w_lng),
+			parseFloat(mapData.s_lat),
+			parseFloat(mapData.e_lng),
+			parseFloat(mapData.n_lat));
+	map.zoomToExtent(area.transform(WGS84Proj, map.getProjectionObject()));
+
 	
 	switch (mapData.map_type)  {
     case "0" : // everything
@@ -77,7 +79,7 @@ window.addEvent("domready", function() {
 						
 					console.log(mapPoints[i]);
 				    var feature = new OpenLayers.Feature.Vector(
-				    		new OpenLayers.Geometry.Point(mapPoints[i].Y, mapPoints[i].X).transform(WGS84Proj, map.getProjectionObject()), {
+				    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
 				    	        title: t,
 				    	        description: d,
 				    	        riverguide: mapPoints[i].riverguide

@@ -24,10 +24,10 @@ class UkrgbMapHelper
 
 		$result = $db->loadRow();
 
-		$data = array("w_lat" => $result[0],
-				"s_long" => $result[1],
-				"e_lat" => $result[2],
-				"n_long" => $result[3],
+		$data = array("w_lng" => $result[0],
+				"s_lat" => $result[1],
+				"e_lng" => $result[2],
+				"n_lat" => $result[3],
 				"map_type" => $result[4],);
 		return $data;
 	}
