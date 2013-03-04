@@ -29,29 +29,46 @@ window.addEvent("domready", function() {
     var defaultMarkerStyle = Object.merge({
         'externalGraphic': OpenLayers.Util.getImagesLocation() + "marker.png"
     }, markerSize);
-    var blueMarkerStyle = Object.merge({
+    
+    var secondaryMarkerStyle = Object.merge({
+        'graphicOpacity' : 0.4
+    }, defaultMarkerStyle);
+    
+    /*var blueMarkerStyle = Object.merge({
         'externalGraphic': OpenLayers.Util.getImagesLocation() + "marker-blue.png"
     }, markerSize);
-	
+	*/
     var styleMap = new OpenLayers.StyleMap({
         'default': new OpenLayers.Style(defaultMarkerStyle)
     });
 
     // Vector layer (with default marker style)
-    var vectorLayer = new OpenLayers.Layer.Vector("Vector", {
+    var vectorLayer = new OpenLayers.Layer.Vector("This River", {
         styleMap: styleMap
+        
     });
+    var otherVectorLayer = new OpenLayers.Layer.Vector("Other Rivers", {
+        styleMap: styleMap,
+        graphicOpacity : 0.4
+        
+    });
+        
+	//map.addLayers([osmap,vectorLayer]);	// OS Open Spave
+	map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
+    map.addControl(new OpenLayers.Control.LayerSwitcher());
     
     // make markers selectable (popups)
-    var selectControl = new OpenLayers.Control.SelectFeature(vectorLayer);
+    var selectControl = new OpenLayers.Control.SelectFeature([vectorLayer,otherVectorLayer]);
     map.addControl(selectControl);
     selectControl.activate();
 
-	map.addLayers([osmap,vectorLayer]);
-	//map.addLayers([osmlayer,vectorLayer]);
 	
 	vectorLayer.events.on({
         'featureselected': onFeatureSelect,
+        'featureunselected': onFeatureUnselect
+        });
+	otherVectorLayer.events.on({
+		'featureselected': onFeatureSelect,
         'featureunselected': onFeatureUnselect
         });
 	
@@ -62,7 +79,6 @@ window.addEvent("domready", function() {
 			parseFloat(mapData.e_lng),
 			parseFloat(mapData.n_lat));
 	map.zoomToExtent(area.transform(WGS84Proj, map.getProjectionObject()));
-
 	
 	switch (mapData.map_type)  {
     case "0" : // everything
@@ -70,21 +86,33 @@ window.addEvent("domready", function() {
 			onSuccess: function(mapPoints){
 				// mapPoints processing
 				for (var i = 0; i < mapPoints.length; i++){
-					//var p = mapPoints[i].id;
 					var name = mapPoints[i].description;
 					var pos = name.indexOf(' - ');
 					var t = name.substring(0,pos);
 					var d = name.substring(pos+3);					
 					if (pos == -1){t = name;d = '';}
 						
-					console.log(mapPoints[i]);
-				    var feature = new OpenLayers.Feature.Vector(
-				    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
-				    	        title: t,
-				    	        description: d,
-				    	        riverguide: mapPoints[i].riverguide
-				    	    });
-				    	    vectorLayer.addFeatures(feature);
+				    if (mapData.aid == mapPoints[i].riverguide){
+					    var feature = new OpenLayers.Feature.Vector(
+					    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
+					    	        title: t,
+					    	        description: d,
+					    	        riverguide: mapPoints[i].riverguide
+					    	    });
+					    
+				    	vectorLayer.addFeatures(feature);
+				    }
+				    else {
+				    	var feature = new OpenLayers.Feature.Vector(
+					    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
+					    	        title: t,
+					    	        description: d,
+					    	        riverguide: mapPoints[i].riverguide
+					    	    },secondaryMarkerStyle);
+					    
+				    	otherVectorLayer.addFeatures(feature);
+				    }
+				    
 				}
 			}}).get({'task':'mappoints','type': mapData.map_type});
     	break;
@@ -94,7 +122,6 @@ window.addEvent("domready", function() {
     }
 	
 	
-    map.addControl(new OpenLayers.Control.LayerSwitcher());
     
     
     

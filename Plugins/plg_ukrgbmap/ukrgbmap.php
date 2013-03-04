@@ -22,17 +22,16 @@ class plgContentUkrgbMap extends JPlugin {
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
 	{		
 		
-		if (!isset($article->riverguide))
-			return;
-		
 		JHtml::_('behavior.framework');
-		JHtml::_('script', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js');
-		JHtml::_('stylesheet', 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css');
+		JHtml::_('script', 'http://openlayers.org/api/OpenLayers.js');
+		JHtml::_('script', 'components/com_ukrgb/proj4js/lib/proj4js-compressed.js');
+		JHtml::_('script', 'components/com_ukrgb/views/map/js/OpenSpace.js');
+		JHtml::_('script', 'components/com_ukrgb/views/map/js/map-openlayers.js');
 		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
 		
 		
-		$mapDiv = '<div id="map"></div>';
-		$user = JFactory::getUser();
+		$mapDiv = '<div id="map" class="ukrgbmap"></div>';
+		/*$user = JFactory::getUser();
 		$canEdit = $user->authorise( "core.edit", "com_content.article." . $article->id );
 		if ($canEdit){
 			$form = '<fieldset>
@@ -48,12 +47,18 @@ class plgContentUkrgbMap extends JPlugin {
 		else 
 		{
 			JHtml::_('script', 'components/com_ukrgb/views/map/js/map.js');
-		}
-		$mapid = $article->riverguide->mapid;
-		$mapData = json_encode(array(
+		}*/
+		
+		$mapid = UkrgbMapHelper::getMapIdforArticle($article->id);
+		
+		/*$mapData = json_encode(array(
 				'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
 				'mapid' => $mapid,
 				'guideid' => $article->riverguide->guideid,
+				'mapdata' => UkrgbMapHelper::getBasicMapData($mapid)));
+		*/
+		$mapData = json_encode(array(
+				'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
 				'mapdata' => UkrgbMapHelper::getBasicMapData($mapid)));
 		
 		$document = &JFactory::getDocument();
