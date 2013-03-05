@@ -2,9 +2,16 @@
 .ukrgbmap {
 	
     height: 400px;  
-    
     border: 1px solid #ccc;
+    
 }
+.ukrgbmapgr {
+	  font-size: 9px;  
+}
+input[type='text'] {
+	font-size: 9px;
+	border: none; 
+	}
 
 .olControlAttribution {
     bottom: 0px!important;

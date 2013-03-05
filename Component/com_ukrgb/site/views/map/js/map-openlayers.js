@@ -51,8 +51,8 @@ window.addEvent("domready", function() {
         styleMap: styleMap,        
     });
         
-	map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Spave
-	//map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
+	//map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Spave
+	map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     
     // make markers selectable (popups)
