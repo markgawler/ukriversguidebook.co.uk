@@ -218,15 +218,14 @@ window.addEvent("domready", function() {
         }, 
 
         onPause: function(e) {
-            var output = document.getElementById(this.key + 'Output');
-            //var msg = 'pause ' + evt.xy;
-            //output.value = output.value + msg + "\r\n";
-            var lonlat = map.getLonLatFromPixel(e.xy).transform(map.getProjectionObject(),OSGBProj);
-            //alert(lonlat);
-            $("GridRef").value = gridrefNumToLet(lonlat.lon,lonlat.lat,6);
+            var lonlat = map.getLonLatFromPixel(e.xy);
+            $("Lat").value = lonlat.lat;
+            $("Lng").value = lonlat.lon;
+            var osgblnglat = lonlat.transform(map.getProjectionObject(),OSGBProj);
+            $("GridRef").value = gridrefNumToLet(osgblnglat.lon,osgblnglat.lat,6);
         },
 
-        onMove: function(evt) {
+        onMove: function(e) {
             // if this control sent an Ajax request (e.g. GetFeatureInfo) when
             // the mouse pauses the onMove callback could be used to abort that
             // request.
