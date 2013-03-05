@@ -30,7 +30,7 @@ class plgContentUkrgbMap extends JPlugin {
 		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
 		
 		
-		$mapDiv = '<div id="map" class="ukrgbmap"></div>';
+		$mapDiv = '<div id="map" class="ukrgbmap"></div><form><label for="GridRef">OS Grid Reference</label><input id="GridRef" size="12" /></form>';
 		/*$user = JFactory::getUser();
 		$canEdit = $user->authorise( "core.edit", "com_content.article." . $article->id );
 		if ($canEdit){

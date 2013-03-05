@@ -7,7 +7,7 @@
 	<authorUrl>www.ukriversguidebook.co.uk</authorUrl>
 	<copyright>Copyright UKRGB</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<version>0.0.1-002</version>
+	<version>0.0.1-004</version>
 	<description>The UKRGB Map Content plugin, display maps in riverguides</description>
 
 	<files>
