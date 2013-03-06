@@ -5,20 +5,32 @@
 window.addEvent("domready", function() {
 	Proj4js.defs["EPSG:27700"] = "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs";
 	var key = "CE783C03FD1F8AE2E0405F0AC8600A1C";
-	var WGS84Proj = new OpenLayers.Projection("EPSG:4326")  ;      
+	var WGS84Proj = new OpenLayers.Projection("EPSG:4326");      
 	var OSGBProj = new OpenLayers.Projection("EPSG:27700");
 
 	var mapData = params.mapdata;
 	var url = params['url'];
-
+	var otherRiversRequested = false;
 
 	var map = new OpenLayers.Map({
         div: "map",
         allOverlays: false,
-        projection: new OpenLayers.Projection("EPSG:900913")
+        //projection: new OpenLayers.Projection("EPSG:900913")
+    	projection: new OpenLayers.Projection("EPSG:27700"),
+    	eventListeners: {
+    		"changelayer": function(e){
+    			// Just request the other rivers when the layer is first displayed.
+    			if (otherRiversRequested == false && e.layer.visibility == true &&  e.layer.name == "Other Rivers"){
+    				console.log(e);
+    				otherRiversRequested = true;
+                	var r = new Request.JSON({
+                		url: url, onSuccess: receiveMapPoints }).get({'task':'mappoints','type': mapData.map_type});
+                	}
+    			}
+    	}
     });
     
-	var osmlayer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+	var osmlayer = new OpenLayers.Layer.OSM( "Open Street Map");
 	var osmap = new OpenLayers.Layer.OpenSpace("OS Openspace",key, {});
 
 	//  Marker styles
@@ -48,11 +60,12 @@ window.addEvent("domready", function() {
         
     });
     var otherVectorLayer = new OpenLayers.Layer.Vector("Other Rivers", {
-        styleMap: styleMap,        
+        styleMap: styleMap,
+        visibility : false
     });
         
-	//map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Spave
-	map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
+	map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Spave
+	//map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     
     // make markers selectable (popups)
@@ -79,40 +92,10 @@ window.addEvent("domready", function() {
 	map.zoomToExtent(area.transform(WGS84Proj, map.getProjectionObject()));
 	
 	switch (mapData.map_type)  {
-    case "0" : // everything
-		var r = new Request.JSON({url: url,
-			onSuccess: function(mapPoints){
-				// mapPoints processing
-				for (var i = 0; i < mapPoints.length; i++){
-					var name = mapPoints[i].description;
-					var pos = name.indexOf(' - ');
-					var t = name.substring(0,pos);
-					var d = name.substring(pos+3);					
-					if (pos == -1){t = name;d = '';}
-						
-				    if (mapData.aid == mapPoints[i].riverguide){
-					    var feature = new OpenLayers.Feature.Vector(
-					    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
-					    	        title: t,
-					    	        description: d,
-					    	        riverguide: mapPoints[i].riverguide
-					    	    });
-					    
-				    	vectorLayer.addFeatures(feature);
-				    }
-				    else {
-				    	var feature = new OpenLayers.Feature.Vector(
-					    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
-					    	        title: t,
-					    	        description: d,
-					    	        riverguide: mapPoints[i].riverguide
-					    	    },secondaryMarkerStyle);
-					    
-				    	otherVectorLayer.addFeatures(feature);
-				    }
-				    
-				}
-			}}).get({'task':'mappoints','type': mapData.map_type});
+    case "0" : // Only request the current river guide.
+		var r = new Request.JSON({
+			url: url, onSuccess: receiveMapPoints }).get({'task':'mappoints','guideid': mapData.aid});
+		
     	break;
 
     default: 	
@@ -120,7 +103,39 @@ window.addEvent("domready", function() {
     }
 	
 	
-    
+	function receiveMapPoints(mapPoints){
+		// mapPoints processing
+		for (var i = 0; i < mapPoints.length; i++){
+			var name = mapPoints[i].description;
+			var pos = name.indexOf(' - ');
+			var t = name.substring(0,pos);
+			var d = name.substring(pos+3);					
+			if (pos == -1){t = name;d = '';}
+				
+		    if (mapData.aid == mapPoints[i].riverguide){
+			    var feature = new OpenLayers.Feature.Vector(
+			    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
+			    	        title: t,
+			    	        description: d,
+			    	        riverguide: mapPoints[i].riverguide
+			    	    });
+			    
+		    	vectorLayer.addFeatures(feature);
+		    }
+		    else {
+		    	var feature = new OpenLayers.Feature.Vector(
+			    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
+			    	        title: t,
+			    	        description: d,
+			    	        riverguide: mapPoints[i].riverguide
+			    	    },secondaryMarkerStyle);
+			    
+		    	otherVectorLayer.addFeatures(feature);
+		    }
+		    
+		}
+	//}}).get({'task':'mappoints','type': mapData.map_type});
+	}
     
     
     
@@ -219,10 +234,12 @@ window.addEvent("domready", function() {
 
         onPause: function(e) {
             var lonlat = map.getLonLatFromPixel(e.xy);
-            $("Lat").value = lonlat.lat;
-            $("Lng").value = lonlat.lon;
-            var osgblnglat = lonlat.transform(map.getProjectionObject(),OSGBProj);
-            $("GridRef").value = gridrefNumToLet(osgblnglat.lon,osgblnglat.lat,6);
+            var wgs84lnglat = lonlat.clone();
+            wgs84lnglat.transform(map.getProjectionObject(),WGS84Proj);
+            $("Lat").value = parseFloat(wgs84lnglat.lat).toFixed(5);
+            $("Lng").value = parseFloat(wgs84lnglat.lon).toFixed(5);
+            lonlat.transform(map.getProjectionObject(),OSGBProj);
+            $("GridRef").value = gridrefNumToLet(lonlat.lon,lonlat.lat,6);
         },
 
         onMove: function(e) {
@@ -283,4 +300,4 @@ Number.prototype.padLZ = function(width) {
   var num = this.toString(), len = num.length;
   for (var i = 0; i < width - len; i++) num = "0" + num;
   return num;
-}
+};
