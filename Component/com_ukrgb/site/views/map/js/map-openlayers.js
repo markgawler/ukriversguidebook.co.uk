@@ -46,10 +46,10 @@ window.addEvent("domready", function() {
         'graphicOpacity' : 0.4
     }, defaultMarkerStyle);
     
-    /*var blueMarkerStyle = Object.merge({
+    var blueMarkerStyle = Object.merge({
         'externalGraphic': OpenLayers.Util.getImagesLocation() + "marker-blue.png"
     }, markerSize);
-	*/
+	
     var styleMap = new OpenLayers.StyleMap({
         'default': new OpenLayers.Style(defaultMarkerStyle)
     });
@@ -64,8 +64,8 @@ window.addEvent("domready", function() {
         visibility : false
     });
         
-	map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Spave
-	//map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
+	//map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Spave
+	map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     
     // make markers selectable (popups)
@@ -128,8 +128,8 @@ window.addEvent("domready", function() {
 			    	        title: t,
 			    	        description: d,
 			    	        riverguide: mapPoints[i].riverguide
-			    	    },secondaryMarkerStyle);
-			    
+			    	    //},secondaryMarkerStyle);
+			    		},blueMarkerStyle);
 		    	otherVectorLayer.addFeatures(feature);
 		    }
 		    

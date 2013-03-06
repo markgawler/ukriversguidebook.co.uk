@@ -21,58 +21,52 @@ class plgContentUkrgbMap extends JPlugin {
 	 */
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
 	{		
-		
-		JHtml::_('behavior.framework');
-		JHtml::_('script', 'http://openlayers.org/api/OpenLayers.js');
-		JHtml::_('script', 'components/com_ukrgb/proj4js/lib/proj4js-compressed.js');
-		JHtml::_('script', 'components/com_ukrgb/views/map/js/OpenSpace.js');
-		JHtml::_('script', 'components/com_ukrgb/views/map/js/map-openlayers.js');
-		JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
-		
-		
-		$mapDiv = '<div id="map" class="ukrgbmap"></div>
-		<form class="ukrgbmapgr">
-		<label>OS Grid Ref: </label><input type="text" id="GridRef" size="10" readonly>
-		<label>   WGS84 Lat: </label><input type="text" id="Lat" size="10" readonly>
-		<label>Lng: </label><input type="text" id="Lng" size="10" readonly>		
-		</form>';
-		
-		/*$user = JFactory::getUser();
-		$canEdit = $user->authorise( "core.edit", "com_content.article." . $article->id );
-		if ($canEdit){
-			$form = '<fieldset>
-				<legend>Map Edit:</legend>
-				<form action="">
-					<input type="button" onclick="submitMapAction()" value="Submit" />
-				</form>
-				</fieldset>';
-			
-			$mapDiv = $mapDiv .$form;
-			JHtml::_('script', 'components/com_ukrgb/views/map/js/map-edit.js');
-		}
-		else 
-		{
-			JHtml::_('script', 'components/com_ukrgb/views/map/js/map.js');
-		}*/
-		
 		$mapid = UkrgbMapHelper::getMapIdforArticle($article->id);
-		
-		/*$mapData = json_encode(array(
-				'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
-				'mapid' => $mapid,
-				'guideid' => $article->riverguide->guideid,
-				'mapdata' => UkrgbMapHelper::getBasicMapData($mapid)));
-		*/
-		$mapData = json_encode(array(
-				'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
-				'mapdata' => UkrgbMapHelper::getBasicMapData($mapid)));
-		
-		$document = &JFactory::getDocument();
-		$document->addScriptDeclaration('var params = ' .$mapData.';');
-		
-		$pattern = '/{map}/i'; 
-		$article->text = preg_replace($pattern, $mapDiv, $article->text);
+		if (isset($mapid)){
+				
+			JHtml::_('behavior.framework');
+			JHtml::_('script', 'http://openlayers.org/api/OpenLayers.js');
+			JHtml::_('script', 'components/com_ukrgb/proj4js/lib/proj4js-compressed.js');
+			JHtml::_('script', 'components/com_ukrgb/views/map/js/OpenSpace.js');
+			JHtml::_('script', 'components/com_ukrgb/views/map/js/map-openlayers.js');
+			JHtml::_('stylesheet','components/com_ukrgb/views/map/CSS/map.css');
 			
+			
+			$mapDiv = '<div id="map" class="ukrgbmap"></div>
+			<form class="ukrgbmapgr">
+			<label>OS Grid Ref: </label><input type="text" id="GridRef" size="10" readonly>
+			<label>   WGS84 Lat: </label><input type="text" id="Lat" size="8" readonly>
+			<label>Lng: </label><input type="text" id="Lng" size="8" readonly>		
+			</form>';
+			
+			/*$user = JFactory::getUser();
+			$canEdit = $user->authorise( "core.edit", "com_content.article." . $article->id );
+			if ($canEdit){
+				$form = '<fieldset>
+					<legend>Map Edit:</legend>
+					<form action="">
+						<input type="button" onclick="submitMapAction()" value="Submit" />
+					</form>
+					</fieldset>';
+				
+				$mapDiv = $mapDiv .$form;
+				JHtml::_('script', 'components/com_ukrgb/views/map/js/map-edit.js');
+			}
+			else 
+			{
+				JHtml::_('script', 'components/com_ukrgb/views/map/js/map.js');
+			}*/
+
+			$mapData = json_encode(array(
+					'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
+					'mapdata' => UkrgbMapHelper::getBasicMapData($mapid)));
+			
+			$document = &JFactory::getDocument();
+			$document->addScriptDeclaration('var params = ' .$mapData.';');
+			
+			$pattern = '/{map}/i'; 
+			$article->text = preg_replace($pattern, $mapDiv, $article->text);
+		}
 	}
 	
 }
