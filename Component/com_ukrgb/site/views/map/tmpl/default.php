@@ -15,5 +15,9 @@ defined('_JEXEC') or die('Restricted access');
 <h1>The UK Rivers Guidebook</h1>
 <p><?php echo $this->message; ?></p>
 <div id="map" class="ukrgbmap"></div>
-
+<form class="ukrgbmapgr">
+<label>OS Grid Ref: </label><input type="text" id="GridRef" size="10" readonly>
+<label>   WGS84 Lat: </label><input type="text" id="Lat" size="8" readonly>
+<label>Lng: </label><input type="text" id="Lng" size="8" readonly>		
+</form>
 

@@ -60,7 +60,7 @@ CREATE TABLE `#__ukrgb_maps` (
 ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 INSERT INTO `#__ukrgb_maps` (sw_corner, ne_corner, map_type) 
-VALUES( GeomFromText( 'POINT(49.95 -7.8)' ), GeomFromText( 'POINT(59.3 1.9)' ), 0);
+VALUES( GeomFromText( 'POINT(-7.8 49.95)' ), GeomFromText( 'POINT(1.9 59.3)' ), 0);
 /* Map Type:
  * 0 - Everything
  * 10 - Retailers 

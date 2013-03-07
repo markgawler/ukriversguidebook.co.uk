@@ -21,7 +21,7 @@ OpenLayers.Layer.OpenSpace = OpenLayers.Class(OpenLayers.Layer.WMS, {
      */
     initialize: function(name, apikey, options) {
         options = OpenLayers.Util.extend({
-            attribution: "&copy; Crown Copyright and database right 2008. All rights reserved. <a target='_blank' href='http://openspace.ordnancesurvey.co.uk/openspace/developeragreement.html#enduserlicense'>End User License Agreement</a>",
+            attribution: "&copy; Crown Copyright and database right 2012. All rights reserved. <a target='_blank' href='http://openspace.ordnancesurvey.co.uk/openspace/developeragreement.html#enduserlicense'>End User License Agreement</a>",
             maxExtent: new OpenLayers.Bounds(0, 0, 800000, 1300000),
             resolutions: [2500, 1000, 500, 200, 100, 50, 25, 10, 5, 2, 1],
             units: "m",

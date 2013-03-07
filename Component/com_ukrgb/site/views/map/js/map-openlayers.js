@@ -42,12 +42,9 @@ window.addEvent("domready", function() {
         'externalGraphic': OpenLayers.Util.getImagesLocation() + "marker.png"
     }, markerSize);
     
-    var secondaryMarkerStyle = Object.merge({
-        'graphicOpacity' : 0.4
-    }, defaultMarkerStyle);
-    
     var blueMarkerStyle = Object.merge({
-        'externalGraphic': OpenLayers.Util.getImagesLocation() + "marker-blue.png"
+        'externalGraphic': OpenLayers.Util.getImagesLocation() + "marker-blue.png",
+        'graphicOpacity' : 0.8
     }, markerSize);
 	
     var styleMap = new OpenLayers.StyleMap({
@@ -64,8 +61,8 @@ window.addEvent("domready", function() {
         visibility : false
     });
         
-	//map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Spave
-	map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
+	map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Space
+	//map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     
     // make markers selectable (popups)
@@ -95,9 +92,13 @@ window.addEvent("domready", function() {
     case "0" : // Only request the current river guide.
 		var r = new Request.JSON({
 			url: url, onSuccess: receiveMapPoints }).get({'task':'mappoints','guideid': mapData.aid});
-		
     	break;
-
+	
+    case "99" : 
+    	var r = new Request.JSON({
+    		url: url, onSuccess: receiveMapPoints }).get({'task':'mappoints','type': mapData.map_type});
+    	break;
+    	
     default: 	
     	console.log("Not implemented",mapData.map_type);
     }
@@ -117,7 +118,9 @@ window.addEvent("domready", function() {
 			    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
 			    	        title: t,
 			    	        description: d,
-			    	        riverguide: mapPoints[i].riverguide
+			    	        riverguide: mapPoints[i].riverguide,
+			    	        includeLink : false,
+
 			    	    });
 			    
 		    	vectorLayer.addFeatures(feature);
@@ -127,7 +130,8 @@ window.addEvent("domready", function() {
 			    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
 			    	        title: t,
 			    	        description: d,
-			    	        riverguide: mapPoints[i].riverguide
+			    	        riverguide: mapPoints[i].riverguide,
+			    	        includeLink : true,
 			    	    //},secondaryMarkerStyle);
 			    		},blueMarkerStyle);
 		    	otherVectorLayer.addFeatures(feature);
@@ -148,13 +152,19 @@ window.addEvent("domready", function() {
     function onFeatureSelect(evt) {
         feature = evt.feature;
         var d = feature.attributes.description;
-        if (d != ''){d += '<br>';}
+        if (feature.attributes.includeLink){
+        	// Only include the link for 'other Rivers'
+            if (d != ''){d += '<br>';}
+        	link = '<a href="/index.php?option=com_content&id='+feature.attributes.riverguide+'&view=article">River Guide</a>';
+        	}
+        else {
+        	link = '';
+        	}
         popup = new OpenLayers.Popup.FramedCloud("featurePopup",
-        feature.geometry.getBounds().getCenterLonLat(),
-        new OpenLayers.Size(100, 100),
-            "<strong>" + feature.attributes.title + "</strong><br>" + d +
-            '<a href="/index.php?option=com_content&id='+feature.attributes.riverguide+'&view=article">River Guide</a>',
-        null, true, onPopupClose);
+        		feature.geometry.getBounds().getCenterLonLat(),
+        		new OpenLayers.Size(100, 100),
+        		"<strong>" + feature.attributes.title + "</strong><br>" + d + link,
+        		null, true, onPopupClose);
 
         feature.popup = popup;
         popup.feature = feature;
@@ -198,7 +208,8 @@ window.addEvent("domready", function() {
         trigger: function(e) {
             var lonlat = map.getLonLatFromPixel(e.xy).transform(map.getProjectionObject(),OSGBProj);
             //alert("You clicked near: " + gridrefNumToLet(lonlat.lon,lonlat.lat,6));
-            $("GridRef").value = gridrefNumToLet(lonlat.lon,lonlat.lat,6);
+            //$("GridRef").value = gridrefNumToLet(lonlat.lon,lonlat.lat,6);
+            window.prompt ("To copy the Grid Reference to clipboard: Ctrl+C, Enter",gridrefNumToLet(lonlat.lon,lonlat.lat,6 ));
         }
     
        
