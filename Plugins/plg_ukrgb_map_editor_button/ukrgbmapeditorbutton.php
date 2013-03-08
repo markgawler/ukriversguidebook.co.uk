@@ -56,9 +56,9 @@ class plgButtonUkrgbMapEditorButton extends JPlugin {
 		
 		$js =  "
          function buttonTestClick(editor) {
-                             txt = '';
-                             //if(!txt) return;
-                               jInsertEditorText('{map '+txt+'}', editor);
+                             txt = prompt('Please enter something','123');
+                             if(!txt) return;
+                               jInsertEditorText('{test '+txt+'}', editor);
         }";
 		$css = ".button2-left .testButton {
                     background: transparent url(/plugins/editors-xtd/test.png) no-repeat 100% 0px;

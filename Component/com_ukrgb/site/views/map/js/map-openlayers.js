@@ -112,13 +112,16 @@ window.addEvent("domready", function() {
 			var t = name.substring(0,pos);
 			var d = name.substring(pos+3);					
 			if (pos == -1){t = name;d = '';}
-				
+			
+			osPoint = new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, OSGBProj);
+            var gr = gridrefNumToLet(osPoint.x, osPoint.y, 6);
 		    if (mapData.aid == mapPoints[i].riverguide){
 			    var feature = new OpenLayers.Feature.Vector(
 			    		new OpenLayers.Geometry.Point(mapPoints[i].X, mapPoints[i].Y).transform(WGS84Proj, map.getProjectionObject()), {
 			    	        title: t,
 			    	        description: d,
 			    	        riverguide: mapPoints[i].riverguide,
+			    	        gridRef : gr,
 			    	        includeLink : false,
 
 			    	    });
@@ -131,14 +134,13 @@ window.addEvent("domready", function() {
 			    	        title: t,
 			    	        description: d,
 			    	        riverguide: mapPoints[i].riverguide,
+			    	        gridRef : gr,
 			    	        includeLink : true,
-			    	    //},secondaryMarkerStyle);
 			    		},blueMarkerStyle);
 		    	otherVectorLayer.addFeatures(feature);
 		    }
 		    
 		}
-	//}}).get({'task':'mappoints','type': mapData.map_type});
 	}
     
     
@@ -152,10 +154,10 @@ window.addEvent("domready", function() {
     function onFeatureSelect(evt) {
         feature = evt.feature;
         var d = feature.attributes.description;
+        if (d != ''){d += '<br>';}
+    	// Only include the link for 'Other Rivers'
         if (feature.attributes.includeLink){
-        	// Only include the link for 'other Rivers'
-            if (d != ''){d += '<br>';}
-        	link = '<a href="/index.php?option=com_content&id='+feature.attributes.riverguide+'&view=article">River Guide</a>';
+        	link = '<a href="/index.php?option=com_content&id='+feature.attributes.riverguide+'&view=article">River Guide</a><br>';
         	}
         else {
         	link = '';
@@ -163,7 +165,7 @@ window.addEvent("domready", function() {
         popup = new OpenLayers.Popup.FramedCloud("featurePopup",
         		feature.geometry.getBounds().getCenterLonLat(),
         		new OpenLayers.Size(100, 100),
-        		"<strong>" + feature.attributes.title + "</strong><br>" + d + link,
+        		"<strong>" + feature.attributes.title + "</strong><br>" + d + link +feature.attributes.gridRef,
         		null, true, onPopupClose);
 
         feature.popup = popup;
@@ -224,7 +226,7 @@ window.addEvent("domready", function() {
     
     OpenLayers.Control.Hover = OpenLayers.Class(OpenLayers.Control, {                
         defaultHandlerOptions: {
-            'delay': 500,
+            'delay': 1000,
             'pixelTolerance': null,
             'stopMove': false
         },
