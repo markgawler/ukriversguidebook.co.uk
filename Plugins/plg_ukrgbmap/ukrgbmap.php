@@ -9,6 +9,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 require_once JPATH_SITE . DS . 'components' . DS . 'com_ukrgb' . DS . 'models' . DS . 'maphelper.php';
+require_once JPATH_SITE . DS . 'components' . DS . 'com_ukrgb' . DS . 'models' . DS . 'mappointshelper.php';
 
 class plgContentUkrgbMap extends JPlugin {
 	/**
@@ -69,5 +70,10 @@ class plgContentUkrgbMap extends JPlugin {
 		}
 	}
 	
+	public function onContentAfterSave($context, &$article, $isNew)
+	{
+		UkrgbMapPointsHelper::updateMapPoints($article->introtext, $article->id, $article->title);
+				
+	}
 }
 ?>

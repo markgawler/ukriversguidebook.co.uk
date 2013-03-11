@@ -10,7 +10,7 @@
 	<copyright>Copyright Info</copyright>
 	<license>License Info</license>
 	<!--  The version string is recorded in the components table -->
-	<version>0.0.23</version>
+	<version>0.0.24</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>Description of the UKRGB component ...</description>
 
@@ -42,6 +42,7 @@
 		<folder>views</folder>
 		<folder>models</folder>
 		<folder>proj4js</folder>
+		<folder>lib</folder>
 		
 	</files>
 	
