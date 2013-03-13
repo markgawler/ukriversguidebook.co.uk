@@ -8,7 +8,7 @@ require_once JPATH_SITE . '/components/com_ukrgb/lib/proj4php/proj4php.php';
 class UkrgbMapPointsHelper
 {
 	
-	public function updateMapPoints($text,$id,$description)
+	public function updateMapPoints($text,$articleId,$description)
 	{
 	/**
 	 text =  article text
@@ -23,21 +23,43 @@ class UkrgbMapPointsHelper
 		
 		$pat = 	"/([STNOH][A-HJ-Z]\s?[0-9]{3,5}\s?[0-9]{3,5})/";
 		$res = preg_match_all ( $pat , $text, $matches);
-		if ($res >0 && $res != False){
+		if ($res >0 && $res != False){				
+			
 			$proj4 = new Proj4php();
 			$projWGS84 = new Proj4phpProj('EPSG:4326',$proj4);	# LatLon with WGS84 datum
 			$projOSGB36 = new Proj4phpProj('EPSG:27700',$proj4);# UK Ordnance Survey, 1936 datum (OSGB36)
-				
+			// remove existing points
+			UkrgbMapPointsHelper::deleteMapPointsForArticle($articleId);
+			$north = 0;
+			$south = 2000;
+			$east = 0;
+			$west = 2000;
 			foreach ($matches[0] as $gr){
 				$gr = str_replace(' ', '', $gr);
+				error_log($gr);
 				$prefix = substr($gr,0,2);
 				($gr."   -  ");
 				$en = UkrgbMapPointsHelper::OSGridtoNE($gr);
 				$pointSrc = new proj4phpPoint($en['x'],$en['y']);
-				$pointDest = $proj4->transform($projOSGB36,$projWGS84,$pointSrc);
-				error_log("Gr: ".$gr."    x: ".$pointDest -> x.'    y: '.$pointDest -> y);
-				UkrgbMapPointsHelper::addMapPoint($pointDest, $id, 0 ,$description);
 				
+				// Calculate the extent of the map.
+				$north = max($north,$en['y']);
+				$south = min($south,$en['y']);
+				$east = max($east,$en['x']);
+				$west = min($west,$en['x']);
+				
+				$pointDest = $proj4->transform($projOSGB36,$projWGS84,$pointSrc);
+				UkrgbMapPointsHelper::addMapPoint($pointDest, $articleId, 0 ,$description);
+			}
+			
+			$swSrc = new proj4phpPoint($west,$north);
+			$neSrc = new proj4phpPoint($east,$south);
+			$swDest = $proj4->transform($projOSGB36,$projWGS84,$swSrc);
+			$neDest = $proj4->transform($projOSGB36,$projWGS84,$neSrc);
+			
+			if (UkrgbMapHelper::getMapIdforArticle($articleId) == null)
+			{
+				ukrgbMapHelper::addMap(0,$swDest,$neDest,$articleId);
 			}
 		}
 	}
@@ -73,14 +95,14 @@ class UkrgbMapPointsHelper
 		}
 	}
 	
-	function deleteMapPointsForArticle ($id){
+	function deleteMapPointsForArticle ($articleId){
 		/* Delete all the Map Points for the specified Article
 		 * 
 		 */
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->delete($db->quoteName('#__ukrgb_map_point'));
-		$query->where('riverguide = '. $db->Quote(id));
+		$query->where('riverguide = '. $db->Quote($articleId));
 		$db->setQuery($query);
 		
 		try {

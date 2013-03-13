@@ -35,13 +35,15 @@ class UkrgbMapHelper
 	
 	public function getMapIdforArticle($articleid)
 	{
+		/* 
+		 * Get the Map ID for the article, null is returned if no map found 
+		 * */
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array('id'));
 		$query->from('#__ukrgb_maps');
 		$query->where($db->quoteName('articleid') .' = '. $db->Quote($articleid));
 		
-		//error_log($query);
 		$db->setQuery($query);
 		try {
 			$result = $db->loadObject();
@@ -50,18 +52,50 @@ class UkrgbMapHelper
 			error_log($e);
 			$result = null;
 		}
-		//ob_start();
-		//var_dump($result);
-		//error_log(ob_get_contents());
-		//ob_end_clean();
-		//error_log($result->id);
 		
-		
+		if ($result == null){						
+			return null; //No Map
+		}
 		return $result->id;
 	}
 	
-	public function addMap()
+	public function addMap($type, $sw ,$ne , $articleId)
 	{
+		/*
+		 * Add A Map 
+		 * */
+		/*sql = """INSERT INTO `jos_ukrgb_maps` (`articleid`, `sw_corner`, `ne_corner`, `map_type`) VALUES (""" \
+		+str(aid)+""", """+\
+		"""GeomFromText( 'POINT(""" +str(lng1)+" " +str(lat1)+""")' ),"""+\
+		"""GeomFromText( 'POINT(""" +str(lng2)+" " +str(lat2)+""")' ),0);"""
+		*/
+		
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+			
+		// Insert columns.
+		$columns = array('map_type', 'sw_corner', 'ne_corner', 'articleid');
+		
+		// Insert values.
+		$values = array(
+				$db->quote($type),
+				'GeomFromText('.$db->quote('POINT('.$sw->x.' '.$sw->y.')').')',
+				'GeomFromText('.$db->quote('POINT('.$ne->x.' '.$ne->y.')').')',
+				$db->quote($articleId));
+		
+		// Prepare the insert query.
+		$query->insert($db->quoteName('#__ukrgb_maps'))
+		->columns($db->quoteName($columns))
+		->values(implode(',', $values));
+		// Reset the query using our newly populated query object.
+		
+		$db->setQuery($query);
+		
+		try {
+			$result = $db->query();
+		} catch (Exception $e) {
+			error_log($e);
+		}
 		
 	}
 }
