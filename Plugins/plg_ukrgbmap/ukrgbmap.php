@@ -72,13 +72,6 @@ class plgContentUkrgbMap extends JPlugin {
 	
 	public function onContentAfterSave($context, &$article, $isNew)
 	{
-		/*
-		 * pg = re.compile(r'(?:[\s|\(|\[])'
-                    r'([STNOHJG][A-Z]\s?[0-9]{3,5}\s?[0-9]{3,5})'
-                    r'(?:[\s|\|\]|\.)])')
-                    */
-		//$pat = 	"/([STNOH][A-HJ-Z]\s?[0-9]{3,5}\s?[0-9]{3,5})/";
-		//$res = preg_match_all ( $pat , $article->introtext, $matches);
 		UkrgbMapPointsHelper::updateMapPoints($article->introtext, $article->id);
 				
 	}

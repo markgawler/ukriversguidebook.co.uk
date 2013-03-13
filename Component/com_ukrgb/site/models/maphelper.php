@@ -60,4 +60,8 @@ class UkrgbMapHelper
 		return $result->id;
 	}
 	
+	public function addMap()
+	{
+		
+	}
 }
