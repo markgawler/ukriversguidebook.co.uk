@@ -10,7 +10,7 @@ Created on 10 Jan 2013
 
 @author: mark.gawler
 
-OSGR - eg SX586920, SX 5865 9207, etc.
+OSGrid - eg SX586920, SX 5865 9207, etc.
 OSGB36 - Northings and Eastings 
 WGS84  - Northings and Eastings 
 
