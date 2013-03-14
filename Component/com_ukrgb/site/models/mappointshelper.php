@@ -2,11 +2,12 @@
 
 // no direct access
 defined('_JEXEC' ) or die('Restricted access' );
-#require_once '../lib/proj4php/proj4php.php';
+
 require_once JPATH_SITE . '/components/com_ukrgb/lib/proj4php/proj4php.php';
 
 class UkrgbMapPointsHelper
 {
+	//TODO: update to use proj4phpPoint  object instead of using an array of points.
 	
 	public function updateMapPoints($text,$articleId,$description)
 	{
@@ -14,13 +15,6 @@ class UkrgbMapPointsHelper
 	 text =  article text
 	 id = article id
 	 **/
-		
-		/*
-		  pg = re.compile(r'(?:[\s|\(|\[])'
-		 		r'([STNOHJG][A-Z]\s?[0-9]{3,5}\s?[0-9]{3,5})'
-		 		r'(?:[\s|\|\]|\.)])')
-		*/
-		
 		$pat = 	"/([STNOH][A-HJ-Z]\s?[0-9]{3,5}\s?[0-9]{3,5})/";
 		$res = preg_match_all ( $pat , $text, $matches);
 		if ($res >0 && $res != False){				
@@ -34,22 +28,26 @@ class UkrgbMapPointsHelper
 			$south = 2000;
 			$east = 0;
 			$west = 2000;
+			$grSet = array(); // Array used as a set to ensure the GR is processed only once. 
 			foreach ($matches[0] as $gr){
 				$gr = str_replace(' ', '', $gr);
-				error_log($gr);
-				$prefix = substr($gr,0,2);
-				($gr."   -  ");
-				$en = UkrgbMapPointsHelper::OSGridtoNE($gr);
-				$pointSrc = new proj4phpPoint($en['x'],$en['y']);
-				
-				// Calculate the extent of the map.
-				$north = max($north,$en['y']);
-				$south = min($south,$en['y']);
-				$east = max($east,$en['x']);
-				$west = min($west,$en['x']);
-				
-				$pointDest = $proj4->transform($projOSGB36,$projWGS84,$pointSrc);
-				UkrgbMapPointsHelper::addMapPoint($pointDest, $articleId, 0 ,$description);
+				if (!in_array($grSet,$gr)){
+					$grSet[] = $gr; 
+					error_log($gr);  //TODO: Don't process the grid ref. if it is repeated in the guide, currently two points get chr
+					$prefix = substr($gr,0,2);
+					($gr."   -  ");  //TODO: what's this doing here?
+					$en = UkrgbMapPointsHelper::OSGridtoNE($gr);
+					$pointSrc = new proj4phpPoint($en['x'],$en['y']);
+					
+					// Calculate the extent of the map.
+					$north = max($north,$en['y']);
+					$south = min($south,$en['y']);
+					$east = max($east,$en['x']);
+					$west = min($west,$en['x']);
+					
+					$pointDest = $proj4->transform($projOSGB36,$projWGS84,$pointSrc);
+					UkrgbMapPointsHelper::addMapPoint($pointDest, $articleId, 0 ,$description);
+				}
 			}
 			
 			$swSrc = new proj4phpPoint($west,$north);
@@ -60,6 +58,9 @@ class UkrgbMapPointsHelper
 			if (UkrgbMapHelper::getMapIdforArticle($articleId) == null)
 			{
 				ukrgbMapHelper::addMap(0,$swDest,$neDest,$articleId);
+			} else {
+				//TODO: Update the map area as it may have changed - no tested
+				ukrgbMapHelper::updateMap(0,$swDest,$neDest,$articleId);
 			}
 		}
 	}

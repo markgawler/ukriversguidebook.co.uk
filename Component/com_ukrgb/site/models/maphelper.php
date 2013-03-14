@@ -63,12 +63,7 @@ class UkrgbMapHelper
 	{
 		/*
 		 * Add A Map 
-		 * */
-		/*sql = """INSERT INTO `jos_ukrgb_maps` (`articleid`, `sw_corner`, `ne_corner`, `map_type`) VALUES (""" \
-		+str(aid)+""", """+\
-		"""GeomFromText( 'POINT(""" +str(lng1)+" " +str(lat1)+""")' ),"""+\
-		"""GeomFromText( 'POINT(""" +str(lng2)+" " +str(lat2)+""")' ),0);"""
-		*/
+		 */
 		
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -90,12 +85,36 @@ class UkrgbMapHelper
 		// Reset the query using our newly populated query object.
 		
 		$db->setQuery($query);
-		
 		try {
 			$result = $db->query();
 		} catch (Exception $e) {
 			error_log($e);
 		}
-		
 	}
+	
+	public function updateMap($type, $sw ,$ne , $articleId)
+	{
+		/*
+		 * Update A Map
+		*/
+		//TODO: Do we need to check the map exists? 
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+			
+		// Insert values.
+		$fields = array(
+				$db->quoteName('map_type').' = '.$db->quote($type),
+				$db->quoteName('sw_corner').' = '.'GeomFromText('.$db->quote('POINT('.$sw->x.' '.$sw->y.')').')',
+				$db->quoteName('ne_corner').' = '.'GeomFromText('.$db->quote('POINT('.$ne->x.' '.$ne->y.')').')');
+	
+		// Prepare the insert query.
+		$query->update($db->quoteName('#__ukrgb_maps'))->set($fields)->where('articleid = '.$articleId);
+		$db->setQuery($query);
+		try {
+			$result = $db->query();
+		} catch (Exception $e) {
+			error_log($e);
+		}
+	}
+	
 }
