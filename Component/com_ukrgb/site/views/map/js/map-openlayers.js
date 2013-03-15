@@ -61,8 +61,8 @@ window.addEvent("domready", function() {
         visibility : false
     });
         
-	//map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Space
-	map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
+	map.addLayers([osmap,vectorLayer,otherVectorLayer]);	// OS Open Space
+	//map.addLayers([osmlayer,vectorLayer,otherVectorLayer]); // Open Street Map
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     
     // make markers selectable (popups)
@@ -183,44 +183,7 @@ window.addEvent("domready", function() {
         }
     }
     
-    // Mouse Click
-    OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
-        defaultHandlerOptions: {
-            'single': true,
-            'double': false,
-            'pixelTolerance': 0,
-            'stopSingle': false,
-            'stopDouble': false
-        },
-
-        initialize: function(options) {
-            this.handlerOptions = OpenLayers.Util.extend(
-                {}, this.defaultHandlerOptions
-            );
-            OpenLayers.Control.prototype.initialize.apply(
-                this, arguments
-            ); 
-            this.handler = new OpenLayers.Handler.Click(
-                this, {
-                    'click': this.trigger
-                }, this.handlerOptions
-            );
-        }, 
-
-        trigger: function(e) {
-            var lonlat = map.getLonLatFromPixel(e.xy).transform(map.getProjectionObject(),OSGBProj);
-            //alert("You clicked near: " + gridrefNumToLet(lonlat.lon,lonlat.lat,6));
-            //$("GridRef").value = gridrefNumToLet(lonlat.lon,lonlat.lat,6);
-            window.prompt ("To copy the Grid Reference to clipboard: Ctrl+C, Enter",gridrefNumToLet(lonlat.lon,lonlat.lat,6 ));
-        }
-    
-       
-    });
-    
-    var click = new OpenLayers.Control.Click();
-    map.addControl(click);
-    click.activate();
-
+ 
     
     // Mouse Hover
     
