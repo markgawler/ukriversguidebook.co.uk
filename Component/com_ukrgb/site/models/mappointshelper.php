@@ -25,31 +25,32 @@ class UkrgbMapPointsHelper
 			// remove existing points
 			UkrgbMapPointsHelper::deleteMapPointsForArticle($articleId);
 			$north = 0;
-			$south = 2000;
+			$south = 1300000;
 			$east = 0;
-			$west = 2000;
+			$west = 800000;
 			$grSet = array(); // Array used as a set to ensure the GR is processed only once. 
 			foreach ($matches[0] as $gr){
 				$gr = str_replace(' ', '', $gr);
+				
+				// Don't process the grid ref. if it is repeated in the guide.
 				if (!in_array($grSet,$gr)){
 					$grSet[] = $gr; 
-					error_log($gr);  //TODO: Don't process the grid ref. if it is repeated in the guide, currently two points get chr
-					$prefix = substr($gr,0,2);
-					($gr."   -  ");  //TODO: what's this doing here?
+					//rror_log($gr);  
+					//$prefix = substr($gr,0,2);
 					$en = UkrgbMapPointsHelper::OSGridtoNE($gr);
 					$pointSrc = new proj4phpPoint($en['x'],$en['y']);
+					$pointDest = $proj4->transform($projOSGB36,$projWGS84,$pointSrc);
+					UkrgbMapPointsHelper::addMapPoint($pointDest, $articleId, 0 ,$description);
 					
-					// Calculate the extent of the map.
+					// Calculate the extent of the map in OSGB Nothings and eastings.
 					$north = max($north,$en['y']);
 					$south = min($south,$en['y']);
 					$east = max($east,$en['x']);
 					$west = min($west,$en['x']);
-					
-					$pointDest = $proj4->transform($projOSGB36,$projWGS84,$pointSrc);
-					UkrgbMapPointsHelper::addMapPoint($pointDest, $articleId, 0 ,$description);
+
 				}
 			}
-			
+			// Convert Map extent to WGS84
 			$swSrc = new proj4phpPoint($west,$north);
 			$neSrc = new proj4phpPoint($east,$south);
 			$swDest = $proj4->transform($projOSGB36,$projWGS84,$swSrc);
@@ -119,8 +120,8 @@ class UkrgbMapPointsHelper
 		/*
 	    Convert an Ordinance Survey zone (2 letter code) to distances from the reference point.
 	    */		
-		// find the 500km square
 		
+		// find the 500km square
 		$lookup = array(
 			'S' => array(0,0),
 			'T' => array(1,0),
@@ -137,7 +138,6 @@ class UkrgbMapPointsHelper
 		// find the 100km offset & add
 		$grid = "VWXYZQRSTULMNOPFGHJKABCDE";
 	    $key = substr($ossquare,1,1);
-		    
 	    $posn = strpos($grid,$key);
 		$easting += ($posn % 5) * 100;
 		$northing += (int)($posn / 5) * 100;
@@ -159,7 +159,7 @@ class UkrgbMapPointsHelper
 		$osgb_easting = substr($coords,0,$rez);
 		$osgb_northing = substr($coords,$rez);
 		
-		//# what is each digit (in metres)
+		// what is each digit (in metres)
 		$rez_unit = pow(10,5-$rez);
 		$relEasting =   $osgb_easting * $rez_unit;
 		$relNorthing =  $osgb_northing * $rez_unit;
