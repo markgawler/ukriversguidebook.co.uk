@@ -33,10 +33,8 @@ class UkrgbMapPointsHelper
 				$gr = str_replace(' ', '', $gr);
 				
 				// Don't process the grid ref. if it is repeated in the guide.
-				if (!in_array($grSet,$gr)){
+				if (!in_array($gr,$grSet)){
 					$grSet[] = $gr; 
-					//rror_log($gr);  
-					//$prefix = substr($gr,0,2);
 					$en = UkrgbMapPointsHelper::OSGridtoNE($gr);
 					$pointSrc = new proj4phpPoint($en['x'],$en['y']);
 					$pointDest = $proj4->transform($projOSGB36,$projWGS84,$pointSrc);
@@ -47,12 +45,11 @@ class UkrgbMapPointsHelper
 					$south = min($south,$en['y']);
 					$east = max($east,$en['x']);
 					$west = min($west,$en['x']);
-
 				}
 			}
 			// Convert Map extent to WGS84
-			$swSrc = new proj4phpPoint($west,$north);
-			$neSrc = new proj4phpPoint($east,$south);
+			$swSrc = new proj4phpPoint($west-250,$south-250);
+			$neSrc = new proj4phpPoint($east+250,$north+250);
 			$swDest = $proj4->transform($projOSGB36,$projWGS84,$swSrc);
 			$neDest = $proj4->transform($projOSGB36,$projWGS84,$neSrc);
 			
@@ -60,7 +57,6 @@ class UkrgbMapPointsHelper
 			{
 				ukrgbMapHelper::addMap(0,$swDest,$neDest,$articleId);
 			} else {
-				//TODO: Update the map area as it may have changed - no tested
 				ukrgbMapHelper::updateMap(0,$swDest,$neDest,$articleId);
 			}
 		}
