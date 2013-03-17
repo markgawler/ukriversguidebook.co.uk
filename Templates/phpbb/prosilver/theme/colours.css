@@ -1,0 +1,1042 @@
+/*  	
+--------------------------------------------------------------
+Colours and backgrounds for common.css
+-------------------------------------------------------------- */
+
+ html #phpbb  , body #phpbb  {
+	color: #536482;
+	background-color: #FFFFFF;
+}
+
+ #phpbb h1 {
+	color: #FFFFFF;
+}
+
+ #phpbb h2 {
+	color: #28313F;
+}
+
+ #phpbb h3 {
+	border-bottom-color: #CCCCCC;
+	color: #115098;
+}
+
+ #phpbb hr {
+	border-color: #FFFFFF;
+	border-top-color: #CCCCCC;
+}
+
+ #phpbb hr.dashed {
+	border-top-color: #CCCCCC;
+}
+
+/* Search box
+--------------------------------------------- */
+
+ #phpbb #search-box {
+	color: #FFFFFF;
+}
+
+ #phpbb #search-box #keywords {
+	background-color: #FFF;
+}
+
+ #phpbb #search-box input {
+	border-color: #0075B0;
+}
+
+/* Round cornered boxes and backgrounds
+---------------------------------------- */
+ #phpbb .headerbar {
+	background-color: #12A3EB;
+	background-image: url("{T_THEME_PATH}/images/bg_header.gif");
+	color: #FFFFFF;
+}
+
+ #phpbb .navbar {
+	background-color: #cadceb;
+}
+
+ #phpbb .forabg {
+	background-color: #0076b1;
+	background-image: url("{T_THEME_PATH}/images/bg_list.gif");
+}
+
+ #phpbb .forumbg {
+	background-color: #12A3EB;
+	background-image: url("{T_THEME_PATH}/images/bg_header.gif");
+}
+
+ #phpbb .panel {
+	background-color: #ECF1F3;
+	color: #28313F;
+}
+
+ #phpbb .post:target .content {
+	color: #000000;
+}
+
+ #phpbb .post:target h3 a {
+	color: #000000;
+}
+
+ #phpbb .bg1 { background-color: #ECF3F7; }
+ #phpbb .bg2 { background-color: #e1ebf2;  }
+ #phpbb .bg3 { background-color: #cadceb; }
+
+ #phpbb .ucprowbg {
+	background-color: #DCDEE2;
+}
+
+ #phpbb .fieldsbg {
+	background-color: #E7E8EA;
+}
+
+ #phpbb span.corners-top {
+	background-image: url("{T_THEME_PATH}/images/corners_left.png");
+}
+
+ #phpbb span.corners-top span {
+	background-image: url("{T_THEME_PATH}/images/corners_right.png");
+}
+
+ #phpbb span.corners-bottom {
+	background-image: url("{T_THEME_PATH}/images/corners_left.png");
+}
+
+ #phpbb span.corners-bottom span {
+	background-image: url("{T_THEME_PATH}/images/corners_right.png");
+}
+
+/* Horizontal lists
+----------------------------------------*/
+
+ #phpbb ul.navlinks {
+	border-bottom-color: #FFFFFF;
+}
+
+/* Table styles
+----------------------------------------*/
+ #phpbb table.table1 thead th {
+	color: #FFFFFF;
+}
+
+ #phpbb table.table1 tbody tr {
+	border-color: #BFC1CF;
+}
+
+ #phpbb table.table1 tbody tr:hover , #phpbb table.table1 tbody tr.hover {
+	background-color: #CFE1F6;
+	color: #000;
+}
+
+ #phpbb table.table1 td {
+	color: #536482;
+}
+
+ #phpbb table.table1 tbody td {
+	border-top-color: #FAFAFA;
+}
+
+ #phpbb table.table1 tbody th {
+	border-bottom-color: #000000;
+	color: #333333;
+	background-color: #FFFFFF;
+}
+
+ #phpbb table.info tbody th {
+	color: #000000;
+}
+
+/* Misc layout styles
+---------------------------------------- */
+ #phpbb dl.details dt {
+	color: #000000;
+}
+
+ #phpbb dl.details dd {
+	color: #536482;
+}
+
+ #phpbb .sep {
+	color: #1198D9;
+}
+
+/* Pagination
+---------------------------------------- */
+
+ #phpbb .pagination span strong {
+	color: #FFFFFF;
+	background-color: #4692BF;
+	border-color: #4692BF;
+}
+
+ #phpbb .pagination span a , #phpbb .pagination span a:link , #phpbb .pagination span a:visited {
+	color: #5C758C;
+	background-color: #ECEDEE;
+	border-color: #B4BAC0;
+}
+
+ #phpbb .pagination span a:hover {
+	border-color: #368AD2;
+	background-color: #368AD2;
+	color: #FFF;
+}
+
+#phpbb.pagination span a:active {
+	color: #5C758C;
+	background-color: #ECEDEE;
+	border-color: #B4BAC0;
+}
+
+/* Pagination in viewforum for multipage topics */
+ #phpbb .row .pagination {
+	background-image: url("{T_THEME_PATH}/images/icon_pages.gif");
+}
+
+ #phpbb .row .pagination span a , #phpbb li.pagination span a {
+	background-color: #FFFFFF;
+}
+
+ #phpbb .row .pagination span a:hover , #phpbb li.pagination span a:hover {
+	background-color: #368AD2;
+}
+
+/* Miscellaneous styles
+---------------------------------------- */
+
+ #phpbb .copyright {
+	color: #555555;
+}
+
+ #phpbb .error {
+	color: #BC2A4D;
+}
+
+ #phpbb .reported {
+	background-color: #F7ECEF;
+}
+
+ #phpbb li.reported:hover {
+	background-color: #ECD5D8 !important;
+}
+ #phpbb .sticky , #phpbb .announce {
+	/* you can add a background for stickies and announcements*/
+}
+
+ #phpbb div.rules {
+	background-color: #ECD5D8;
+	color: #BC2A4D;
+}
+
+ #phpbb p.rules {
+	background-color: #ECD5D8;
+	background-image: none;
+}
+
+/*  	
+--------------------------------------------------------------
+Colours and backgrounds for links.css
+-------------------------------------------------------------- */
+
+ #phpbb a:link { color: #105289; }
+ #phpbb a:visited { color: #105289; }
+ #phpbb a:hover { color: #D31141!important; } /*ukrgb integration fix */
+ #phpbb a:active { color: #368AD2; }
+
+/* Links on gradient backgrounds */
+ #phpbb #search-box a:link , #phpbb .navbg a:link , #phpbb .forumbg .header a:link , #phpbb .forabg .header a:link , #phpbb th a:link {
+	color: #FFFFFF;
+}
+
+ #phpbb #search-box a:visited , #phpbb .navbg a:visited , #phpbb .forumbg .header a:visited , #phpbb .forabg .header a:visited , #phpbb th a:visited {
+	color: #FFFFFF;
+}
+
+ #phpbb #search-box a:hover , #phpbb .navbg a:hover , #phpbb .forumbg .header a:hover , #phpbb .forabg .header a:hover , #phpbb th a:hover {
+	color: #A8D8FF;
+}
+
+ #phpbb #search-box a:active , #phpbb .navbg a:active , #phpbb .forumbg .header a:active , #phpbb .forabg .header a:active , #phpbb th a:active {
+	color: #C8E6FF;
+}
+
+/* Links for forum/topic lists */
+ #phpbb a.forumtitle {
+	color: #105289;
+}
+
+/* a.forumtitle:visited { color: #105289; } */
+
+ #phpbb a.forumtitle:hover {
+	color: #BC2A4D;
+}
+
+ #phpbb a.forumtitle:active {
+	color: #105289;
+}
+
+ #phpbb a.topictitle {
+	color: #105289;
+}
+
+/* a.topictitle:visited { color: #368AD2; } */
+
+
+ #phpbb a.topictitle:hover {
+	color: #BC2A4D;
+}
+
+ #phpbb a.topictitle:active {
+	color: #105289;
+}
+
+/* Post body links */
+ #phpbb .postlink {
+	color: #368AD2;
+	border-bottom-color: #368AD2;
+}
+
+ #phpbb .postlink:visited {
+	color: #5D8FBD;
+	border-bottom-color: #666666;
+}
+
+ #phpbb .postlink:active {
+	color: #368AD2;
+}
+
+ #phpbb .postlink:hover {
+	background-color: #D0E4F6;
+	color: #0D4473;
+}
+
+ #phpbb .signature a, #phpbb.signature a:visited, #phpbb .signature a:hover, #phpbb .signature a:active {
+	background-color: transparent;
+}
+
+/* Profile links */
+ #phpbb .postprofile a:link , #phpbb .postprofile a:visited , #phpbb .postprofile dt.author a {
+	color: #105289;
+}
+
+ #phpbb .postprofile a:hover , #phpbb .postprofile dt.author a:hover {
+	color: #D31141;
+}
+
+ #phpbb .postprofile a:active {
+	color: #105289;
+}
+
+/* Profile searchresults */	
+ #phpbb .search .postprofile a {
+	color: #105289;
+}
+
+ #phpbb .search .postprofile a:hover {
+	color: #D31141;
+}
+
+/* Back to top of page */
+ #phpbb a.top {
+	background-image: url("{IMG_ICON_BACK_TOP_SRC}");
+}
+
+ #phpbb a.top2 {
+	background-image: url("{IMG_ICON_BACK_TOP_SRC}");
+}
+
+/* Arrow links  */
+ #phpbb a.up { background-image: url("{T_THEME_PATH}/images/arrow_up.gif") }
+ #phpbb a.down { background-image: url("{T_THEME_PATH}/images/arrow_down.gif") }
+ #phpbb a.left { background-image: url("{T_THEME_PATH}/images/arrow_left.gif") }
+ #phpbb a.right { background-image: url("{T_THEME_PATH}/images/arrow_right.gif") }
+
+ #phpbb a.up:hover {
+	background-color: transparent;
+}
+
+ #phpbb a.left:hover {
+	color: #368AD2;
+}
+
+ #phpbb a.right:hover {
+	color: #368AD2;
+}
+
+
+/*  	
+--------------------------------------------------------------
+Colours and backgrounds for content.css
+-------------------------------------------------------------- */
+
+
+ #phpbb ul.forums {
+	background-color: #eef5f9;
+	background-image: url("{T_THEME_PATH}/images/gradient.gif");
+}
+
+ #phpbb ul.topiclist li {
+	color: #4C5D77;
+}
+
+ #phpbb ul.topiclist dd {
+	border-left-color: #FFFFFF;
+}
+
+ #phpbb .rtl ul.topiclist dd {
+	border-right-color: #fff;
+	border-left-color: transparent;
+}
+
+ #phpbb ul.topiclist li.row dt a.subforum.read {
+	background-image: url("{IMG_SUBFORUM_READ_SRC}");
+}
+
+ #phpbb ul.topiclist li.row dt a.subforum.unread {
+	background-image: url("{IMG_SUBFORUM_UNREAD_SRC}");
+}
+
+ #phpbb li.row {
+	border-top-color:  #FFFFFF;
+	border-bottom-color: #00608F;
+}
+
+ #phpbb li.row strong {
+	color: #000000;
+}
+
+ #phpbb li.row:hover {
+	background-color: #F6F4D0;
+}
+
+ #phpbb li.row:hover dd {
+	border-left-color: #CCCCCC;
+}
+
+ #phpbb .rtl li.row:hover dd {
+	border-right-color: #CCCCCC;
+	border-left-color: transparent;
+}
+
+ #phpbb li.header dt , #phpbb li.header dd {
+	color: #FFFFFF;
+}
+
+/* Forum list column styles */
+
+ #phpbb ul.topiclist dd.searchextra {
+	color: #333333;
+}
+
+/* Post body styles
+----------------------------------------*/
+
+ #phpbb .postbody {
+	color: #333333;
+}
+
+/* Content container styles
+----------------------------------------*/
+ #phpbb .content {
+	color: #333333;
+}
+
+ #phpbb .content h2 , #phpbb .panel h2 {
+	color: #115098;
+	border-bottom-color:  #CCCCCC;
+}
+
+ #phpbb dl.faq dt {
+	color: #333333;
+}
+
+ #phpbb .posthilit {
+	background-color: #F3BFCC;
+	color: #BC2A4D;
+}
+
+/* Post signature */
+ #phpbb .signature {
+	border-top-color: #CCCCCC;
+}
+
+/* Post noticies */
+ #phpbb .notice {
+	border-top-color:  #CCCCCC;
+}
+
+/* BB Code styles
+----------------------------------------*/
+/* Quote block */
+ #phpbb blockquote {
+	background-color: #EBEADD;
+	background-image: url("{T_THEME_PATH}/images/quote.gif");
+	border-color:#DBDBCE;
+}
+
+ #phpbb .rtl blockquote {
+	background-image: url("{T_THEME_PATH}/images/quote_rtl.gif");
+}
+
+ #phpbb blockquote blockquote {
+	/* Nested quotes */
+	background-color:#EFEED9;
+}
+
+ #phpbb blockquote blockquote blockquote {
+	/* Nested quotes */
+	background-color: #EBEADD;
+}
+
+/* Code block */
+ #phpbb dl.codebox {
+	background-color: #FFFFFF;
+	border-color: #C9D2D8;
+}
+
+ #phpbb dl.codebox dt {
+	border-bottom-color:  #CCCCCC;
+}
+
+ #phpbb dl.codebox code {
+	color: #2E8B57;
+}
+
+ #phpbb .syntaxbg      { color: #FFFFFF; }
+ #phpbb .syntaxcomment { color: #FF8000; }
+ #phpbb .syntaxdefault { color: #0000BB; }
+ #phpbb .syntaxhtml    { color: #000000; }
+ #phpbb .syntaxkeyword { color: #007700; }
+ #phpbb .syntaxstring  { color: #DD0000; }
+
+/* Attachments
+----------------------------------------*/
+ #phpbb .attachbox {
+	background-color: #FFFFFF;
+	border-color:  #C9D2D8;
+}
+
+ #phpbb .pm-message .attachbox {
+	background-color: #F2F3F3;
+}
+
+ #phpbb .attachbox dd {
+	border-top-color: #C9D2D8;
+}
+
+ #phpbb .attachbox p {
+	color: #666666;
+}
+
+ #phpbb .attachbox p.stats {
+	color: #666666;
+}
+
+ #phpbb .attach-image img {
+	border-color: #999999;
+}
+
+/* Inline image thumbnails */
+
+
+ #phpbb dl.file dd {
+	color: #666666;
+}
+
+ #phpbb dl.thumbnail img {
+	border-color: #666666;
+	background-color: #FFFFFF;
+}
+
+ #phpbb dl.thumbnail dd {
+	color: #666666;
+}
+
+ #phpbb dl.thumbnail dt a:hover {
+	background-color: #EEEEEE;
+}
+
+ #phpbb dl.thumbnail dt a:hover img {
+	border-color: #368AD2;
+}
+
+/* Post poll styles
+----------------------------------------*/
+
+ #phpbb fieldset.polls dl {
+	border-top-color: #DCDEE2;
+	color: #666666;
+}
+
+ #phpbb fieldset.polls dl.voted {
+	color: #000000;
+}
+
+ #phpbb fieldset.polls dd div {
+	color: #FFFFFF;
+}
+
+ #phpbb .rtl .pollbar1 , #phpbb .rtl .pollbar2 , #phpbb .rtl .pollbar3 , #phpbb .rtl .pollbar4 , #phpbb .rtl .pollbar5 {
+	border-right-color: transparent;
+}
+
+ #phpbb .pollbar1 {
+	background-color: #AA2346;
+	border-bottom-color: #74162C;
+	border-right-color: #74162C;
+}
+
+ #phpbb .rtl .pollbar1 {
+	border-left-color: #74162C;
+}
+
+ #phpbb .pollbar2 {
+	background-color: #BE1E4A;
+	border-bottom-color: #8C1C38;
+	border-right-color: #8C1C38;
+}
+
+ #phpbb .rtl .pollbar2 {
+	border-left-color: #8C1C38;
+}
+
+ #phpbb .pollbar3 {
+	background-color: #D11A4E;
+	border-bottom-color: #AA2346;
+	border-right-color: #AA2346;
+}
+
+ #phpbb .rtl .pollbar3 {
+	border-left-color: #AA2346;
+}
+
+ #phpbb .pollbar4 {
+	background-color: #E41653;
+	border-bottom-color: #BE1E4A;
+	border-right-color: #BE1E4A;
+}
+
+ #phpbb .rtl .pollbar4 {
+	border-left-color: #BE1E4A;
+}
+
+ #phpbb .pollbar5 {
+	background-color: #F81157;
+	border-bottom-color: #D11A4E;
+	border-right-color: #D11A4E;
+}
+
+ #phpbb .rtl .pollbar5 {
+	border-left-color: #D11A4E;
+}
+
+/* Poster profile block
+----------------------------------------*/
+ #phpbb .postprofile {
+	color: #666666;
+	border-left-color: #FFFFFF;
+}
+
+ #phpbb .rtl .postprofile {
+	border-right-color: #FFFFFF;
+	border-left-color: transparent;
+}
+
+ #phpbb .pm .postprofile {
+	border-left-color: #DDDDDD;
+}
+
+ #phpbb .rtl .pm .postprofile {
+	border-right-color: #DDDDDD;
+	border-left-color: transparent;
+}
+
+ #phpbb .postprofile strong {
+	color: #000000;
+}
+
+ #phpbb .online {
+	background-image: url("{IMG_ICON_USER_ONLINE_SRC}");
+}
+/* Start mod (add) for prosilver_left */
+
+ #phpbb .online dt {
+   margin-top: 5px;
+}
+
+/* end mod */
+/*  	
+--------------------------------------------------------------
+Colours and backgrounds for buttons.css
+-------------------------------------------------------------- */
+
+/* Big button images */
+ #phpbb .reply-icon span { background-image: url("{IMG_BUTTON_TOPIC_REPLY_SRC}"); }
+ #phpbb .post-icon span { background-image: url("{IMG_BUTTON_TOPIC_NEW_SRC}"); }
+ #phpbb .locked-icon span { background-image: url("{IMG_BUTTON_TOPIC_LOCKED_SRC}"); }
+ #phpbb .pmreply-icon span { background-image: url("{IMG_BUTTON_PM_REPLY_SRC}") ;}
+ #phpbb .newpm-icon span { background-image: url("{IMG_BUTTON_PM_NEW_SRC}") ;}
+ #phpbb .forwardpm-icon span { background-image: url("{IMG_BUTTON_PM_FORWARD_SRC}") ;}
+
+ #phpbb a.print {
+	background-image: url("{T_THEME_PATH}/images/icon_print.gif");
+}
+
+ #phpbb a.sendemail {
+	background-image: url("{T_THEME_PATH}/images/icon_sendemail.gif");
+}
+
+ #phpbb a.fontsize {
+	background-image: url("{T_THEME_PATH}/images/icon_fontsize.gif");
+}
+
+/* Icon images
+---------------------------------------- */
+#phpbb .sitehome						{ background-image: url("{T_THEME_PATH}/images/icon_home.gif"); }
+#phpbb .icon-faq						{ background-image: url("{T_THEME_PATH}/images/icon_faq.gif"); }
+#phpbb .icon-members					{ background-image: url("{T_THEME_PATH}/images/icon_members.gif"); }
+#phpbb .icon-home						{ background-image: url("{T_THEME_PATH}/images/icon_home.gif"); }
+#phpbb .icon-ucp						{ background-image: url("{T_THEME_PATH}/images/icon_ucp.gif"); }
+#phpbb .icon-register					{ background-image: url("{T_THEME_PATH}/images/icon_register.gif"); }
+#phpbb .icon-logout					{ background-image: url("{T_THEME_PATH}/images/icon_logout.gif"); }
+#phpbb .icon-bookmark					{ background-image: url("{T_THEME_PATH}/images/icon_bookmark.gif"); }
+#phpbb .icon-bump						{ background-image: url("{T_THEME_PATH}/images/icon_bump.gif"); }
+#phpbb .icon-subscribe					{ background-image: url("{T_THEME_PATH}/images/icon_subscribe.gif"); }
+#phpbb .icon-unsubscribe				{ background-image: url("{T_THEME_PATH}/images/icon_unsubscribe.gif"); }
+#phpbb .icon-pages						{ background-image: url("{T_THEME_PATH}/images/icon_pages.gif"); }
+#phpbb .icon-search					{ background-image: url("{T_THEME_PATH}/images/icon_search.gif"); } 
+
+/* Profile & navigation icons */
+ #phpbb .email-icon , #phpbb .email-icon a { background-image: url("{IMG_ICON_CONTACT_EMAIL_SRC}"); }
+ #phpbb .aim-icon , #phpbb .aim-icon a { background-image: url("{IMG_ICON_CONTACT_AIM_SRC}"); }
+ #phpbb .yahoo-icon , #phpbb .yahoo-icon a { background-image: url("{IMG_ICON_CONTACT_YAHOO_SRC}"); }
+ #phpbb .web-icon , #phpbb .web-icon a { background-image: url("{IMG_ICON_CONTACT_WWW_SRC}"); }
+ #phpbb .msnm-icon , #phpbb .msnm-icon a { background-image: url("{IMG_ICON_CONTACT_MSNM_SRC}"); }
+ #phpbb .icq-icon , #phpbb .icq-icon a { background-image: url("{IMG_ICON_CONTACT_ICQ_SRC}"); }
+ #phpbb .jabber-icon , #phpbb .jabber-icon a { background-image: url("{IMG_ICON_CONTACT_JABBER_SRC}"); }
+ #phpbb .pm-icon , #phpbb .pm-icon a { background-image: url("{IMG_ICON_CONTACT_PM_SRC}"); }
+ #phpbb .quote-icon , #phpbb .quote-icon a { background-image: url("{IMG_ICON_POST_QUOTE_SRC}"); }
+
+/* Moderator icons */
+ #phpbb .report-icon , #phpbb .report-icon a { background-image: url("{IMG_ICON_POST_REPORT_SRC}"); }
+ #phpbb .edit-icon , #phpbb .edit-icon a { background-image: url("{IMG_ICON_POST_EDIT_SRC}"); }
+ #phpbb .delete-icon , #phpbb .delete-icon a { background-image: url("{IMG_ICON_POST_DELETE_SRC}"); }
+ #phpbb .info-icon , #phpbb .info-icon a { background-image: url("{IMG_ICON_POST_INFO_SRC}"); }
+ #phpbb .warn-icon , #phpbb .warn-icon a { background-image: url("{IMG_ICON_USER_WARN_SRC}"); } /* Need updated warn icon */
+
+/*  	
+--------------------------------------------------------------
+Colours and backgrounds for cp.css
+-------------------------------------------------------------- */
+
+/* Main CP box
+----------------------------------------*/
+
+
+ #phpbb #cp-main h3 , #phpbb #cp-main hr , #phpbb #cp-menu hr {
+	border-color: #A4B3BF;
+}
+
+ #phpbb #cp-main .panel li.row {
+	border-bottom-color: #B5C1CB;
+	border-top-color: #F9F9F9;
+}
+
+ #phpbb ul.cplist {
+	border-top-color: #B5C1CB;
+}
+
+ #phpbb #cp-main .panel li.header dd , #phpbb #cp-main .panel li.header dt {
+	color: #000000;
+}
+
+ #phpbb #cp-main table.table1 thead th {
+	color: #333333;
+	border-bottom-color: #333333;
+}
+
+ #phpbb #cp-main .pm-message {
+	border-color: #DBDEE2;
+	background-color: #FFFFFF;
+}
+
+/* CP tabbed menu
+----------------------------------------*/
+ #phpbb #tabs a {
+	background-image: url("{T_THEME_PATH}/images/bg_tabs1.gif");
+}
+
+ #phpbb #tabs a span {
+	background-image: url("{T_THEME_PATH}/images/bg_tabs2.gif");
+	color: #536482;
+}
+
+ #phpbb #tabs a:hover span {
+	color: #BC2A4D;
+}
+
+ #phpbb #tabs .activetab a {
+	border-bottom-color: #CADCEB;
+}
+
+ #phpbb #tabs .activetab a span {
+	color: #333333;
+}
+
+ #phpbb #tabs .activetab a:hover span {
+	color: #000000;
+}
+
+/* Mini tabbed menu used in MCP
+----------------------------------------*/
+ #phpbb #minitabs li {
+	background-color: #E1EBF2;
+}
+
+ #phpbb #minitabs li.activetab {
+	background-color: #F9F9F9;
+}
+
+ #phpbb #minitabs li.activetab a , #phpbb #minitabs li.activetab a:hover {
+	color: #333333;
+}
+
+/* UCP navigation menu
+----------------------------------------*/
+
+/* Link styles for the sub-section links */
+ #phpbb #navigation a {
+	color: #333;
+	background-color: #B2C2CF;
+	background-image: url("{T_THEME_PATH}/images/bg_menu.gif");
+}
+
+ #phpbb .rtl #navigation a {
+	background-image: url("{T_THEME_PATH}/images/bg_menu_rtl.gif");
+	background-position: 0 100%;
+}
+
+ #phpbb #navigation a:hover {
+	background-image: none;
+	background-color: #aabac6;
+	color: #BC2A4D;
+}
+
+ #phpbb #navigation #active-subsection a {
+	color: #D31141;
+	background-color: #F9F9F9;
+	background-image: none;
+}
+
+ #phpbb #navigation #active-subsection a:hover {
+	color: #D31141;
+}
+
+/* Preferences pane layout
+----------------------------------------*/
+ #phpbb #cp-main h2 {
+	color: #333333;
+}
+
+ #phpbb #cp-main .panel {
+	background-color: #F9F9F9;
+}
+
+ #phpbb #cp-main .pm {
+	background-color: #FFFFFF;
+}
+
+ #phpbb #cp-main span.corners-top , #phpbb #cp-menu span.corners-top {
+	background-image: url("{T_THEME_PATH}/images/corners_left2.gif");
+}
+
+ #phpbb #cp-main span.corners-top span , #phpbb #cp-menu span.corners-top span {
+	background-image: url("{T_THEME_PATH}/images/corners_right2.gif");
+}
+
+ #phpbb #cp-main span.corners-bottom , #phpbb #cp-menu span.corners-bottom {
+	background-image: url("{T_THEME_PATH}/images/corners_left2.gif");
+}
+
+ #phpbb #cp-main span.corners-bottom span , #phpbb #cp-menu span.corners-bottom span {
+	background-image: url("{T_THEME_PATH}/images/corners_right2.gif");
+}
+
+/* Topicreview */
+ #phpbb #cp-main .panel #topicreview span.corners-top , #phpbb #cp-menu .panel #topicreview span.corners-top {
+	background-image: url("{T_THEME_PATH}/images/corners_left.gif");
+}
+
+ #phpbb #cp-main .panel #topicreview span.corners-top span , #phpbb #cp-menu .panel #topicreview span.corners-top span {
+	background-image: url("{T_THEME_PATH}/images/corners_right.gif");
+}
+
+ #phpbb #cp-main .panel #topicreview span.corners-bottom , #phpbb #cp-menu .panel #topicreview span.corners-bottom {
+	background-image: url("{T_THEME_PATH}/images/corners_left.gif");
+}
+
+ #phpbb #cp-main .panel #topicreview span.corners-bottom span , #phpbb #cp-menu .panel #topicreview span.corners-bottom span {
+	background-image: url("{T_THEME_PATH}/images/corners_right.gif");
+}
+
+/* Friends list */
+ #phpbb .cp-mini {
+	background-color: #eef5f9;
+}
+
+ #phpbb dl.mini dt {
+	color: #425067;
+}
+
+/* PM Styles
+----------------------------------------*/
+/* PM Message history */
+ #phpbb .current {
+	color: #000000 !important;
+}
+
+/* PM panel adjustments */
+
+ #phpbb .pm-panel-header , 
+ #phpbb #cp-main .pm-message-nav {
+	border-bottom-color: #A4B3BF;
+}
+
+/* PM marking colours */
+ #phpbb .pmlist li.pm_message_reported_colour , #phpbb .pm_message_reported_colour {
+	border-left-color: #BC2A4D;
+	border-right-color: #BC2A4D;
+}
+
+ #phpbb .pmlist li.pm_marked_colour , #phpbb .pm_marked_colour {
+	border-color: #FF6600;
+}
+
+ #phpbb .pmlist li.pm_replied_colour , #phpbb .pm_replied_colour {
+	border-color: #A9B8C2;
+}
+
+ #phpbb .pmlist li.pm_friend_colour , #phpbb .pm_friend_colour {
+	border-color: #5D8FBD;
+}
+
+ #phpbb .pmlist li.pm_foe_colour , #phpbb .pm_foe_colour {
+	border-color: #000000;
+}
+
+/* Avatar gallery */
+ #phpbb #gallery label {
+	background-color: #FFFFFF;
+	border-color: #CCC;
+}
+
+ #phpbb #gallery label:hover {
+	background-color: #EEE;
+}
+
+/*  	
+--------------------------------------------------------------
+Colours and backgrounds for forms.css
+-------------------------------------------------------------- */
+
+/* General form styles
+----------------------------------------*/
+ #phpbb select {
+	border-color: #666666;
+	background-color: #FAFAFA;
+	color: #000;
+}
+
+ #phpbb label {
+	color: #425067;
+}
+
+ #phpbb option.disabled-option {
+	color: graytext;
+}
+
+/* Definition list layout for forms
+---------------------------------------- */
+ #phpbb dd label {
+	color: #333;
+}
+
+/* Hover effects */
+ #phpbb fieldset dl:hover dt label {
+	color: #000000;
+}
+
+ #phpbb fieldset.fields2 dl:hover dt label {
+	color: inherit;
+}
+
+/* Quick-login on index page */
+ #phpbb fieldset.quick-login input.inputbox {
+	background-color: #F2F3F3;
+}
+
+/* Posting page styles
+----------------------------------------*/
+
+ #phpbb #message-box textarea {
+	color: #333333;
+}
+
+/* Input field styles
+---------------------------------------- */
+ #phpbb .inputbox {
+	background-color: #FFFFFF; 
+	border-color: #B4BAC0;
+	color: #333333;
+}
+
+ #phpbb .inputbox:hover {
+	border-color: #11A3EA;
+}
+
+ #phpbb .inputbox:focus {
+	border-color: #11A3EA;
+	color: #0F4987;
+}
+
+/* Form button styles
+---------------------------------------- */
+
+ #phpbb a.button1 , #phpbb input.button1 , #phpbb input.button3 , #phpbb a.button2 , #phpbb input.button2 {
+	color: #000;
+	background-color: #FAFAFA;
+	background-image: url("{T_THEME_PATH}/images/bg_button.gif");
+}
+
+ #phpbb a.button1 , #phpbb input.button1 {
+	border-color: #666666;
+}
+
+ #phpbb input.button3 {
+	background-image: none;
+}
+
+/* Alternative button */
+ #phpbb a.button2 , #phpbb input.button2 , #phpbb input.button3 {
+	border-color: #666666;
+}
+
+/* <a> button in the style of the form buttons */
+ #phpbb a.button1 , #phpbb a.button1:link , #phpbb a.button1:visited , #phpbb a.button1:active , #phpbb a.button2 , #phpbb a.button2:link , #phpbb a.button2:visited , #phpbb a.button2:active {
+	color: #000000;
+}
+
+/* Hover states */
+ #phpbb a.button1:hover , #phpbb input.button1:hover , #phpbb a.button2:hover , #phpbb input.button2:hover , #phpbb input.button3:hover {
+	border-color: #BC2A4D;
+	color: #BC2A4D;
+}
+
+ #phpbb input.search {
+	background-image: url("{T_THEME_PATH}/images/icon_textbox_search.gif");
+}
+
+ #phpbb input.disabled {
+	color: #666666;
+}

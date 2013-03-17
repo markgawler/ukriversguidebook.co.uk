@@ -1,0 +1,139 @@
+/* Print Style Sheet
+---------------------------------------- */
+
+
+/* Lots still TODO here! */
+
+/* General markup styles */
+ #phpbb * {
+	padding: 0;
+	margin: 0;
+}
+
+ body #phpbb  {
+	font: 11pt Verdana, Arial, Helvetica, sans-serif;
+	color:#000000;
+}
+
+ #phpbb a:link { color: #000000; text-decoration: none; }
+ #phpbb a:visited { color: #000000; text-decoration: none; }
+ #phpbb a:active { color: #000000; text-decoration: none; }
+
+ #phpbb img , #phpbb .noprint , #phpbb #sub-header , #phpbb #sub-footer , #phpbb .navbar , #phpbb .box1 , #phpbb .divider , #phpbb .signature { display: none; }
+/* Display smilies (Bug #47265) */
+ #phpbb .content img {
+	display: inline;
+}
+
+/* Container for the main body */
+ #phpbb #wrap {
+	margin: 0 2em;
+}
+
+ #phpbb p { font-size: 85%; }
+ #phpbb .copyright { font-size: 75%; }
+ #phpbb .page-number { float:right; width: auto; text-align: right; font-size: 75%; }
+
+ #phpbb h1 , #phpbb h2 , #phpbb h3 , #phpbb h1 a , #phpbb h2 a , #phpbb h3 a {
+	font-family: "Trebuchet MS",georgia,Verdana,Sans-serif;
+	color: #000000;
+	background: none;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+ #phpbb h1 { font-size: 20pt; }
+ #phpbb h2 { font-size: 16pt; margin-top: 1em; }
+ #phpbb h3 { font-size: 14pt; margin-top: 1em; }
+
+ #phpbb .content {
+	font-size: 11pt;
+	line-height: 14pt;
+	margin-bottom: 1em;
+	font-family: "Lucida Grande", "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	overflow: hidden;
+}
+
+/* CSS2 Print tip from: http://www.alistapart.com/articles/goingtoprint/ */
+ #phpbb .postbody a:link , #phpbb .postbody a:visited , #phpbb .postbody a:active , #phpbb .postbody a:hover {
+	text-decoration: underline;
+	padding: 0.1em 0.2em;
+	margin: -0.1em -0.2em;
+	color: #666;
+	background: none;
+	font-size: 100%;
+}
+
+ html > body #phpbb  .postbody a:link:after , html > body #phpbb  .postbody a:visited:after {
+	content: " (" attr(href) ") ";
+	font-size: 90%;
+	text-decoration: none;
+}
+
+ #phpbb hr {
+	height: 1px;
+	background-color: #999999;
+	border-width: 0;
+}
+
+ #phpbb .author {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 75%;
+	margin-bottom: 0.6em;
+}
+
+ #phpbb .date {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	float: right;
+	position: relative;
+	text-align: right;
+	font-size: 75%;
+}
+
+/* Dont want to print url for names or titles in content area */
+ #phpbb .postbody .author a:link , #phpbb .postbody .author a:visited , 
+html > body #phpbb  .postbody .author a:link:after , 
+html > body #phpbb  .postbody .author a:visited:after , 
+#phpbb .postquote .quote-by a:link , #phpbb .postquote .quote-by a:visited , 
+html > body #phpbb  .postquote .quote-by a:link:after , 
+html > body #phpbb  .postquote .quote-by a:visited:after , 
+html > body #phpbb  .postbody h1 a:link:after , html > body #phpbb  .postbody h2 a:link:after {
+	text-decoration: none;
+	content: "";
+}
+
+/* Poster profile */
+ #phpbb .postprofile { display: none; }
+ #phpbb .grip-show { display:none; }
+
+/* Quote */
+ #phpbb .postquote , #phpbb blockquote {
+	font-size: 85%;
+	margin: 1em 18% 1em 4%;
+	padding: 0.5em;
+	position: relative;
+	line-height: 1.5em;
+	border: 1px #999999 solid;
+}
+
+ #phpbb .postquote img { display: none; }
+ #phpbb .postquote span { display: block; }
+ #phpbb .postquote span .postquote { font-size: 100%; }
+ #phpbb .quote-by , #phpbb blockquote cite { 
+	color: black;
+	display : block;
+	font-weight: bold;
+}
+
+/* List */
+ #phpbb ol , #phpbb ul {
+	margin-left: 15pt
+}
+
+/* Misc page elements */
+ #phpbb div.spacer { clear: both; }
+
+/* Accessibility tweaks: Mozilla.org */
+ #phpbb .skip_link { display: none; }
+
+ #phpbb .skip_link { display: none; }

@@ -1,0 +1,473 @@
+/* Control Panel Styles
+---------------------------------------- */
+
+
+/* Main CP box
+----------------------------------------*/
+
+ #phpbb #cp-menu {
+	float:left;
+	width: 19%;
+	margin-top: 1em;
+	margin-bottom: 5px;
+}
+
+ #phpbb #cp-main {
+	float: left;
+	width: 81%;
+}
+
+ #phpbb #cp-main .content {
+	padding: 0;
+}
+
+ #phpbb #cp-main h3 , #phpbb #cp-main hr , #phpbb #cp-menu hr {
+	border-color: #bfbfbf;
+}
+
+ #phpbb #cp-main .panel p {
+	font-size: 1.1em;
+}
+
+ #phpbb #cp-main .panel ol {
+	margin-left: 2em;
+	font-size: 1.1em;
+}
+
+ #phpbb #cp-main .panel li.row {
+	border-bottom: 1px solid #cbcbcb;
+	border-top: 1px solid #F9F9F9;
+}
+
+ #phpbb ul.cplist {
+	margin-bottom: 5px;
+	border-top: 1px solid #cbcbcb;
+}
+
+ #phpbb #cp-main .panel li.header dd , #phpbb #cp-main .panel li.header dt {
+	color: #000000;
+	margin-bottom: 2px;
+}
+
+ #phpbb #cp-main table.table1 {
+	margin-bottom: 1em;
+}
+
+ #phpbb #cp-main table.table1 thead th {
+	color: #333333;
+	font-weight: bold;
+	border-bottom: 1px solid #333333;
+	padding: 5px;
+}
+
+ #phpbb #cp-main table.table1 tbody th {
+	font-style: italic;
+	background-color: transparent !important;
+	border-bottom: none;
+}
+
+ #phpbb #cp-main .pagination {
+	float: right;
+	width: auto;
+	padding-top: 1px;
+}
+
+ #phpbb #cp-main .postbody p {
+	font-size: 1.1em;
+}
+
+ #phpbb #cp-main .pm-message {
+	border: 1px solid #e2e2e2;
+	margin: 10px 0;
+	background-color: #FFFFFF;
+	width: auto;
+	float: none;
+}
+
+ #phpbb .pm-message h2 {
+	padding-bottom: 5px;
+}
+
+ #phpbb #cp-main .postbody h3 , #phpbb #cp-main .box2 h3 {
+	margin-top: 0;
+}
+
+ #phpbb #cp-main .buttons {
+	margin-left: 0;
+}
+
+ #phpbb #cp-main ul.linklist {
+	margin: 0;
+}
+
+/* MCP Specific tweaks */
+
+ #phpbb .mcp-main .postbody {
+	width: 100%;
+}
+
+ #phpbb .tabs-container h2 {
+	float: left;
+	margin-bottom: 0px;
+}
+
+ #phpbb .tabs-container #minitabs {
+	float: right;
+	margin-top: 19px;
+}
+
+ #phpbb .tabs-container:after {
+	display: block;
+	clear: both;
+	content: '';
+}
+
+/* CP tabbed menu
+----------------------------------------*/
+
+ #phpbb #tabs {
+	line-height: normal;
+	margin: 20px 0 -1px 7px;
+	min-width: 570px;
+}
+
+ #phpbb #tabs ul {
+	margin:0;
+	padding: 0;
+	list-style: none;
+}
+
+ #phpbb #tabs li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+ #phpbb #tabs a {
+	float: left;
+	background: none no-repeat 0% -35px;
+	margin: 0 1px 0 0;
+	padding: 0 0 0 5px;
+	text-decoration: none;
+	position: relative;
+	cursor: pointer;
+}
+
+ #phpbb #tabs a span {
+	float: left;
+	display: block;
+	background: none no-repeat 100% -35px;
+	padding: 6px 10px 6px 5px;
+	color: #828282;
+	white-space: nowrap;
+}
+
+ #phpbb #tabs a:hover span {
+	color: #bcbcbc;
+}
+
+ #phpbb #tabs .activetab a {
+	background-position: 0 0;
+	border-bottom: 1px solid #ebebeb;
+}
+
+ #phpbb #tabs .activetab a span {
+	background-position: 100% 0;
+	padding-bottom: 7px;
+	color: #333333;
+}
+
+ #phpbb #tabs a:hover {
+	background-position: 0 -70px;
+	text-decoration: none !important; /* ukrgb */
+}
+
+ #phpbb #tabs a:hover span {
+	background-position:100% -70px;
+}
+
+ #phpbb #tabs .activetab a:hover {
+	background-position: 0 0;
+}
+
+ #phpbb #tabs .activetab a:hover span {
+	color: #000000;
+	background-position: 100% 0;
+}
+
+/* Mini tabbed menu used in MCP
+----------------------------------------*/
+
+ #phpbb #minitabs {
+	line-height: normal;
+	margin: -20px 7px 0 0;
+}
+
+ #phpbb #minitabs ul {
+	margin:0;
+	padding: 0;
+	list-style: none;
+}
+
+ #phpbb #minitabs li {
+	display: block;
+	float: right;
+	padding: 0 10px 4px 10px;
+	font-size: 1em;
+	font-weight: bold;
+	background-color: #f2f2f2;
+	margin-left: 2px;
+}
+
+ #phpbb #minitabs a {
+}
+
+ #phpbb #minitabs a:hover {
+	text-decoration: none;
+}
+
+ #phpbb #minitabs li.activetab {
+	background-color: #F9F9F9;
+}
+
+ #phpbb #minitabs li.activetab a , #phpbb #minitabs li.activetab a:hover {
+	color: #333333;
+}
+
+/* UCP navigation menu
+----------------------------------------*/
+/* Container for sub-navigation list */
+
+ #phpbb #navigation {
+	width: 100%;
+	padding-top: 36px;
+}
+
+ #phpbb #navigation ul {
+	list-style:none;
+}
+
+/* Default list state */
+
+ #phpbb #navigation li {
+	margin: 1px 0;
+	padding: 0;
+	font-weight: bold;
+	display: inline;
+}
+
+/* Link styles for the sub-section links */
+
+ #phpbb #navigation a {
+	display: block;
+	padding: 5px;
+	margin: 1px 0;
+	text-decoration: none;
+	font-weight: bold;
+	color: #333;
+	background: #cfcfcf none repeat-y 100% 0;
+}
+
+ #phpbb #navigation a:hover {
+	text-decoration: none;
+	background-color: #c6c6c6;
+	color: #bcbcbc;
+	background-image: none;
+}
+
+ #phpbb #navigation #active-subsection a {
+	display: block;
+	color: #d3d3d3;
+	background-color: #F9F9F9;
+	background-image: none;
+}
+
+ #phpbb #navigation #active-subsection a:hover {
+	color: #d3d3d3;
+}
+
+/* Preferences pane layout
+----------------------------------------*/
+
+ #phpbb #cp-main h2 {
+	border-bottom: none;
+	padding: 0;
+	margin-left: 10px;
+	color: #333333;
+}
+
+ #phpbb #cp-main .panel {
+	background-color: #F9F9F9;
+}
+
+ #phpbb #cp-main .pm {
+	background-color: #FFFFFF;
+}
+
+ #phpbb #cp-main span.corners-top , #phpbb #cp-menu span.corners-top {
+	background-image: none;
+}
+
+ #phpbb #cp-main span.corners-top span , #phpbb #cp-menu span.corners-top span {
+	background-image: none;
+}
+
+ #phpbb #cp-main span.corners-bottom , #phpbb #cp-menu span.corners-bottom {
+	background-image: none;
+}
+
+ #phpbb #cp-main span.corners-bottom span , #phpbb #cp-menu span.corners-bottom span {
+	background-image: none;
+}
+
+/* Topicreview */
+
+ #phpbb #cp-main .panel #topicreview span.corners-top , #phpbb #cp-menu .panel #topicreview span.corners-top {
+	background-image: none;
+}
+
+ #phpbb #cp-main .panel #topicreview span.corners-top span , #phpbb #cp-menu .panel #topicreview span.corners-top span {
+	background-image: none;
+}
+
+ #phpbb #cp-main .panel #topicreview span.corners-bottom , #phpbb #cp-menu .panel #topicreview span.corners-bottom {
+	background-image: none;
+}
+
+ #phpbb #cp-main .panel #topicreview span.corners-bottom span , #phpbb #cp-menu .panel #topicreview span.corners-bottom span {
+	background-image: none;
+}
+
+/* Friends list */
+
+ #phpbb .cp-mini {
+	background-color: #f9f9f9;
+	padding: 0 5px;
+	margin: 10px 15px 10px 5px;
+}
+
+ #phpbb .cp-mini span.corners-top , #phpbb .cp-mini span.corners-bottom {
+	margin: 0 -5px;
+}
+
+ #phpbb dl.mini dt {
+	font-weight: bold;
+	color: #676767;
+}
+
+ #phpbb dl.mini dd {
+	padding-top: 4px;
+}
+
+ #phpbb .friend-online {
+	font-weight: bold;
+}
+
+ #phpbb .friend-offline {
+	font-style: italic;
+}
+
+/* PM Styles
+----------------------------------------*/
+
+ #phpbb #pm-menu {
+	line-height: 2.5em;
+}
+
+/* PM panel adjustments */
+ #phpbb .reply-all a.left {
+	background-position: 3px 60%;
+}
+
+ #phpbb .reply-all a.left:hover {
+	background-position: 0px 60%;
+}
+
+ #phpbb .reply-all {
+	font-size: 11px;
+	padding-top: 5px;
+}
+
+/* PM Message history */
+
+ #phpbb .current {
+	color: #999999;
+}
+
+/* Defined rules list for PM options */
+
+ #phpbb ol.def-rules {
+	padding-left: 0;
+}
+
+ #phpbb ol.def-rules li {
+	line-height: 180%;
+	padding: 1px;
+}
+
+/* PM marking colours */
+ #phpbb .pmlist li.bg1 {
+	padding: 0 3px;
+}
+
+ #phpbb .pmlist li.bg2 {
+	padding: 0 3px;
+}
+
+ #phpbb .pmlist li.pm_message_reported_colour , #phpbb .pm_message_reported_colour {
+	border-left-color: #bcbcbc;
+	border-right-color: #bcbcbc;
+}
+
+ #phpbb .pmlist li.pm_marked_colour , #phpbb .pm_marked_colour {
+	padding: 0;
+	border: solid 3px #ffffff;
+	border-width: 0 3px;
+}
+
+ #phpbb .pmlist li.pm_replied_colour , #phpbb .pm_replied_colour {
+	padding: 0;
+	border: solid 3px #c2c2c2;
+	border-width: 0 3px;
+}
+
+ #phpbb .pmlist li.pm_friend_colour , #phpbb .pm_friend_colour {
+	padding: 0;
+	border: solid 3px #bdbdbd;
+	border-width: 0 3px;
+}
+
+ #phpbb .pmlist li.pm_foe_colour , #phpbb .pm_foe_colour {
+	padding: 0;
+	border: solid 3px #000000;
+	border-width: 0 3px;
+}
+
+ #phpbb .pm-legend {
+	border-left-width: 10px;
+	border-left-style: solid;
+	border-right-width: 0;
+	margin-bottom: 3px;
+	padding-left: 3px;
+}
+
+/* Avatar gallery */
+
+ #phpbb #gallery label {
+	position: relative;
+	float: left;
+	margin: 10px;
+	padding: 5px;
+	width: auto;
+	background: #FFFFFF;
+	border: 1px solid #CCC;
+	text-align: center;
+}
+
+ #phpbb #gallery label:hover {
+	background-color: #EEE;
+}
+
+

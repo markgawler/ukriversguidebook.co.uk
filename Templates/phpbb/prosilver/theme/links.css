@@ -1,0 +1,237 @@
+/* Link Styles
+---------------------------------------- */
+
+/* Links adjustment to correctly display an order of rtl/ltr mixed content */
+
+ #phpbb a {
+	direction: ltr;
+	unicode-bidi: embed;
+}
+
+ #phpbb a:link { color: #898989; text-decoration: none; }
+ #phpbb a:visited { color: #898989; text-decoration: none; }
+ #phpbb a:hover { 
+   color: #d3d3d3; text-decoration: underline!important; /*ukrgb */
+   background-color: transparent!important;
+}
+ #phpbb a:active { color: #d2d2d2; text-decoration: none; }
+
+/* Coloured usernames */
+
+ #phpbb .username-coloured {
+	font-weight: bold;
+	display: inline !important;
+	padding: 0 !important;
+}
+
+/* Links on gradient backgrounds */
+
+ #phpbb #search-box a:link , #phpbb .navbg a:link , #phpbb .forumbg .header a:link , #phpbb .forabg .header a:link , #phpbb th a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+ #phpbb #search-box a:visited , #phpbb .navbg a:visited , #phpbb .forumbg .header a:visited , #phpbb .forabg .header a:visited , #phpbb th a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+ #phpbb #search-box a:hover , #phpbb .navbg a:hover , #phpbb .forumbg .header a:hover , #phpbb .forabg .header a:hover , #phpbb th a:hover {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+ #phpbb #search-box a:active , #phpbb .navbg a:active , #phpbb .forumbg .header a:active , #phpbb .forabg .header a:active , #phpbb th a:active {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+/* Links for forum/topic lists */
+
+ #phpbb a.forumtitle {
+	font-family: "Trebuchet MS", Helvetica, Arial, Sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #898989;
+	text-decoration: none;
+}
+
+/* a.forumtitle:visited { color: #898989; } */
+
+
+ #phpbb a.forumtitle:hover {
+	color: #bcbcbc;
+	text-decoration: underline;
+}
+
+ #phpbb a.forumtitle:active {
+	color: #898989;
+}
+
+ #phpbb a.topictitle {
+	font-family: "Trebuchet MS", Helvetica, Arial, Sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #898989;
+	text-decoration: none;
+}
+
+/* a.topictitle:visited { color: #d2d2d2; } */
+
+
+ #phpbb a.topictitle:hover {
+	color: #bcbcbc;
+	text-decoration: underline;
+}
+
+ #phpbb a.topictitle:active {
+	color: #898989;
+}
+
+/* Post body links */
+
+ #phpbb .postlink {
+	text-decoration: none;
+	color: #d2d2d2;
+	/* border-bottom: 1px solid #d2d2d2; */
+	padding-bottom: 0;
+}
+
+ /* #phpbb .postlink:visited {	color: #bdbdbd; }*/
+
+/*} */
+
+ #phpbb .postlink:active {
+	color: #d2d2d2;
+}
+
+ #phpbb .postlink:hover {
+	background-color: #f6f6f6;
+	text-decoration: none;
+	color: #404040;
+}
+
+ #phpbb .signature a, #phpbb .signature a:visited, #phpbb .signature a:hover, #phpbb .signature a:active {
+	border: none;
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+/* Profile links */
+
+ #phpbb .postprofile a:link, #phpbb .postprofile a:visited, #phpbb .postprofile dt.author a {
+	font-weight: bold;
+	color: #898989;
+	text-decoration: none;
+}
+
+ #phpbb .postprofile a:hover , #phpbb .postprofile dt.author a:hover {
+	text-decoration: underline;
+	color: #d3d3d3;
+}
+
+/* CSS spec requires a:ltestink, a:visited, a:hover and a:active rules to be specified in this order. */
+/* See http://www.phpbb.com/bugs/phpbb3/59685 */
+ #phpbb .postprofile a:active {
+	font-weight: bold;
+	color: #898989;
+	text-decoration: none;
+}
+
+
+/* Profile searchresults */	
+ #phpbb .search .postprofile a {
+	color: #898989;
+	text-decoration: none; 
+	font-weight: normal;
+}
+
+ #phpbb .search .postprofile a:hover {
+	color: #d3d3d3;
+	text-decoration: underline; 
+}
+
+/* Back to top of page */
+ #phpbb .back2top {
+	clear: both;
+	height: 11px;
+	text-align: right;
+}
+
+ #phpbb a.top {
+	background: none no-repeat top left;
+	text-decoration: none;
+	width: {IMG_ICON_BACK_TOP_WIDTH}px;
+	height: {IMG_ICON_BACK_TOP_HEIGHT}px;
+	display: block;
+	float: right;
+	overflow: hidden;
+	letter-spacing: 1000px;
+	text-indent: 11px;
+}
+
+ #phpbb a.top2 {
+	background: none no-repeat 0 50%;
+	text-decoration: none;
+	padding-left: 15px;
+}
+
+/* Arrow links  */
+ #phpbb a.up { background: none no-repeat left center; }
+ #phpbb a.down { background: none no-repeat right center; }
+ #phpbb a.left { background: none no-repeat 3px 60%; 
+ 	width: inherit; /* ukrgb */}
+ #phpbb a.right { background: none no-repeat 95% 60%; }
+
+ #phpbb a.up , #phpbb a.up:link , #phpbb a.up:active , #phpbb a.up:visited {
+	padding-left: 10px;
+	text-decoration: none;
+	border-bottom-width: 0;
+}
+
+ #phpbb a.up:hover {
+	background-position: left top;
+	background-color: transparent;
+}
+
+ #phpbb a.down , #phpbb a.down:link , #phpbb a.down:active , #phpbb a.down:visited {
+	padding-right: 10px;
+}
+
+ #phpbb a.down:hover {
+	background-position: right bottom;
+	text-decoration: none;
+}
+
+ #phpbb a.left , #phpbb a.left:active , #phpbb a.left:visited {
+	padding-left: 12px;
+}
+
+ #phpbb a.left:hover {
+	color: #d2d2d2;
+	text-decoration: none;
+	background-position: 0 60%;
+}
+
+ #phpbb a.right , #phpbb a.right:active , #phpbb a.right:visited {
+	padding-right: 12px;
+}
+
+ #phpbb a.right:hover {
+	color: #d2d2d2;
+	text-decoration: none;
+	background-position: 100% 60%;
+}
+
+/* invisible skip link, used for accessibility  */
+ #phpbb .skiplink {
+	position: absolute;
+	left: -999px;
+	width: 990px;
+}
+
+/* Feed icon in forumlist_body.html */
+ #phpbb a.feed-icon-forum {
+	float: right;
+	margin: 3px;
+}

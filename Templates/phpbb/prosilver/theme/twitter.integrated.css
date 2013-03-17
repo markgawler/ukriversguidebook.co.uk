@@ -1,0 +1,27 @@
+
+ #phpbb ﻿#twitter_div { width: 100%; }
+
+ #phpbb ul#twitter_update_list , #phpbb .twitter_update_list {
+	
+	list-style-image: none;
+	list-style-position: inside;
+	list-style-type: none;
+	
+	margin: 0;
+	padding: 0;
+	}
+
+ #phpbb ul#twitter_update_list li , #phpbb .twitter_update_list li {
+	
+	margin: 0 0 4px 0;
+	padding: 4px 0 4px 4px;
+	
+	background-color: #CADCEB;
+	}
+
+ #phpbb ul#twitter_update_list li a { color: #000; text-decoration: underline; }
+
+ #phpbb ul#twitter_update_list li span { display: block; font-size: 1.2em; }
+
+ #phpbb ul#twitter_update_list li span a { color: #060; text-decoration: none; }
+

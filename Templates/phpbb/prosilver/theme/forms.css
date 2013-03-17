@@ -1,0 +1,421 @@
+/* Form Styles
+---------------------------------------- */
+
+/* General form styles
+----------------------------------------*/
+
+ #phpbb fieldset {
+	border-width: 0;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 1.1em;
+}
+
+ #phpbb input {
+	font-weight: normal;
+	cursor: pointer;
+	vertical-align: middle;
+	padding: 0 3px;
+	font-size: 1em;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+ #phpbb select {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	cursor: pointer;
+	vertical-align: middle;
+	border: 1px solid #666666;
+	padding: 1px;
+	background-color: #FAFAFA;
+	font-size: 1em;
+}
+
+ #phpbb option {
+	padding-right: 1em;
+}
+
+ #phpbb option.disabled-option {
+	color: graytext;
+}
+
+ #phpbb textarea {
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	width: 60%;
+	padding: 2px;
+	font-size: 1em;
+	line-height: 1.4em;
+}
+
+ #phpbb label {
+	cursor: default;
+	padding-right: 5px;
+	color: #676767;
+}
+
+ #phpbb label input {
+	vertical-align: middle;
+}
+
+ #phpbb label img {
+	vertical-align: middle;
+}
+
+/* Definition list layout for forms
+---------------------------------------- */
+
+ #phpbb fieldset dl {
+	padding: 4px 0;
+}
+
+ #phpbb fieldset dt {
+	float: left;	
+	width: 40%;
+	text-align: left;
+	display: block;
+}
+
+ #phpbb fieldset dd {
+ 	float: none; /* ukrgb */
+	margin-left: 41%;
+	vertical-align: top;
+	margin-bottom: 3px;
+}
+
+/* Specific layout 1 */
+
+ #phpbb fieldset.fields1 dt {
+	width: 15em;
+	border-right-width: 0;
+}
+
+ #phpbb fieldset.fields1 dd {
+	margin-left: 15em;
+	border-left-width: 0;
+}
+
+ #phpbb fieldset.fields1 {
+	background-color: transparent;
+}
+
+ #phpbb fieldset.fields1 div {
+	margin-bottom: 3px;
+}
+
+/* Set it back to 0px for the reCaptcha divs: PHPBB3-9587 */
+
+ #phpbb fieldset.fields1 #recaptcha_widget_div div {
+	margin-bottom: 0;
+}
+
+/* Specific layout 2 */
+
+ #phpbb fieldset.fields2 dt {
+	width: 15em;
+	border-right-width: 0;
+}
+
+ #phpbb fieldset.fields2 dd {
+	margin-left: 16em;
+	border-left-width: 0;
+}
+
+/* Form elements */
+
+ #phpbb dt label {
+	font-weight: bold;
+	text-align: left;
+}
+
+ #phpbb dd label {
+	white-space: nowrap;
+	color: #333;
+}
+
+ #phpbb dd input , #phpbb dd textarea {
+	margin-right: 3px;
+}
+
+ #phpbb dd select {
+	width: auto;
+}
+
+ #phpbb dd textarea {
+	width: 85%;
+}
+
+/* Hover effects */
+
+ #phpbb fieldset dl:hover dt label {
+	color: #000000;
+}
+
+ #phpbb fieldset.fields2 dl:hover dt label {
+	color: inherit;
+}
+
+ #phpbb #timezone {
+	width: 95%;
+}
+
+ * html #phpbb  #timezone {
+	width: 50%;
+}
+
+/* Quick-login on index page */
+
+ #phpbb fieldset.quick-login {
+	margin-top: 5px;
+}
+
+ #phpbb fieldset.quick-login input {
+	width: auto;
+}
+
+ #phpbb fieldset.quick-login input.inputbox {
+	width: 15%;
+	vertical-align: middle;
+	margin-right: 5px;
+	background-color: #f3f3f3;
+}
+
+ #phpbb fieldset.quick-login label {
+	white-space: nowrap;
+	padding-right: 2px;
+}
+
+/* Display options on viewtopic/viewforum pages  */
+
+ #phpbb fieldset.display-options {
+	text-align: center;
+	margin: 3px 0 5px 0;
+}
+
+ #phpbb fieldset.display-options label {
+	white-space: nowrap;
+	padding-right: 2px;
+}
+
+ #phpbb fieldset.display-options a {
+	margin-top: 3px;
+}
+
+/* Display actions for ucp and mcp pages */
+
+ #phpbb fieldset.display-actions {
+	text-align: right;
+	line-height: 2em;
+	white-space: nowrap;
+	padding-right: 1em;
+}
+
+ #phpbb fieldset.display-actions label {
+	white-space: nowrap;
+	padding-right: 2px;
+}
+
+ #phpbb fieldset.sort-options {
+	line-height: 2em;
+}
+
+/* MCP forum selection*/
+
+ #phpbb fieldset.forum-selection {
+	margin: 5px 0 3px 0;
+	float: right;
+}
+
+ #phpbb fieldset.forum-selection2 {
+	margin: 13px 0 3px 0;
+	float: right;
+}
+
+/* Jumpbox */
+
+ #phpbb fieldset.jumpbox {
+	text-align: right;
+	margin-top: 15px;
+	height: 2.5em;
+}
+
+ #phpbb fieldset.quickmod {
+	width: 50%;
+	float: right;
+	text-align: right;
+	height: 2.5em;
+}
+
+/* Submit button fieldset */
+
+ #phpbb fieldset.submit-buttons {
+	text-align: center;
+	vertical-align: middle;
+	margin: 5px 0;
+}
+
+ #phpbb fieldset.submit-buttons input {
+	vertical-align: middle;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+/* Posting page styles
+----------------------------------------*/
+
+/* Buttons used in the editor */
+
+ #phpbb #format-buttons {
+	margin: 15px 0 2px 0;
+}
+
+ #phpbb #format-buttons input , #phpbb #format-buttons select {
+	vertical-align: middle;
+}
+
+/* Main message box */
+
+ #phpbb #message-box {
+	width: 80%;
+}
+
+ #phpbb #message-box textarea {
+	font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	width: 450px;
+	height: 270px;
+	min-width: 100%;
+	max-width: 100%;
+	font-size: 1.2em;
+	color: #333333;
+}
+
+/* Emoticons panel */
+
+ #phpbb #smiley-box {
+	width: 18%;
+	float: right;
+}
+
+ #phpbb #smiley-box img {
+	margin: 3px;
+}
+
+/* Input field styles
+---------------------------------------- */
+
+ #phpbb .inputbox {
+	background-color: #FFFFFF;
+	border: 1px solid #c0c0c0;
+	color: #333333;
+	padding: 2px;
+	cursor: text;
+}
+
+ #phpbb .inputbox:hover {
+	border: 1px solid #eaeaea;
+}
+
+ #phpbb .inputbox:focus {
+	border: 1px solid #eaeaea;
+	color: #4b4b4b;
+}
+
+ #phpbb input.inputbox { width: 85%; }
+ #phpbb input.medium { width: 50%; }
+ #phpbb input.narrow { width: 25%; }
+ #phpbb input.tiny { width: 125px; }
+
+ #phpbb textarea.inputbox {
+	width: 85%;
+}
+
+ #phpbb .autowidth {
+	width: auto !important;
+}
+
+/* Form button styles
+---------------------------------------- */
+
+ #phpbb input.button1 , #phpbb input.button2 {
+	font-size: 1em;
+}
+
+ #phpbb a.button1 , #phpbb input.button1 , #phpbb input.button3 , #phpbb a.button2 , #phpbb input.button2 {
+	width: auto !important;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	color: #000;
+	background: #FAFAFA none repeat-x top left;
+}
+
+ #phpbb a.button1 , #phpbb input.button1 {
+	font-weight: bold;
+	border: 1px solid #666666;
+}
+
+ #phpbb input.button3 {
+	padding: 0;
+	margin: 0;
+	line-height: 5px;
+	height: 12px;
+	background-image: none;
+	font-variant: small-caps;
+}
+
+/* Alternative button */
+
+ #phpbb a.button2 , #phpbb input.button2 , #phpbb input.button3 {
+	border: 1px solid #666666;
+}
+
+/* <a> button in the style of the form buttons */
+
+ #phpbb a.button1 , #phpbb a.button1:link , #phpbb a.button1:visited , #phpbb a.button1:active , #phpbb a.button2 , #phpbb a.button2:link , #phpbb a.button2:visited , #phpbb a.button2:active {
+	text-decoration: none;
+	color: #000000;
+	padding: 2px 8px;
+	line-height: 250%;
+	vertical-align: text-bottom;
+	background-position: 0 1px;
+}
+
+/* Hover states */
+
+ #phpbb a.button1:hover , #phpbb input.button1:hover , #phpbb a.button2:hover , #phpbb input.button2:hover , #phpbb input.button3:hover {
+	border: 1px solid #BCBCBC;
+	background-position: 0 100%;
+	color: #BCBCBC;
+}
+
+ #phpbb input.disabled {
+	font-weight: normal;
+	color: #666666;
+}
+
+/* Topic and forum Search */
+
+ #phpbb .search-box {
+	margin-top: 3px;
+	margin-left: 5px;
+	float: left;
+}
+
+ #phpbb .search-box input {
+}
+
+ #phpbb input.search {
+	background-image: none;
+	background-repeat: no-repeat;
+	background-position: left 1px;
+	padding-left: 17px;
+}
+
+ #phpbb .full { width: 95%; }
+
+ #phpbb .medium { width: 50%;}
+
+ #phpbb .narrow { width: 25%;}
+
+ #phpbb .tiny { width: 10%;}
+
+
+
