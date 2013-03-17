@@ -52,16 +52,12 @@
 		</div>
 	<!-- ENDIF -->
 
-
-	<div class="tweet-outer-box">
-	  <a class="tweet-btn" id='tweet-button' href="#">Tweet This</a> 
-	  <div id="tweet-box" class="tweet-box" >
-            <div class="tweet-box-float " id="tbox"></div>
-            <input id='tweet-close' type="image" src="{T_THEME_PATH}/images/cancel.png" alt="Submit" onclick="hide_tbox()" />
-          </div>
+	<div class="tweet-box">
+	 <a href="https://twitter.com/share" class="twitter-share-button"  data-url="{BOARD_URL}viewtopic.php?t={S_TOPIC_ID}" data-text="{TOPIC_TITLE}" data-hashtags="ukrgb">Tweet</a>
 	</div>
 
 	<div class="facebook-box"> 
+	<div id="fb-root"></div>
 	  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
 	  <fb:like show_faces="false" width="450"></fb:like>
 	</div>

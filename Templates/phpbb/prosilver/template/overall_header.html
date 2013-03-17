@@ -86,40 +86,18 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 // ]]>
 </script>
 <!-- API Keys -->
-<script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=sjAMsjHQobanoa57cDDJgA&v=1"></script>
+<!-- <script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=sjAMsjHQobanoa57cDDJgA&v=1"></script> -->
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 
 <!-- <script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/styleswitcher.js"></script> -->
 <script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/forum_fn.js"></script>
 
 <!--  <script type="text/javascript" src="{T_TEMPLATE_PATH}/mootools.js"></script> -->
 <script type="text/javascript">
-   var displayed = false;
-   function hide_tbox(){
-      displayed = false;
-      $('tweet-box').setStyles({
-         position: 'absolute',
-         top: '-900000px',
-         opacity: 0
-      });
-   };
-  
+    
    window.addEvent('domready', function() {
-	  
-	   
-      var exampleFx = new Fx.Tween('tweet-box', {
-         property: 'opacity',
-         duration: 400, 
-         transition: Fx.Transitions.Quart.easeInOut
-      });
-              
-      function show_tbox(){
-         displayed = true;
-         $('tweet-box').setStyles({
-            position: 'absolute',
-            top: $('tweet-button').getStyle('top')
-         });
-         exampleFx.start(0,1);
-      };
       
       if (("{S_FORUM_ID}" == "12" ||"{S_FORUM_ID}" == "15") && $('paypal-box') != null) {
   		$('paypal-box').set('html',
@@ -136,30 +114,7 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 
   		);
   		};
-      
-      
 
-      if ($('tbox') != null) {
-         $('tweet-button').addEvent('click', function(event) { 
-            event.stop();
-            if (displayed){
-               hide_tbox();
-            }
-            else {
-               show_tbox();
-            }
-         });
-      };
-	  
-      twttr.anywhere(function (T) {
-         T("#tbox").tweetBox({
-            height: 100,
-            width: 400,
-            label: 'Tweet this!',
-            defaultContent: "{TOPIC_TITLE} {BOARD_URL}viewtopic.php?f={S_FORUM_ID}&t={S_TOPIC_ID} #ukrgb",
-            onTweet : function(plaintext, html) {hide_tbox()}
-         });
-      });
    });
 
 </script>

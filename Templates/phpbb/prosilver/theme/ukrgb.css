@@ -7,44 +7,8 @@
 }
 
 /* twitter */
- #phpbb .tweet-outer-box {
+ #phpbb .tweet-box {
     margin-top: 4px;
     margin-left: 5px;
     float: left;
 }
-
-
- #phpbb .tweet-box {
-    position: absolute;
-    border: solid 1px black;
-    padding: 5px;
-    margin: 5px;
-    background-color: White;
-    opacity: 0;
-    top: -900000px;
-    display:block;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; 
-}
- #phpbb .tweet-box-float {
-    float: left;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-a.tweet-btn {
-    display: block;
-    width: 55px;
-    height: 20px;
-    color: rgba(0,0,0,0);
-    font-size:0;
-    background: url("{T_THEME_PATH}/images/tweet-button.png") no-repeat 0 0;
-}
-a.tweet-btn:hover {
-    background-position: 0 -21px;
-}
-a.tweet-btn:active {
-    background-position: 0 -42px;
-}
-
