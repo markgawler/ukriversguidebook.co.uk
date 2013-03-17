@@ -1,0 +1,38 @@
+
+html, body {
+    background: #ccc;
+}
+ 
+div​#container {
+    margin: 0 auto;
+    background: red;
+    width: 960px;    
+}
+ 
+div#header {
+    background: green;
+    height: 160px;     
+}
+ 
+div#footer{
+    background: blue;
+    height: 80px;     
+}
+ 
+div#main{
+    background: yellow;
+    min-height: 320px;
+    width: 800px;
+    float: left;
+}
+ 
+div#left{
+    background: orange;
+    width: 160px;
+    float: left;
+}
+ 
+.clr {
+    clear: both;
+}
+​
