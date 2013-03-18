@@ -215,7 +215,7 @@ window.addEvent("domready", function() {
             $("Lat").value = parseFloat(wgs84lnglat.lat).toFixed(5);
             $("Lng").value = parseFloat(wgs84lnglat.lon).toFixed(5);
             lonlat.transform(map.getProjectionObject(),OSGBProj);
-            $("GridRef").value = gridrefNumToLet(lonlat.lon,lonlat.lat,6);
+            $("GridRef").value = gridrefNumToLet(lonlat.lon,lonlat.lat,8);
         },
 
         onMove: function(e) {
