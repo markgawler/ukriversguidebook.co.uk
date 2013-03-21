@@ -104,7 +104,7 @@ class UkrgbModelDonation extends JModelItem
 			//error_log($result);
 			//error_log($identityToken->value);
 			$identityToken = $result->value;
-			error_log($identityToken);
+			error_log('---'.$identityToken);
 					
 		} catch (Exception $e) {
 			// catch any database errors.
@@ -124,10 +124,12 @@ class UkrgbModelDonation extends JModelItem
 		$data = array('cmd' => '_notify-synch', 'tx' => $transaction, 'at' => $identityToken);
 			
 		// Invoke the GET request.
-		$response = $http->post('https://www.sandbox.paypal.com/cgi-bin/webscr', $data);
+		$response = $http->post('https://www.paypal.com/cgi-bin/webscr', $data);
 		$this->responce = $response;
 		if($response->code == 200 AND strpos($response->body, 'SUCCESS') === 0)
 		{
+			error_log("---Status Good");
+			error_log("---".$response->body);
 			// Good response
 			$this->status = UkrgbTxState::Good;
 			
@@ -158,6 +160,9 @@ class UkrgbModelDonation extends JModelItem
 		}
 		else
 		{
+			error_log("---Status Error");
+			error_log("---Responce: ".$response->code);
+			error_log("---".$response->body);
 			$user = JFactory::getUser();
 			$this->status = UkrgbTxState::Error;
 			$data = array(
@@ -236,6 +241,7 @@ class UkrgbModelDonation extends JModelItem
 	*/
 	private function storeTransaction($ppData)
 	{
+		error_log("---storeTransaction");
 		// Get a Table instance
 		$table = $this->getTable();
 		
