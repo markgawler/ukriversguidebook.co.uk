@@ -22,8 +22,6 @@ class UkrgbTxState
 	const Error = 2; // Bad response (Response code not 200 or status not SUCSESS)
 }
 
-//var $today = DaysOfWeek::Sunday;
-
 /**
  * UKRGB Donation Model
 */
@@ -66,17 +64,7 @@ class UkrgbModelDonation extends JModelItem
 		$this->status = UkrgbTxState::None;
 		
 		$input = JFactory::getApplication()->input;
-		/*
-		 * http://area51.ukriversguidebook.co.uk/?option=com_ukrgb&task=donation
-		* &tx=8KD08645R4242620M
-		* &st=Completed
-		* &amt=1.00
-		* &cc=GBP
-		* &cm=
-		* &item_number=
-		* &sig=qpQHTyYtztCgnpUM27DRNcG1v%2ffPoUezS1jFfYTPG%2btJx2EggoqGt5exMziA2G7LsdndWEuTXj%2bsdfoFMz8ULjxqVoAAipxpaT5JchBfQDYkF%2f8p8WYsm%2bGzgeinyGRXI2%2fCV%2fF8v8BM6Pu57Ypl4CJjYxgmZlxrM6Elzdr8eYg%3d
-		*
-		*/
+		
 		$transaction = $input->get ('tx');
 		$sig = $input->get ('sig'); // not uses yet
 		$message = $input->get('cm'); // this seems to contain the 'custom' value.
@@ -87,7 +75,7 @@ class UkrgbModelDonation extends JModelItem
 			return $this->status;
 		}
 		
-		// Load the IdentityToken 'at' from the Component configuration
+		// Load the IdentityToken from the Component configuration
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select(array('value'));
@@ -97,19 +85,36 @@ class UkrgbModelDonation extends JModelItem
 
 		try {
 			$result = $db->loadObject();
-			
-			//ob_start();
-			//var_dump($identityToken);
-			//$result = ob_get_clean();
-			//error_log($result);
-			//error_log($identityToken->value);
-			$identityToken = $result->value;
-			error_log('---'.$identityToken);
-					
+			$identityToken = $result->value;					
 		} catch (Exception $e) {
 			// catch any database errors.
 			error_log($e);
 		}		
+		
+		// Should we use Sandbox.
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select(array('value'));
+		$query->from('#__ukrgb_configuration');
+		$query->where('name = ' . $db->Quote('paypal_sandbox'));
+		$db->setQuery($query);
+		
+		try {
+			$result = $db->loadObject();
+			$sandbox = $result->value;
+							
+		} catch (Exception $e) {
+			// catch any database errors.
+			error_log($e);
+		}
+		
+		if (filter_var($sandbox, FILTER_VALIDATE_BOOLEAN)){
+			$payPalURL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+		}else{
+			$payPalURL = 'https://www.paypal.com/cgi-bin/webscr';
+		}
+		error_log('---'.$payPalURL);
+		
 		
 		// Create an instance of a default JHttp object.
 		//$http = JHttpFactory::getHttp();  // - not in Platform 11.3?
@@ -124,12 +129,12 @@ class UkrgbModelDonation extends JModelItem
 		$data = array('cmd' => '_notify-synch', 'tx' => $transaction, 'at' => $identityToken);
 			
 		// Invoke the GET request.
-		$response = $http->post('https://www.paypal.com/cgi-bin/webscr', $data);
+		$response = $http->post($payPalURL, $data);
 		$this->responce = $response;
 		if($response->code == 200 AND strpos($response->body, 'SUCCESS') === 0)
 		{
 			error_log("---Status Good");
-			error_log("---".$response->body);
+			//error_log("---".$response->body);
 			// Good response
 			$this->status = UkrgbTxState::Good;
 			
@@ -162,7 +167,7 @@ class UkrgbModelDonation extends JModelItem
 		{
 			error_log("---Status Error");
 			error_log("---Responce: ".$response->code);
-			error_log("---".$response->body);
+			//error_log("---".$response->body);
 			$user = JFactory::getUser();
 			$this->status = UkrgbTxState::Error;
 			$data = array(
