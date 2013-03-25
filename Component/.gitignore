@@ -2,3 +2,8 @@
 .buildpath
 .project
 /com_ukrgb.zip
+/guides.sql
+/mapPoints.sql
+/maps.sql
+/missingRefs.txt
+/points.sql
