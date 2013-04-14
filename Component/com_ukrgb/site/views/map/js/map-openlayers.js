@@ -21,7 +21,7 @@ window.addEvent("domready", function() {
     		"changelayer": function(e){
     			// Just request the other rivers when the layer is first displayed.
     			if (otherRiversRequested == false && e.layer.visibility == true &&  e.layer.name == "Other Rivers"){
-    				console.log(e);
+    				//console.log(e);
     				otherRiversRequested = true;
                 	var r = new Request.JSON({
                 		url: url, onSuccess: receiveMapPoints }).get({'task':'mappoints','type': mapData.map_type});
