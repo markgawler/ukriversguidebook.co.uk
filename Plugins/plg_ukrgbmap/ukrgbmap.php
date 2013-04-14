@@ -38,7 +38,7 @@ class plgContentUkrgbMap extends JPlugin {
 				
 				$mapDiv = '<div id="map" class="ukrgbmap"></div>
 				<form class="ukrgbmapgr">
-				<label>OS Grid Ref: </label><input type="text" id="GridRef" size="10" readonly>
+				<label>OS Grid Ref: </label><input type="text" id="GridRef" size="12" readonly>
 				<label>   WGS84 Lat: </label><input type="text" id="Lat" size="8" readonly>
 				<label>Lng: </label><input type="text" id="Lng" size="8" readonly>		
 				</form>';
