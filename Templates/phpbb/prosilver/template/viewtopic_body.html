@@ -25,6 +25,31 @@
 	</div>
 <!-- ENDIF -->
 
+<div class="social-buttons">
+	<div class="facebook-box"> 
+		
+		
+	  	<fb:like send="false" layout="button_count" width="450" show_faces="false"></fb:like>
+	</div>
+	<div class="google-box">
+		<g:plusone size="medium" href="{BOARD_URL}viewtopic.php?f={S_FORUM_ID}&t={S_TOPIC_ID}"></g:plusone>
+	
+	    <script type="text/javascript">	
+	      (function() {
+	        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	        po.src = 'https://apis.google.com/js/plusone.js';
+	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	      })();
+	    </script>
+	</div>
+	<div class="tweet-box">
+	 <a href="https://twitter.com/share" class="twitter-share-button"  data-url="{BOARD_URL}viewtopic.php?t={S_TOPIC_ID}" data-text="{TOPIC_TITLE}" data-hashtags="ukrgb">Tweet</a>
+	</div>
+	
+	
+</div>
+<div class="clear"></div>
+
 <div class="topic-actions">
 
 	<div class="buttons">
@@ -52,17 +77,9 @@
 		</div>
 	<!-- ENDIF -->
 
-	<div class="tweet-box">
-	 <a href="https://twitter.com/share" class="twitter-share-button"  data-url="{BOARD_URL}viewtopic.php?t={S_TOPIC_ID}" data-text="{TOPIC_TITLE}" data-hashtags="ukrgb">Tweet</a>
-	</div>
-
-	<div class="facebook-box"> 
-	<div id="fb-root"></div>
-	  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-	  <fb:like show_faces="false" width="450"></fb:like>
-	</div>
 </div>
 <div class="clear"></div>
+
 
 <!-- IF S_HAS_POLL -->
 	<form method="post" action="{S_POLL_ACTION}">

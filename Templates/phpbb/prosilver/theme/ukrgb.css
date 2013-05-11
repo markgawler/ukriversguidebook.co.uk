@@ -1,14 +1,22 @@
 
 /* Facebook */
  #phpbb .facebook-box {
-    margin-top: 2px;
-    margin-left: 5px;
-    float: left;
+    float: right;
 }
 
 /* twitter */
  #phpbb .tweet-box {
-    margin-top: 4px;
-    margin-left: 5px;
-    float: left;
+    float: right;
 }
+/* google */
+ #phpbb .google-box {
+    float: right;
+}
+
+/* social */
+ #phpbb .social-buttons {
+    margin-top: 2px;
+ 	margin-right: 5px;
+ 	min-height: 24px;
+ 	margin-bottom: 0px;
+ }

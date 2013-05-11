@@ -15,9 +15,12 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 <meta name="description" content="" />
 
 <meta property="og:title" content="{TOPIC_TITLE}"/>
-<meta property="og:site_name" content="{SITENAME}"/>
+<meta property="og:site_name" content="The UK Rivers Guidebook"/>
+<meta property="og:description" content="{SITE_DESCRIPTION}"/>
+<meta property="og:image" content="http://www.ukriversguidebook.co.uk/images/ukrgb_fb.png">
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="http://www.ukriversguidebook.co.uk/index.php?option=com_jfusion&Itemid=102&jfile=viewtopic.php&f={S_FORUM_ID}&t={S_TOPIC_ID}"/>
 <meta property="fb:app_id" content="149457755146356"/>
- 
 
 {META}
 <title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
@@ -85,16 +88,11 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 
 // ]]>
 </script>
-<!-- API Keys -->
-<!-- <script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=sjAMsjHQobanoa57cDDJgA&v=1"></script> -->
-
+<!-- Twitter -->
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-
-<!-- <script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/styleswitcher.js"></script> -->
 <script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/forum_fn.js"></script>
 
-<!--  <script type="text/javascript" src="{T_TEMPLATE_PATH}/mootools.js"></script> -->
 <script type="text/javascript">
     
    window.addEvent('domready', function() {
@@ -118,10 +116,18 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
    });
 
 </script>
-<!-- AIR-Box mod addition - starts here -->
+<!-- Facebook API -->
+<script>(function(d, s, id) {
+  		var js, fjs = d.getElementsByTagName(s)[0];
+  		if (d.getElementById(id)) return;
+  		js = d.createElement(s); js.id = id;
+  		js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=149457755146356";
+  		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+</script> 	
+<!-- AIR-Box mod addition -->
 <script type="text/javascript" src="{T_TEMPLATE_PATH}/airbox.js"></script>
 
-<!-- AIR-Box mod addition - ends here -->
 <link href="{T_THEME_PATH}/print.css" rel="stylesheet" type="text/css" media="print" title="printonly" />
 <link href="{T_STYLESHEET_LINK}" rel="stylesheet" type="text/css" media="screen, projection" />
 
@@ -200,6 +206,7 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 	</div>
 
 	<a name="start_here"></a>
+	<div id="fb-root"></div> <!-- Facebook -->
 	<div id="page-body">
 		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
