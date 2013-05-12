@@ -89,7 +89,31 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 // ]]>
 </script>
 <!-- Twitter -->
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script>
+//!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];
+//if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
+//js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);
+//}}(document,"script","twitter-wjs");
+
+window.twttr = (function (d,s,id) {
+  var t, js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+  js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+  return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+}(document, "script", "twitter-wjs"));
+
+function trackTwitter(intent_event) {
+    if (intent_event) {
+	  ga('send', 'twitter', 'tweet', '{BOARD_URL}viewtopic.php?t={S_TOPIC_ID}');
+    }
+  }
+
+  //- Wait for async js to load
+  twttr.ready(function (twttr) {
+    twttr.events.bind('tweet', trackTwitter);
+  });
+
+</script>
 
 <script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/forum_fn.js"></script>
 
@@ -117,13 +141,24 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 
 </script>
 <!-- Facebook API -->
-<script>(function(d, s, id) {
-  		var js, fjs = d.getElementsByTagName(s)[0];
-  		if (d.getElementById(id)) return;
-  		js = d.createElement(s); js.id = id;
-  		js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=149457755146356";
-  		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+<script>
+	window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    //FB.init();
+    
+	FB.Event.subscribe('edge.create', function(targetUrl) {
+		  ga('send', 'facebook', 'like', targetUrl);
+		});
+	};
+		
+	(function(d, s, id) {
+  	var js, fjs = d.getElementsByTagName(s)[0];
+  	if (d.getElementById(id)) return;
+  	js = d.createElement(s); js.id = id;
+  	js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=149457755146356";
+  	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	
 </script> 	
 <!-- AIR-Box mod addition -->
 <script type="text/javascript" src="{T_TEMPLATE_PATH}/airbox.js"></script>
@@ -143,6 +178,8 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 
 <body class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">
 <div id="phpbb">
+<div id="fb-root"></div> <!-- Facebook -->
+
 <div id="wrap">
 	<a id="top" name="top" accesskey="t"></a>
 	<div id="page-header">
@@ -206,7 +243,6 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 	</div>
 
 	<a name="start_here"></a>
-	<div id="fb-root"></div> <!-- Facebook -->
 	<div id="page-body">
 		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
