@@ -25,8 +25,6 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 {META}
 <title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
 
-{TAPATALK_HEAD}
-
 <!-- IF S_ENABLE_FEEDS -->
 	<!-- IF S_ENABLE_FEEDS_OVERALL --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {SITENAME}" href="{U_FEED}" /><!-- ENDIF -->
 	<!-- IF S_ENABLE_FEEDS_NEWS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_NEWS}" href="{U_FEED}?mode=news" /><!-- ENDIF -->
@@ -180,9 +178,6 @@ function trackTwitter(intent_event) {
 
 <body class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">
 <div id="phpbb">
-<!-- Tapatalk Detect body start --> 
-<script type="text/javascript">tapatalkDetect()</script>
-<!-- Tapatalk Detect banner body end -->
 <div id="fb-root"></div> <!-- Facebook -->
 
 <div id="wrap">
@@ -256,4 +251,3 @@ function trackTwitter(intent_event) {
 			<span class="corners-bottom"><span></span></span></div>
 		</div>
 		<!-- ENDIF -->
-
