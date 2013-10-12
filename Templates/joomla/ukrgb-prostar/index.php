@@ -199,6 +199,7 @@ else
 			
 			<?php endif; ?>
 			<jdoc:include type="modules" name="banner" style="xhtml" />
+			<jdoc:include type="modules" name="breadcrumb" style="none" />
 			<div class="row-fluid">
 				<?php if ($this->countModules('position-8')) : ?>
 				<!-- Begin Sidebar -->
