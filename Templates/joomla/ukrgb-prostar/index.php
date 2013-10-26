@@ -48,6 +48,7 @@ JHtml::_('bootstrap.loadCss', false, $this->direction);
 
 // Add current user information
 $user = JFactory::getUser();
+$userMessage = ($user->id ? $user->name : 'Sign In');
 
 // Adjusting content width
 if ($this->countModules('position-7') && $this->countModules('position-8'))
@@ -182,7 +183,7 @@ else
 						<?php if ($this->countModules('login')) : ?>
 							<!-- The drop down menu -->
           					<li class="dropdown active">
-            				<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+            				<a class="dropdown-toggle" href="#" data-toggle="dropdown"><?php echo $userMessage;?><strong class="caret"></strong></a>
             				<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
               					<!-- Login form here -->
 								<jdoc:include type="modules" name="login" style="none" />
@@ -203,7 +204,7 @@ else
 			<div class="row-fluid">
 				<?php if ($this->countModules('position-8')) : ?>
 				<!-- Begin Sidebar -->
-				<div id="sidebar" class="span3">
+				<div id="sidebar" class="span3">  <!-- id="sidebar" -->
 					<div class="sidebar-nav">
 						<jdoc:include type="modules" name="position-8" style="xhtml" />
 					</div>

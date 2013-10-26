@@ -30,6 +30,7 @@
 		<position>banner</position>
 		<position>login</position>
 		<position>debug</position>
+		<position>breadcrumb</position>
 		<position>position-0</position>
 		<position>position-1</position>
 		<position>position-2</position>
