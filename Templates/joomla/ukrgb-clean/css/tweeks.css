@@ -1,0 +1,112 @@
+
+div.banner {
+	 padding-top: 10px;
+	 padding-bottom: 10px;
+}
+
+/*  Flyout menus */
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block; 
+    margin-top: -5px;   
+}
+ul.nav ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu {
+    display: none;    
+}
+ul.nav ul.dropdown-menu li.dropdown-submenu:hover ul.dropdown-menu {
+    display: block;
+    margin-top: -6px;    
+}
+ul.nav ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu {
+    display: none;    
+}
+ul.nav ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu li.dropdown-submenu:hover ul.dropdown-menu {
+    display: block;    
+}
+
+/* Search*/
+div.search form {
+	margin-bottom: 0px;
+}
+
+label.element-invisible {
+	display: none;
+}
+
+#phpbb dt {
+font-weight: normal;
+}
+#phpbb dt, dd {
+line-height: 16px;
+}
+
+#phpbb * {
+line-height: normal;
+}
+
+#phpbb [class^="icon-"] {
+height: initial;
+}
+
+#phpbb select {
+width: initial;
+height: initial;
+}
+
+#phpbb input[type="text"]{
+	height: initial;
+}
+
+#phpbb label {
+display: initial;
+font-size: inherit;
+}
+
+/* Hide the home icon phpBB has its own*/
+.icon-home:before {
+content: "";
+}
+
+
+/* These changes need to go in the phpBB style sheet */
+/*
+media="screen, projection"
+#phpbb dd.lastpost {
+width: 23%;
+font-size: 1.1em;
+}
+media="screen, projection"
+#phpbb #wrap {
+padding: 0 0px;
+min-width: 540px;
+}
+*/
+
+/*more phpBB*/
+/* tweeks to force the page to asingle column early (need to limit these to phphBB) */
+@media (max-width: 979px) and (min-width: 768px) {
+main#content.span9 { 
+	float: none;
+	min-height: 1px;
+	margin-left: 20px;
+	width: 100%;
+}
+
+div#aside.span3{
+float: none;S
+min-height: 1px;
+margin-left: 20px;
+width:100%;
+}
+
+body #phpbb {
+	margin-left: 20px!important;
+}
+}
+
+
+body {
+	min-width: 540px;
+}
+/* end of phpBB stuff*/
+
+

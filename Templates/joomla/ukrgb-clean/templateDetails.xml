@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/2.5/template-install.dtd">
+<extension version="3.1" type="template" client="site"  method="upgrade">
+	<name>ukrgb clean</name>
+	<version>0.1</version>
+	<creationDate>08/11/2013</creationDate>
+	<author>Mark Gawler</author>
+	<authorEmail>markg@wler.co.uk</authorEmail>
+	<copyright>Copyright (C) Mark Gawler. All rights reserved.</copyright>
+	<description>TPL_UKRGBCLEAN_XML_DESCRIPTION</description>
+	<files>
+		<filename>favicon.ico</filename>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+		<folder>css</folder>
+		<folder>html</folder>
+		<folder>img</folder>
+		<folder>js</folder>
+		<folder>language</folder>
+	</files>
+	<positions>
+		<position>logo</position>
+		<position>menu</position>
+		<position>aside</position>
+		<position>login</position>
+		<position>search</position>
+		<position>banner</position>
+		<position>debug</position>
+		<position>footer</position>
+	</positions>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_ukrgbclean.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_ukrgbclean.sys.ini</language>
+	</languages>
+</extension>
