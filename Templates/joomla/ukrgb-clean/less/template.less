@@ -559,6 +559,22 @@ code {
 }	
  
 
-body {
-	#gradient > .vertical(@grayLighter, @white);
+.footer {
+	#gradient > .vertical(@grayLight, @grayDark);
+	padding-top: 15px;
+	/*padding-right: 10px;*/
+	padding-bottom: 15px;
+	padding-left: 20px;
+	
+	p {
+		margin-right: 30px;
+		color: @white;
+	}	
 }
+
+
+
+body {
+	#gradient > .vertical(@grayLight, @white);
+}
+

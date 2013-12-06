@@ -34,4 +34,11 @@
 		<language tag="en-GB">en-GB/en-GB.tpl_ukrgbclean.ini</language>
 		<language tag="en-GB">en-GB/en-GB.tpl_ukrgbclean.sys.ini</language>
 	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field name="forumItemId" type="menuitem" default="0" label="Select Forum menu item" description="The menu item of the integrated phpBB forum" />
+			</fieldset>
+		</fields>
+	</config>
 </extension>

@@ -60,9 +60,6 @@ foreach ($list as $i => &$item) :
 	{
 		//ukrgb
 		//$class .= ' parent';
-		//var_dump($item->level);
-		//var_dump($item);
-		//die();
 		if ($item->level > 1)
 		{
 			$class .= '-submenu';

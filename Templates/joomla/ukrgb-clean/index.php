@@ -17,6 +17,9 @@ $doc = JFactory::getDocument();
 $this->language = $doc->language;
 $sitename = $app->getCfg('sitename');
 
+$itemid   = $app->input->getCmd('Itemid', '');
+
+$phpbbLayout = ($itemid == $this->params->get('forumItemId') ? 'phpbb-layout' : '');
 
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
@@ -49,25 +52,26 @@ $userMessage = ($user->id ? $user->name : 'Sign In');
 </head>
 
 <body>
-	<div id="wrapper" class="container">
+	<div id="wrapper" class="container bg">
 		<!-- Headder -->
-		<div id="header" class="row">
-          <div id="logo" class="span12">
-          	<img src="http://placehold.it/1170x100">
-            <!--  <jdoc:include type="modules" name="logo" style="xhtml" />
-            -->
-          </div>  <!-- end logo -->
-        </div>  <!-- row headder-->
-        
-        <div id="banner" class="row banner">
-        	<div id="banner-left" class="span6">
-	          	<img src="http://placehold.it/570x80">
-        	</div>
-        	<div id="banner-right" class="span6 hidden-phone">
-        		<img src="http://placehold.it/570x80">
-        	</div>
-        </div> <!-- banner -->
-		
+		<div id="wrapper-header">
+			<div id="header" class="row">
+	          <div id="logo" class="span12">
+	          	<img src="http://placehold.it/1170x100">
+	            <!--  <jdoc:include type="modules" name="logo" style="xhtml" />
+	            -->
+	          </div>  <!-- end logo -->
+	        </div>  <!-- row headder-->
+	        
+	        <div id="banner" class="row banner">
+	        	<div id="banner-left" class="span6">
+		          	<img src="http://placehold.it/570x80">
+	        	</div>
+	        	<div id="banner-right" class="span6 hidden-phone">
+	        		<img src="http://placehold.it/570x80">
+	        	</div>
+	        </div> <!-- banner -->
+		</div>
 		<!-- Navigation -->
 		<div id="mainmenu" class="row">
           <div id="menu-wrapper" class="span12">
@@ -116,17 +120,22 @@ $userMessage = ($user->id ? $user->name : 'Sign In');
 
         <!-- Content -->
 		<div id="main" class="row">
-			<main id="content" class="span9">
-				<!--  src="http://placehold.it/870x400"> -->
-				<jdoc:include type="message" />
-				<jdoc:include type="component" />
+
+			<main id="content" class="span9 <?php echo $phpbbLayout?> "> 
+				<div class="pad">
+					<jdoc:include type="message" /> 
+					<jdoc:include type="component" />
+				</div> 
 			</main>
-			
-			<div id="aside" class="span3">
-				 <jdoc:include type="modules" name="aside" style="well" />
+			<div id="aside" class="span3 <?php echo $phpbbLayout?> ">
+				<div class="pad">
+					<jdoc:include type="modules" name="aside" style="well" />
+				</div>
 			</div>
-		</div> <!-- main -->
-			
+
+		</div>
+		<!-- main -->
+
 		<!-- Footer -->
 		<footer class="footer" role="contentinfo">
 			<div class="container">
