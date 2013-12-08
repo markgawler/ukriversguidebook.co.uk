@@ -7216,6 +7216,13 @@ code {
 }
 .footer p {
   margin-right: 30px;
+  color: #eeeeee;
+}
+.footer a {
+  color: #eeeeee;
+  text-decoration: none;
+}
+.footer a:hover {
   color: #ffffff;
 }
 body {

@@ -26,7 +26,8 @@
 		<position>aside</position>
 		<position>login</position>
 		<position>search</position>
-		<position>banner</position>
+		<position>banner-left</position>
+		<position>banner-right</position>
 		<position>debug</position>
 		<position>footer</position>
 	</positions>

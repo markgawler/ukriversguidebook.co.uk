@@ -1,27 +1,29 @@
 
-div.banner {
-	 padding-top: 10px;
-	 padding-bottom: 10px;
-}
 
 /*  Flyout menus */
 ul.nav li.dropdown:hover ul.dropdown-menu{
     display: block; 
     margin-top: -5px;   
 }
+
 ul.nav ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu {
     display: none;    
 }
-ul.nav ul.dropdown-menu li.dropdown-submenu:hover ul.dropdown-menu {
-    display: block;
-    margin-top: -6px;    
+
+@media (min-width: 768px) {
+	ul.nav ul.dropdown-menu li.dropdown-submenu:hover ul.dropdown-menu {
+	    display: block;
+	    margin-top: -6px;    
+	}
 }
+/*
 ul.nav ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu {
     display: none;    
 }
 ul.nav ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu li.dropdown-submenu:hover ul.dropdown-menu {
     display: block;    
 }
+*/
 
 /* Search*/
 div.search form {
@@ -130,4 +132,23 @@ body {
 }
 /* end of phpBB stuff*/
 
+/* remove padding once menu colapses (tablets and mobiles) */
+@media (max-width: 767px){
+	body {
+	padding-left: 0px;
+	padding-right: 0px;
+	}
+}
 
+.banner {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	
+}
+
+.banneritem img {
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	height: 80px
+}

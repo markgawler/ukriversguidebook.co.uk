@@ -65,10 +65,12 @@ $userMessage = ($user->id ? $user->name : 'Sign In');
 	        
 	        <div id="banner" class="row banner">
 	        	<div id="banner-left" class="span6">
-		          	<img src="http://placehold.it/570x80">
+	        		<jdoc:include type="modules" name="banner-left" style="none" />
+		          	<!--<img src="http://placehold.it/570x80">-->
 	        	</div>
 	        	<div id="banner-right" class="span6 hidden-phone">
-	        		<img src="http://placehold.it/570x80">
+	        		<jdoc:include type="modules" name="banner-right" style="none" />
+	        		<!--<img src="http://placehold.it/570x80">-->
 	        	</div>
 	        </div> <!-- banner -->
 		</div>
