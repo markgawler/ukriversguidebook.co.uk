@@ -124,13 +124,13 @@ $userMessage = ($user->id ? $user->name : 'Sign In');
 		<div id="main" class="row">
 
 			<main id="content" class="span9 <?php echo $phpbbLayout?> "> 
-				<div class="pad">
+				<div class="pad-main">
 					<jdoc:include type="message" /> 
 					<jdoc:include type="component" />
 				</div> 
 			</main>
 			<div id="aside" class="span3 <?php echo $phpbbLayout?> ">
-				<div class="pad">
+				<div class="pad-aside">
 					<jdoc:include type="modules" name="aside" style="well" />
 				</div>
 			</div>
