@@ -106,7 +106,7 @@ h1 {
 ---------------------------------------- */
  #phpbb #wrap {
 	padding: 0 0px;  /* joomla Integration */
-	min-width: 650px;
+	min-width: 530px;
 }
 
  #phpbb #simple-wrap {
