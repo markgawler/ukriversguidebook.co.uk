@@ -17,8 +17,8 @@ $doc = JFactory::getDocument();
 $this->language = $doc->language;
 $sitename = $app->getCfg('sitename');
 
+// Check for forum
 $itemid   = $app->input->getCmd('Itemid', '');
-
 $phpbbLayout = ($itemid == $this->params->get('forumItemId') ? 'phpbb-layout' : '');
 
 // Add JavaScript Frameworks
@@ -93,11 +93,20 @@ $userMessage = ($user->id ? $user->name : 'Sign In');
 						<li class="navbar-form"><jdoc:include type="modules" name="search" style="none" /></li>
 						<!-- The drop down menu -->
           				<li class="dropdown">
-            			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $userMessage;?><span class="caret"></span></a>
-            			<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-              				<!-- Login form here -->
-							<jdoc:include type="modules" name="login" style="none" />
-						</div>
+          				<?php if ($user->name) {?>
+          					
+          					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $user->name;?><span class="caret"></span></a>
+          					<ul class="dropdown-menu">						
+          						<li><a href="<?php echo JRoute::_('index.php?option=com_users&task=user.logout&'. JSession::getFormToken().'=1'); ?>">Log out</a></li>
+          					    <li><a href="<?php echo JRoute::_('index.php?option=com_jfusion&view=plugin&Itemid=102&jfile=ucp.php&i=pm&folder=inbox'); ?>">Private Messages</a></li>
+							</ul>
+          				<?php } else {?> 
+          				    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign In<span class="caret"></span></a>
+          					<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+              					<!-- Login form here -->
+								<jdoc:include type="modules" name="login" style="none" />
+							</div>
+						<?php }?>
 						</li>
 					</ul>		                	
                    	                	
