@@ -23,12 +23,8 @@ $phpbbLayout = ($itemid == $this->params->get('forumItemId') ? 'phpbb-layout' : 
 
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
-JHtml::_('jquery.framework');
-//$doc->addScript('templates/' .$this->template. '/js/template.js');
-
-
-//$doc->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
-//$doc->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap-responsive.css');
+//JHtml::_('jquery.framework');
+$doc->addScript('templates/' .$this->template. '/js/template.js');
 
 // Add Stylesheets
 $doc->addStyleSheet('templates/'.$this->template.'/css/template.css');
@@ -97,7 +93,7 @@ $userMessage = ($user->id ? $user->name : 'Sign In');
 						<li class="navbar-form"><jdoc:include type="modules" name="search" style="none" /></li>
 						<!-- The drop down menu -->
           				<li class="dropdown">
-            			<a class="dropdown-toggle" href="#" data-toggle="dropdown"><?php echo $userMessage;?><strong class="caret"></strong></a>
+            			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $userMessage;?><span class="caret"></span></a>
             			<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
               				<!-- Login form here -->
 							<jdoc:include type="modules" name="login" style="none" />

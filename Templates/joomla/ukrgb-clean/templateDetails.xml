@@ -39,6 +39,8 @@
 		<fields name="params">
 			<fieldset name="advanced">
 				<field name="forumItemId" type="menuitem" default="0" label="Select Forum menu item" description="The menu item of the integrated phpBB forum" />
+				
+				
 			</fieldset>
 		</fields>
 	</config>

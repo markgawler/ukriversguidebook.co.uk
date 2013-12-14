@@ -1,6 +1,8 @@
 
 
 /*  Flyout menus */
+
+/*
 ul.nav li.dropdown:hover ul.dropdown-menu{
     display: block; 
     margin-top: -5px;   
@@ -10,13 +12,13 @@ ul.nav ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu {
     display: none;    
 }
 
-/*@media (min-width: 768px) {*/
-@media (min-width: 979px) {
+*/
+@media (max-width: 980px) {
 	ul.nav ul.dropdown-menu li.dropdown-submenu:hover ul.dropdown-menu {
-	    display: block;
-	    margin-top: -6px;    
+	    display: none;
 	}
 }
+
 /*
 ul.nav ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu {
     display: none;    
