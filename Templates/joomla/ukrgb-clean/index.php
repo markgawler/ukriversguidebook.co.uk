@@ -32,8 +32,6 @@ $doc->addStyleSheet('templates/'.$this->template.'/css/tweeks.css');
 
 // Add current user information
 $user = JFactory::getUser();
-$userMessage = ($user->id ? $user->name : 'Sign In');
-
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +99,7 @@ $userMessage = ($user->id ? $user->name : 'Sign In');
           					    <li><a href="<?php echo JRoute::_('index.php?option=com_jfusion&view=plugin&Itemid=102&jfile=ucp.php&i=pm&folder=inbox'); ?>">Private Messages</a></li>
 							</ul>
           				<?php } else {?> 
-          				    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign In<span class="caret"></span></a>
+          				    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign In <span class="caret"></span></a>
           					<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
               					<!-- Login form here -->
 								<jdoc:include type="modules" name="login" style="none" />

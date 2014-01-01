@@ -6727,6 +6727,39 @@ div.modal.fade.in {
 .icon-out-2:before {
   content: "\e024";
 }
+.ukrgbmap {
+  height: 400px;
+  border: 1px solid #ccc;
+}
+.ukrgbmapgr label {
+  font-size: 10px;
+}
+.ukrgbmapgr input[type='text'] {
+  font-size: 10px;
+  border: none;
+  padding: 0px 0px;
+  margin: 0px 5px;
+  background-color: #ffffff;
+}
+div#map svg {
+  max-width: none;
+}
+div#map img {
+  max-width: none;
+}
+.olControlAttribution {
+  bottom: 0px!important;
+}
+/*
+.olPopup * {
+    margin: 0px;
+    padding:0px;
+    font-size: 12px;
+}
+*/
+/* .olFramedCloudPopupContent {
+	top :10px;
+} */
 /* Site Body Styles */
 body.site {
   border-top: 3px solid #0088cc;

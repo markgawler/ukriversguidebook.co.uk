@@ -1,0 +1,44 @@
+.ukrgbmap {
+    height: 400px;  
+    border: 1px solid #ccc;    
+}
+
+.ukrgbmapgr {
+	label {
+		font-size: 10px;
+	}  
+	
+	input[type='text'] {
+		font-size: 10px;
+		border: none;
+		padding: 0px 0px;
+		margin: 0px 5px;
+		background-color: @white;
+	}
+	
+}
+
+// Fix markers and popups being hidden / broken by Bootstrap css (i think)
+div#map  {
+	svg {
+		max-width: none;
+	}
+	img {
+		max-width: none;
+	}
+}
+
+.olControlAttribution {
+    bottom: 0px!important;
+}
+/*
+.olPopup * {
+    margin: 0px;
+    padding:0px;
+    font-size: 12px;
+}
+*/
+
+/* .olFramedCloudPopupContent {
+	top :10px;
+} */
