@@ -1,48 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="1.6.0" method="upgrade">
+<extension type="component" version="3.0.0" method="upgrade">
 
 	<name>UKRGB</name>
 	<!-- The following elements are optional and free of formatting conttraints -->
-	<creationDate>November 2009</creationDate>
-	<author>John Doe</author>
-	<authorEmail>john.doe@example.org</authorEmail>
+	<creationDate>December 2013</creationDate>
+	<author>Mark Gawler</author>
+	<authorEmail>markg@wler.co.uk</authorEmail>
 	<authorUrl>http://www.example.org</authorUrl>
 	<copyright>Copyright Info</copyright>
 	<license>License Info</license>
 	<!--  The version string is recorded in the components table -->
-	<version>0.0.24</version>
-	<!-- The description is optional and defaults to the name -->
-	<description>Description of the UKRGB component ...</description>
-
-	<install> <!-- Runs on install -->
-		<sql>
-			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-		</sql>
-	</install>
+	<version>0.1.0</version>
+	<description>The UKRGB Joomal Extention PayPal Donation, Maps, Etc.</description>
+	
+	
+    <install> <!-- Runs on install -->
+    	<sql>
+        	<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
 	<uninstall> <!-- Runs on uninstall -->
 		<sql>
 			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
 		</sql>
 	</uninstall>
 
-	<update> <!-- Runs on update; New in  2.5-->
+	<update> <!-- Runs on update -->
 		<schemas>
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
 	</update>
 	
-	<!-- Site Main File Copy Section -->
-	<!-- Note the folder attribute: This attribute describes the folder
-		to copy FROM in the package to install therefore files copied
-		in this section are copied from /site/ in the package -->
 	<files folder="site">
 		<filename>index.html</filename>
 		<filename>ukrgb.php</filename>
-		<filename>controller.php</filename>
-		<folder>views</folder>
-		<folder>models</folder>
-		<folder>proj4js</folder>
-		<folder>lib</folder>
+		<folder>controller</folder>
+		<folder>view</folder>
+		<folder>model</folder>
 		
 	</files>
 	
@@ -50,20 +44,20 @@
 	<administration>
 		<!-- Administration Menu Section -->
 		<menu>UKRGB</menu>
-		<!-- Administration Main File Copy Section -->
-		<!-- Note the folder attribute: This attribute describes the folder
-			to copy FROM in the package to install therefore files copied
-			in this section are copied from /admin/ in the package -->
+		
 		<files folder="admin">
-			<!-- Admin Main File Copy Section -->
 			<filename>index.html</filename>
 			<filename>ukrgb.php</filename>
-			<!-- SQL files section -->
+			<filename>config.xml</filename>
+			<filename>acess.xml</filename>
+			<folder>controller</folder>
+			<folder>view</folder>
+			<folder>model</folder>
 			<folder>sql</folder>
-			<!-- tables files section -->
-            <folder>tables</folder>
 		</files>
 	</administration>
 
 </extension>
 
+
+    

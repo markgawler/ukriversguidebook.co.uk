@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="eventDetails" lable="Summary">
+		<field	name="eventTitle"
+			type="text"
+			label="Title"
+			description="Event title to appear in the calendar."
+			maxlength="60"
+			required="true"
+			filter="string"
+			/>
+		
+		
+		<field name="eventDate" 
+			type="calendar" 
+			default="01-01-2014" 
+			label="Select a date" 
+			description="The date of the Event" 
+			format="%d-%m-%Y" />
+	</fieldset>
+</form>

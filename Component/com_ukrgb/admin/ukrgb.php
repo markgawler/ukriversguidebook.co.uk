@@ -1,15 +1,23 @@
-<?php
-// No direct access to this file
-defined('_JEXEC') or die('Restricted access');
- 
-// import joomla controller library
-jimport('joomla.application.component.controller');
- 
-// Get an instance of the controller prefixed by Ukrgb
-$controller = JController::getInstance('Ukrgb');
- 
+<?php // No direct access
+// Admin
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+//load classes
+JLoader::registerPrefix('Ukrgb', JPATH_COMPONENT_ADMINISTRATOR);
+
+//Load plugins
+JPluginHelper::importPlugin('ukrgb');
+
+//application
+$app = JFactory::getApplication();
+
+// Require specific controller if requested
+$controller = $app->input->get('task','display');
+
+// Create the controller
+$classname = 'UkrgbController'.ucwords($controller);
+$controller = new $classname();
+
 // Perform the Request task
-$controller->execute(JRequest::getCmd('task'));
- 
-// Redirect if set by the controller
-$controller->redirect();
+$controller->execute();

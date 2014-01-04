@@ -1,0 +1,14 @@
+
+// Contribution report
+select 
+jos_ukrgb_doantion.id,
+jos_users.name,
+jos_ukrgb_doantion.first_name,
+jos_ukrgb_doantion.last_name,
+jos_ukrgb_doantion.payer_email,
+jos_ukrgb_doantion.payment_date,
+jos_ukrgb_doantion.mc_gross,
+jos_ukrgb_doantion.mc_fee,
+jos_ukrgb_doantion.payer_id,
+jos_ukrgb_doantion.tx
+from jos_ukrgb_doantion left join jos_users on jos_ukrgb_doantion.user_id=jos_users.id

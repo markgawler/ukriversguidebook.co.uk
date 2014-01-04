@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" version="3.0.0" method="upgrade">
+
+	<name>UKRGB</name>
+	<libraryname>ukrgb</libraryname>
+	<!-- The following elements are optional and free of formatting conttraints -->
+	<creationDate>December 2013</creationDate>
+	<author>Mark Gawler</author>
+	<authorEmail>markg@wler.co.uk</authorEmail>
+	<authorUrl>http://www.example.org</authorUrl>
+	<copyright>Copyright Info</copyright>
+	<license>License Info</license>
+	<!--  The version string is recorded in the components table -->
+	<version>0.1.0</version>
+	<description>The UKRGB Joomal Extention Library Proj4 php and js.</description>
+	
+	
+	<files folder="library">
+		<filename>index.html</filename>
+		<folder>proj4php</folder>
+		<folder>proj4js</folder>
+	</files>
+	
+
+</extension>
+
+    
