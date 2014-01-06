@@ -12,9 +12,8 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * Helper class for controllers
  *
- * @package     Joomla.Libraries
+ * @package     Ukrgb.events
  * @subpackage  controller
- * @since       3.2
 */
 class UkrgbControllerHelper
 {
@@ -26,12 +25,15 @@ class UkrgbControllerHelper
 		
 		$task = ucfirst(strtolower($tasks[0]));
 		$activity = '';
-		if (count($tasks)>1){
+		
+		if (!empty($tasks[1]))
+		{
 			$activity = ucfirst(strtolower($tasks[1]));
 		}
 				
 		$controllerName = 'Ukrgb' . 'Controller' . $task . $activity;
 		
+		error_log("Controller: ".$controllerName."-");
 		
 		if (!class_exists($controllerName))
 		{
@@ -42,4 +44,3 @@ class UkrgbControllerHelper
 		return $controller;
 	}
 }
-?>

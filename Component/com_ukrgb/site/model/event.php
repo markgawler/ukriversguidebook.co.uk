@@ -82,7 +82,7 @@ class UkrgbModelEvent extends JModelDatabase
 	
 			// Allow for additional modification of the form, and events to be triggered.
 			// We pass the data because plugins may require it.
-			//$this->preprocessForm($form, $data);
+		//	$this->preprocessForm($form, $data);
 	
 			// Load the data into the form after the plugins have operated.
 			$form->bind($data);
@@ -99,6 +99,48 @@ class UkrgbModelEvent extends JModelDatabase
 		$this->_forms[$hash] = $form;
 	
 		return $form;
+	}
+	
+	/**
+	 * Method to validate the form data.
+	 *
+	 * @param   JForm   $form   The form to validate against.
+	 * @param   array   $data   The data to validate.
+	 * @param   string  $group  The name of the field group to validate.
+	 *
+	 * @return  mixed  Array of filtered data if valid, false otherwise.
+	 *
+	 * @see     JFormRule
+	 * @see     JFilterInput
+	 * @since   3.2
+	 */
+	public function validate($form, $data, $group = null)
+	{
+		// Filter and validate the form data.
+		$data   = $form->filter($data);
+		$return = $form->validate($data, $group);
+	
+		// Check for an error.
+		if ($return instanceof Exception)
+		{
+			JFactory::getApplication()->enqueueMessage($return->getMessage(), 'error');
+	
+			return false;
+		}
+	
+		// Check the validation results.
+		if ($return === false)
+		{
+			// Get the validation messages from the form.
+			foreach ($form->getErrors() as $message)
+			{
+				JFactory::getApplication()->enqueueMessage($message, 'error');
+			}
+	
+			return false;
+		}
+	
+		return $data;
 	}
 
 }

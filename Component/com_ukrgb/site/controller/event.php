@@ -23,24 +23,16 @@ class UkrgbControllerEvent extends JControllerBase
 		{
 			$model = new $modelClass;
 			$view = new $viewClass($model, $paths);
-			$view->setLayout('default');
+			$view->setLayout('form');
 		
 			// Push document object into the view.
 			$view->document = $document;
 			
-			
 			// Load form and bind data
 			$form = $model->getForm();
 			
-			//if ($form)
-			//{
-			//	$form->bind($serviceData);
-			//}
-			
 			// Set form and data to the view
 			$view->form = &$form;
-			//$view->data = &$serviceData;
-				
 				
 			// Render view.
 			echo $view->render();

@@ -5,17 +5,56 @@
 			type="text"
 			label="Title"
 			description="Event title to appear in the calendar."
-			maxlength="60"
+			maxlength="100"
 			required="true"
 			filter="string"
 			/>
 		
-		
 		<field name="eventDate" 
 			type="calendar" 
-			default="01-01-2014" 
 			label="Select a date" 
-			description="The date of the Event" 
-			format="%d-%m-%Y" />
+			description="The start date of the Event" 
+			format="%d-%m-%Y" 
+			required="true"
+			/>
+		
+		<field name="eventDuration"
+			type="integer" 
+			label="Duration (Days)" 
+			description="The duration of the multi day event in days" 
+			required="false"
+			default="1"
+			first="1" last="14" step="1" 
+			/>
+		
+		<field name="allDay"
+			label="All Day Event"
+			type="checkbox"
+			value="1"
+			default="1"
+			lable="All Day Event"
+			description="Select if this is an all day or multiple day event, times will be ignored when selected"
+			/>
+		
+		<field name="startTime"
+			label="Start Time"
+			type="text"
+			default="00:00"
+			/>
+		
+		<field name="endTime"
+			label="End Time"
+			type="text"
+			default="00:00"
+			/>
+		
+		<field name="description"
+			lable="Description"
+			type="textarea"
+			rows="10"
+			cols="100"
+			/>
+		
 	</fieldset>
+ 
 </form>
