@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fieldset name="eventDetails" lable="Summary">
+	<fieldset name="eventSumary" lable="Summary">
 		<field	name="eventTitle"
 			type="text"
 			label="Title"
@@ -10,10 +10,19 @@
 			filter="string"
 			/>
 		
+		<field name="eventLocation"
+			type="text"
+			Lable="Location"
+			description="Where the event bing held"
+			maxlength="60"
+			required="true"
+			filter="string"
+			/>
+		
 		<field name="eventDate" 
 			type="calendar" 
 			label="Select a date" 
-			description="The start date of the Event" 
+			description="The start date of the Event (dd-mm-yy)" 
 			format="%d-%m-%Y" 
 			required="true"
 			/>
@@ -27,7 +36,7 @@
 			first="1" last="14" step="1" 
 			/>
 		
-		<field name="allDay"
+		<field name="eventAllDay"
 			label="All Day Event"
 			type="checkbox"
 			value="1"
@@ -36,24 +45,60 @@
 			description="Select if this is an all day or multiple day event, times will be ignored when selected"
 			/>
 		
-		<field name="startTime"
+		<field name="eventStartTime"
 			label="Start Time"
+			description="An optionl Start time, this is only applicable when this is not an all day event"
 			type="text"
 			default="00:00"
+			maxlength="5"
 			/>
 		
-		<field name="endTime"
+		<field name="eventEndTime"
 			label="End Time"
+			description="An optionl End time, this is only applicable when this is not an all day event"
 			type="text"
 			default="00:00"
+			maxlength="5"
+			filter="string"
 			/>
 		
-		<field name="description"
+		<field name="eventProvider"
+			lable="Provider"
+			description="The name of the cotch, coaching company or Outdore / Traning Centre"
+			type="text"
+			maxlength="60"
+			filter="string"
+			/>
+			
+		<filed name="eventDiciplin"
+			lable="Diciplin"
+			description="The Compotition Diciplin"
+			type="text"
+			maxlength="30"
+			/>
+		
+		<field name="eventSummary"
+			lable="Summary"
+			description="A summary of the event to apear in the calendar. Do not include any HTML or BBCodes"
+			type="textarea"
+			rows="4"
+			cols="100"
+			required="true"
+			filter="string"
+	</fieldset>
+	<fieldset name="eventDetail" lable="Details">
+		
+		<field name="eventDescription"
 			lable="Description"
+			description="A description of the event to that will be posted in the forum along with other details in this form. Do not include any HTML, BBCodes can be included"
 			type="textarea"
 			rows="10"
 			cols="100"
+			required="true"
 			/>
+			
+	
+			
 		
 	</fieldset>
  
