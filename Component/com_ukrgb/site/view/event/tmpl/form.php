@@ -19,6 +19,22 @@ defined('_JEXEC') or die;
 			<?php echo JText::_('UKRGB Events'); ?>
 		</legend>
 		<?php
+		foreach ($this->form->getFieldset('eventSummary') as $field):
+		?>
+		<div class="">
+			<div class="">
+				<?php echo $field->label; ?>
+			</div>
+			<div class="">
+				<?php echo $field->input; ?>
+			</div>
+		</div>
+		<?php
+		endforeach;
+		?>
+	</fieldset>
+	<fieldset>
+		<?php
 		foreach ($this->form->getFieldset('eventDetails') as $field):
 		?>
 		<div class="">
