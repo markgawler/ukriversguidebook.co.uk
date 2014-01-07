@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fieldset name="eventSumary" lable="Summary">
+	<fieldset name="eventSummary " lable="Summary">
 		<field	name="eventTitle"
 			type="text"
 			label="Title"
