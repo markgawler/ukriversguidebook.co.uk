@@ -40,7 +40,7 @@ class UkrgbControllerEventSubmit extends JControllerBase
 		$return = $model->validate($form, $data);
 		
 
-		
+		/*
 		$data = $this->input->getArray(array(
 				'jform' => array(
 						'eventTitle' => 'string',
@@ -48,7 +48,7 @@ class UkrgbControllerEventSubmit extends JControllerBase
 				)
 		));
 		$formData = $data['jform'];
-		
+		*/
 		// Check for validation errors.
 		if ($return === false)
 		{

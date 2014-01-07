@@ -1,6 +1,6 @@
 <?php
 
-// Site - Map Model
+// Site - event  Model
 defined('_JEXEC') or die;
 
 class UkrgbModelEvent extends JModelDatabase
@@ -143,4 +143,10 @@ class UkrgbModelEvent extends JModelDatabase
 		return $data;
 	}
 
+	
+	public function store($data)
+	{
+		var_dump($data);
+		die();
+	}
 }
