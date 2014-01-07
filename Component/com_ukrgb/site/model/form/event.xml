@@ -85,7 +85,9 @@
 			cols="100"
 			required="true"
 			filter="string"
+			/>
 	</fieldset>
+	
 	<fieldset name="eventDetail" lable="Details">
 		
 		<field name="eventDescription"
@@ -96,10 +98,6 @@
 			cols="100"
 			required="true"
 			/>
-			
-	
-			
-		
 	</fieldset>
  
 </form>
