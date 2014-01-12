@@ -40,6 +40,9 @@
 		
 	</files>
 	
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB.com_ukrgb.ini</language>
+	</languages>
 	
 	<administration>
 		<!-- Administration Menu Section -->
@@ -55,6 +58,11 @@
 			<folder>model</folder>
 			<folder>sql</folder>
 		</files>
+		
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/en-GB.com_ukrgb.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_ukrgb.sys.ini</language>
+		</languages>
 	</administration>
 
 </extension>

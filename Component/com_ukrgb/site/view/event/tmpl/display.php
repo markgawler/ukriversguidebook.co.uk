@@ -10,6 +10,6 @@
 defined('_JEXEC') or die;
 
 ?>
-<h2>Events</h2>
+<h2>Events Display TBA</h2>
 
-
+	

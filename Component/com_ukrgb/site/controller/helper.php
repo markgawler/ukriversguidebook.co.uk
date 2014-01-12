@@ -33,8 +33,6 @@ class UkrgbControllerHelper
 				
 		$controllerName = 'Ukrgb' . 'Controller' . $task . $activity;
 		
-		error_log("Controller: ".$controllerName."-");
-		
 		if (!class_exists($controllerName))
 		{
 			error_log("Error Log no such Controller: ".$controllerName);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_UKRGB_EVENT_VIEW_DISPLAY_TITLE" option="COM_UKRGB_EVENT_VIEW_DISPLAY_OPTION">
+		<help
+			key = "JHELP_MENUS_MENU_ITEM_UKRGB_EVENT"
+		/>
+		<message>
+			<![CDATA[COM_UKRGB_EVENT_VIEW_DISPLAY_DESC]]>
+		</message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request">
+			<field name="task" type="hidden" default="event"/>
+		</fieldset>
+	</fields>
+	
+		<!-- Add fields to the parameters object for the layout. -->
+<fields name="params">
+<fieldset name="basic" label="COM_UKRGB_EVENT_OPTIONS">
+
+			<field name="ukrgb_event_cal" type="list"
+				label="COM_UKRGB_FIELD_SELECT_EVENT_CAL_LABEL"
+				description="COM_UKRGB_FIELD_SELECT_EVENT_CAL_DESC"
+			>
+				<option value="0">COM_UKRGB_FIELD_ITEM_ALL_EVENT</option>
+				<option value="1">COM_UKRGB_FIELD_ITEM_TCG_EVENT</option>
+				<option value="2">COM_UKRGB_FIELD_ITEM_SOCIAL_EVENT</option>
+				<option value="3">COM_UKRGB_FIELD_ITEM_COMP_EVENT</option>
+			</field>
+</fieldset>
+</fields>
+</metadata>

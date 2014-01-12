@@ -35,55 +35,43 @@ class UkrgbControllerEventSubmit extends JControllerBase
 		$model = new UkrgbModelEvent();
 		$form  = $model->getForm();
 		$data  = $this->input->post->get('jform', array(), 'array');
-		
-		// Validate the posted data.
-		$return = $model->validate($form, $data);
-		
 
-		/*
-		$data = $this->input->getArray(array(
-				'jform' => array(
-						'eventTitle' => 'string',
-						'eventDate' => 'string'
-				)
-		));
-		$formData = $data['jform'];
-		*/
+		// Validate the posted data.
+		
+		$return = $model->validate($form, $data);
+
+		
 		// Check for validation errors.
 		if ($return === false)
 		{
 			/*
 			 * The validate method enqueued all messages for us, so we just need to redirect back.
 			*/
-		
+			
 			// Save the data in the session.
 			$this->app->setUserState('com_ukrgb.event.data', $data);
-		
+							
 			// Redirect back to the edit screen.
-			$this->app->redirect(JRoute::_('index.php?option=com_ukrgb&task=event', false));
+			$this->app->redirect(JRoute::_('index.php?option=com_ukrgb&task=event&layout=edit', false));		
 		}
 		
 		// Attempt to save the configuration.
 		$data = $return;
-		
-		//var_dump($data);
-		//die();
-		
 		$model->store($data);
 		
 		// Check the return value.
-		//if ($return === false)
-		//{
+		if ($return === false)
+		{
 			/*
 			 * The save method enqueued all messages for us, so we just need to redirect back.
 			*/
 		
 			// Save the data in the session.
-			//$this->app->setUserState('com_config.config.global.data', $data);
-		
+			$this->app->setUserState('com_ukrgb.event.data', $data);				
+			
 			// Save failed, go back to the screen and display a notice.
-			//$this->app->redirect(JRoute::_('index.php?option=com_config&controller=config.display.config', false));
-		//}
+			$this->app->redirect(JRoute::_('index.php?option=com_ukrgb&task=event&layout=edit', false));
+		}
 		
 		// Redirect back to com_config display
 		$this->app->enqueueMessage(JText::_('Evens Saved Sucsessfully'));

@@ -11,6 +11,8 @@ class UkrgbControllerEvent extends JControllerBase
 
 		$viewName = $this->input->getWord('view', 'event');
 		$viewFormat = $document->getType();
+		$layout = $this->input->getWord('layout', 'display');
+		$id = $this->input->getInt('evid', null);
 		
 		// Register the layout paths for the view
 		$paths = new SplPriorityQueue;
@@ -23,17 +25,26 @@ class UkrgbControllerEvent extends JControllerBase
 		{
 			$model = new $modelClass;
 			$view = new $viewClass($model, $paths);
-			$view->setLayout('form');
+			$view->setLayout($layout);
 		
 			// Push document object into the view.
 			$view->document = $document;
+			$view->eventId = $id;
 			
-			// Load form and bind data
-			$form = $model->getForm();
+			if ($layout == 'edit')
+			{
+				// Load form and bind data
+				$form = $model->getForm($id);
 			
-			// Set form and data to the view
-			$view->form = &$form;
+				// Set form and data to the view
+				$view->form = &$form;
+			}
+			else 
+			{
+				$data = $model->load($id);
+				//var_dump($data);
 				
+			}	
 			// Render view.
 			echo $view->render();
 		}

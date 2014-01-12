@@ -11,6 +11,33 @@
 			class="input-xxlarge"
 			/>
 		
+		<field name="eventStart" 
+			type="calendar" 
+			label="Select an start date" 
+			description="The start date of the Event (dd-mm-yy)" 
+			format="%d-%m-%Y" 
+			required="true"
+			class="input-small"
+			/>
+		
+		<field name="eventEnd" 
+			type="calendar" 
+			label="Select an end date" 
+			description="The start date of the Event (dd-mm-yy)" 
+			format="%d-%m-%Y" 
+			required="false"
+			class="input-small"
+			/>
+			
+		<field name="eventAllDay"
+			label="All Day Event"
+			type="checkbox"
+			value="1"
+			default="1"
+			lable="All Day Event"
+			description="Select if this is an all day or multiple day event, times will be ignored when selected"
+			/>
+			
 		<field name="eventLocation"
 			type="text"
 			label="Location"
@@ -21,52 +48,6 @@
 			class="input-large"
 			/>
 		
-		<field name="eventDate" 
-			type="calendar" 
-			label="Select a date" 
-			description="The start date of the Event (dd-mm-yy)" 
-			format="%d-%m-%Y" 
-			required="true"
-			class="input-small"
-			/>
-		
-		<field name="eventDuration"
-			type="integer" 
-			label="Duration (Days)" 
-			description="The duration of the multi day event in days" 
-			required="false"
-			default="1"
-			first="1" last="14" step="1"
-			class="input-small" 
-			/>
-		
-		<field name="eventAllDay"
-			label="All Day Event"
-			type="checkbox"
-			value="1"
-			default="1"
-			lable="All Day Event"
-			description="Select if this is an all day or multiple day event, times will be ignored when selected"
-			/>
-		
-		<field name="eventStartTime"
-			label="Start Time"
-			description="An optionl Start time, this is only applicable when this is not an all day event"
-			type="text"
-			default="00:00"
-			maxlength="5"
-			class="input-small"
-			/>
-		
-		<field name="eventEndTime"
-			label="End Time"
-			description="An optionl End time, this is only applicable when this is not an all day event"
-			type="text"
-			default="00:00"
-			maxlength="5"
-			filter="string"
-			class="input-small"
-			/>
 		
 		<field name="eventProvider"
 			label="Provider"
@@ -107,5 +88,26 @@
 			class="input-xxlarge"
 			/>
 	</fieldset>
- 
+	
+	<fieldset name="eventNotused" lable="Details">
+		<field name="eventStartTime"
+			label="Start Time"
+			description="An optionl Start time, this is only applicable when this is not an all day event"
+			type="text"
+			default="00:00"
+			maxlength="5"
+			class="input-small"
+			/>
+		
+		<field name="eventEndTime"
+			label="End Time"
+			description="An optionl End time, this is only applicable when this is not an all day event"
+			type="text"
+			default="00:00"
+			maxlength="5"
+			filter="string"
+			class="input-small"
+			/>
+	</fieldset>
+			
 </form>
