@@ -7,6 +7,7 @@ class UkrgbModelEvent extends JModelDatabase
 {
 	public function store($ev)
 	{
+		//error_log('-- Store event');
 		// Create a new query object.
 		$query = $this->db->getQuery(true);
 		
@@ -27,6 +28,7 @@ class UkrgbModelEvent extends JModelDatabase
 	
 	public function load($id)
 	{	
+		//error_log('-- Load event');
 		// Create a new query object.
 		$db = $this->getDb();
 		$query = $db->getQuery(true);
@@ -48,9 +50,5 @@ class UkrgbModelEvent extends JModelDatabase
 		}
 		return $result;
 	}
-	
-
-	
-	
 	
 }

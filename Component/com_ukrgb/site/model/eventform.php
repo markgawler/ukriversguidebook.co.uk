@@ -7,16 +7,20 @@ class UkrgbModelEventform
 	/**
 	 * Method to get the form object.
 	 *
-	 * @param	array  $data	An optional argument to control if existing data is to be loaded.
+	 * @param	object  $ev	An optional argument, event object to populated the form with.
 	 *
 	 * @return  mixed  JForm 	object on success, False on error.
 	 *
 	 */
-	public function getForm($ev)
+	public function getForm($ev = null)
 	{
-		if (empty($ev))
+		if (!empty($ev))
 		{
 			$data = $this->eventObjectToFormArray($ev);			
+		}
+		else 
+		{
+			$data = array();
 		}
 		
 		$app = JFactory::getApplication();
@@ -27,7 +31,7 @@ class UkrgbModelEventform
 
 		if (!empty($form))
 		{
-			// Load the data into the form after the plugins have operated.
+			// Load the data into the form
 			$form->bind($data);
 		}
 		else
@@ -194,6 +198,7 @@ class UkrgbModelEventform
 		return $phptime;
 	}
 	
+	
 	function eventObjectToFormArray ($ev)
 	{	
 		$data = array(
@@ -208,6 +213,7 @@ class UkrgbModelEventform
 				'eventDescription' => $ev->description,
 				'eventStartTime' => '00:00', //@TODO - start and end times
 				'eventEndTime' => '00:00');
+		return $data;
 	}
 	
 	function formArrayToEventObject ($data)

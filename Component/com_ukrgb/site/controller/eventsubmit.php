@@ -31,10 +31,17 @@ class UkrgbControllerEventSubmit extends JControllerBase
 			$this->app->enqueueMessage(JText::_('JINVALID_TOKEN'));
 			$this->app->redirect('index.php');
 		}
+		if (JFactory::getUser()->guest)
+		{
 		
+			//JFactory::getApplication()->enqueueMessage(JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'));
+			$this->app->enqueueMessage(JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'error');
+			return;
+		}
+					
 
 		$formModel = new UkrgbModelEventform;
-		$form  = $formModel->getForm(null);
+		$form  = $formModel->getForm();
 		$data  = $this->input->post->get('jform', array(), 'array');
 
 		// Validate the posted data.
@@ -58,7 +65,8 @@ class UkrgbControllerEventSubmit extends JControllerBase
 		// Attempt to save the configuration.
 		$data = $return;
 		$model = new UkrgbModelEvent();
-		$model->store($data);
+		$ev = $formModel->formArrayToEventObject($data);
+		$model->store($ev);
 		
 		// Check the return value.
 		if ($return === false)

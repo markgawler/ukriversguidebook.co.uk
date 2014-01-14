@@ -23,26 +23,38 @@ class UkrgbControllerEvent extends JControllerBase
 
 		if (class_exists($viewClass))
 		{
+			// Access check.
+			$user = JFactory::getUser(); 
+			if ($user->guest)
+			{
+				$this->app->enqueueMessage(JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'error');
+				return;
+			}
+			
 			$model = new $modelClass;
-			$view = new $viewClass($model, $paths);
+			$view = new $viewClass($model, $paths);			
 			$view->setLayout($layout);
-		
+				
 			// Push document object into the view.
 			$view->document = $document;
-			$view->eventId = $id;
 			if ($id != null)
 			{
-				$data = $model->load($id);
+				$ev = $model->load($id);
+				// revent editing someoneelses event
+				if ($ev->created_by != $user->id){
+					$this->app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+					return;
+				}
 			}
 			else
 			{
-				$data = null;
+				$ev = null;
 			}
 			
 			if ($layout == 'edit')
 			{					
 				$formModel = new UkrgbModelEventform;
-				$form = $formModel->getForm($data);
+				$form = $formModel->getForm($ev);
 
 				// Set form and data to the view
 				$view->form = &$form;

@@ -17,17 +17,7 @@ class UkrgbViewEventHtml extends JViewHtml
 		
 		if ($this->layout == 'edit')
 		{
-	
 			JHTML::_('behavior.formvalidation');
-		
-			//$app = JFactory::getApplication();		
-	
-			
-			//retrieve task list from model
-			//$model = new UkrgbModelEvent();
-			
-			
-			//display
 		}
 		return parent::render();
 	}
