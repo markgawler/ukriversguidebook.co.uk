@@ -32,13 +32,13 @@ class UkrgbControllerEventSubmit extends JControllerBase
 			$this->app->redirect('index.php');
 		}
 		
-		$model = new UkrgbModelEvent();
-		$form  = $model->getForm();
+
+		$formModel = new UkrgbModelEventform;
+		$form  = $formModel->getForm(null);
 		$data  = $this->input->post->get('jform', array(), 'array');
 
 		// Validate the posted data.
-		
-		$return = $model->validate($form, $data);
+		$return = $formModel->validate($form, $data);
 
 		
 		// Check for validation errors.
@@ -57,6 +57,7 @@ class UkrgbControllerEventSubmit extends JControllerBase
 		
 		// Attempt to save the configuration.
 		$data = $return;
+		$model = new UkrgbModelEvent();
 		$model->store($data);
 		
 		// Check the return value.
