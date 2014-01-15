@@ -50,6 +50,7 @@ defined('_JEXEC') or die;
 		?>
 	</fieldset>
 	<fieldset>
+		<input type="hidden" name="evid" value="<?php echo $this->eventId; ?>" />
 		<input type="hidden" name="option" value="com_ukrgb" />
 		<input type="hidden" name="task" value="eventsubmit" />
 	

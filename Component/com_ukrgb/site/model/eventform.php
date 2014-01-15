@@ -202,6 +202,7 @@ class UkrgbModelEventform
 	function eventObjectToFormArray ($ev)
 	{	
 		$data = array(
+				'eventId' => $ev->id,
 				'eventTitle' => $ev->title,
 				'eventStart' => $ev->start_date,
 				'eventEnd' => $ev->end_date,

@@ -40,15 +40,23 @@ class UkrgbControllerEvent extends JControllerBase
 			if ($id != null)
 			{
 				$ev = $model->load($id);
-				// revent editing someoneelses event
-				if ($ev->created_by != $user->id){
-					$this->app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+				// Invalid events
+				if (empty($ev))
+				{	
+					$this->app->enqueueMessage(JText::_('COM_UKRGB_EVENT_INVALID_ID'), 'error');
 					return;
 				}
+				// prevent editing someoneelses event
+				if ($ev->created_by != $user->id){
+					$this->app->enqueueMessage(JText::_('COM_UKRGB_EVENT_AUTH_EDIT'), 'error');
+					return;
+				}
+				$view->eventId = $id;
 			}
 			else
 			{
 				$ev = null;
+				$view->eventId = null;
 			}
 			
 			if ($layout == 'edit')
