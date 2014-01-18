@@ -1,23 +1,20 @@
-<?php // No direct access
-// Admin
+<?php 
+/**
+ * @package     Joomla.Administrator
+ * @subpackage  com_ukrgb
+ *
+ * @copyright   Copyright (C) 2005 - 2014 Mark Gawler, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die;
+#JHtml::_('behavior.tabstate');
 
-//load classes
-JLoader::registerPrefix('Ukrgb', JPATH_COMPONENT_ADMINISTRATOR);
+if (!JFactory::getUser()->authorise('core.manage', 'com_ukrgb'))
+{
+	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+}
 
-//Load plugins
-JPluginHelper::importPlugin('ukrgb');
-
-//application
-$app = JFactory::getApplication();
-
-// Require specific controller if requested
-$controller = $app->input->get('task','display');
-
-// Create the controller
-$classname = 'UkrgbController'.ucwords($controller);
-$controller = new $classname();
-
-// Perform the Request task
-$controller->execute();
+$controller	= JControllerLegacy::getInstance('Ukrgb');
+$controller->execute(JFactory::getApplication()->input->get('task'));
+$controller->redirect();
