@@ -1,7 +1,7 @@
 <?php
 // Site - event form
-defined('_JEXEC') or die;
-	
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
 class UkrgbModelEventform
 {
 	/**

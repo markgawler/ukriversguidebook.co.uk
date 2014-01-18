@@ -46,16 +46,23 @@
 	
 	<administration>
 		<!-- Administration Menu Section -->
-		<menu>UKRGB</menu>
+		<menu>UK Rivers Guidebook</menu>
+		<submenu>
+		<menu link="option=com_ukrgb" view="map" alt="UKRGB/Maps">Maps</menu>
+		<menu link="option=com_ukrgb" view="event" alt="UKRGB/Events">Events</menu>
+		
+		</submenu>
 		
 		<files folder="admin">
 			<filename>index.html</filename>
 			<filename>ukrgb.php</filename>
 			<filename>config.xml</filename>
 			<filename>acess.xml</filename>
-			<folder>controller</folder>
-			<folder>view</folder>
-			<folder>model</folder>
+			<filename>controller.php</filename>
+			<folder>helpers</folder>
+			<folder>views</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
 			<folder>sql</folder>
 		</files>
 		
