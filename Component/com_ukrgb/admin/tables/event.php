@@ -31,21 +31,33 @@ class UkrgbTableEvent extends JTable
 		$user	= JFactory::getUser();
 		if ($this->id) {
 			// Existing item
-			$this->modified	= $date->toMySQL();
+			$this->modified	= $date->toSql();
 			$this->modified_by	= $user->get('id');
 		} else {
 			// New Event. Created and created_by field can be set by the user,
 			// so we don't touch either of these if they are set.
-			if (!intval($this->created)) {
-				$this->created = $date->toMySQL();
+			if (!(int) $this->created) {
+				$this->created = $date->toSql();
 			}
 			if (empty($this->created_by)) {
 				$this->created_by = $user->get('id');
 			}
 		}
+		
+		// Set publish_up to null date if not set
+		if (!$this->publish_up)
+		{
+			$this->publish_up = $this->_db->getNullDate();
+		}
+		
+		// Set publish_down to null date if not set
+		if (!$this->publish_down)
+		{
+			$this->publish_down = $this->_db->getNullDate();
+		}
 
 		// Verify that the alias is unique
-		$table = JTable::getInstance('event', 'UkrgbTable');
+		$table = JTable::getInstance('Event', 'UkrgbTable');
 		if ($table->load(array('alias'=>$this->alias,'catid'=>$this->catid)) && ($table->id != $this->id || $this->id==0)) {
 			$this->setError(JText::_('COM_UKRGB_ERROR_UNIQUE_ALIAS'));
 			return false;
@@ -66,8 +78,8 @@ class UkrgbTableEvent extends JTable
 		$query = $db->getQuery(true);
 		$query->select('id');
 		$query->from($db->quoteName('#__ukrgb_cal_events'));
-		$query->where('title = ' . $db->quote($this->title) . 
-			' AND catid = ' . (int) $this->catid);
+		$query->where('title = ' . $db->quote($this->title) .
+				' AND catid = ' . (int) $this->catid);
 		$db->setQuery($query);
 
 		$xid = intval($db->loadResult());

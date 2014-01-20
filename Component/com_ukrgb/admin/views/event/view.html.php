@@ -14,9 +14,9 @@ jimport('joomla.application.component.view');
  * View to edit a contact.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_joomprosubs
- */
-class JoomprosubsViewSubscription extends JView
+ * @subpackage	com_ukrgb
+*/
+class UkrgbViewEvent extends JViewLegacy
 {
 	protected $form;
 	protected $item;
@@ -27,6 +27,7 @@ class JoomprosubsViewSubscription extends JView
 	 */
 	public function display($tpl = null)
 	{
+		
 		// Initialiase variables.
 		$this->form		= $this->get('Form');
 		$this->item		= $this->get('Item');
@@ -48,36 +49,37 @@ class JoomprosubsViewSubscription extends JView
 	 */
 	protected function addToolbar()
 	{
-		JRequest::setVar('hidemainmenu', true);
+		JFactory::getApplication()->input->set('hidemainmenu', true);
 
 		$user = JFactory::getUser();
 		$isNew = ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
-		$canDo = JoomprosubsHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
-
-		JToolBarHelper::title(JText::_('COM_JOOMPROSUBS_MANAGER_JOOMPROSUB'), 'newfeeds.png');
+		$canDo = UkrgbHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
+		
+		
+		JToolBarHelper::title(JText::_('COM_UKRGB_MANAGER_EVENT'), 'newfeeds.png');
 
 		// If not checked out, can save the item.
-		if (!$checkedOut && ($canDo->get('core.edit')||(count($user->getAuthorisedCategories('com_joomprosubs', 'core.create')))))
+		if (!$checkedOut && ($canDo->get('core.edit')||(count($user->getAuthorisedCategories('com_ukrgb', 'core.create')))))
 		{
-			JToolBarHelper::apply('subscription.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('subscription.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::apply('event.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('event.save', 'JTOOLBAR_SAVE');
 		}
-		if (!$checkedOut && (count($user->getAuthorisedCategories('com_joomprosubs', 'core.create')))){			
-			JToolBarHelper::custom('subscription.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+		if (!$checkedOut && (count($user->getAuthorisedCategories('com_ukrgb', 'core.create')))){
+			JToolBarHelper::custom('event.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
 		}
 		// If an existing item, can save to a copy.
-		if (!$isNew && (count($user->getAuthorisedCategories('com_joomprosubs', 'core.create')) > 0)) {
-			JToolBarHelper::custom('subscription.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+		if (!$isNew && (count($user->getAuthorisedCategories('com_ukrgb', 'core.create')) > 0)) {
+			JToolBarHelper::custom('ukrgb.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 		if (empty($this->item->id)) {
-			JToolBarHelper::cancel('subscription.cancel', 'JTOOLBAR_CANCEL');
+			JToolBarHelper::cancel('ukrgb.cancel', 'JTOOLBAR_CANCEL');
 		}
 		else {
-			JToolBarHelper::cancel('subscription.cancel', 'JTOOLBAR_CLOSE');
+			JToolBarHelper::cancel('ukrgb.cancel', 'JTOOLBAR_CLOSE');
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('', '', JText::_('COM_JOOMPROSUBS_SUBSCRIPTION_HELP_LINK'));
+		JToolBarHelper::help('', '', JText::_('COM_UKRGB_EVENT_HELP_LINK'));
 	}
 }

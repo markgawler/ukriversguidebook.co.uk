@@ -26,20 +26,21 @@ class UkrgbHelper extends JHelperContent
 	public static function addSubmenu($vName = 'eventmanager')
 	{
 		JSubMenuHelper::addEntry(
-		JText::_('COM_UKRGB_SUBMENU_JOOMPROSUBS'),
-		'index.php?option=com_ukrgb&view=eventmanager',
-		$vName == 'eventmanager'
-				);
-				JSubMenuHelper::addEntry(
-				JText::_('COM_JOOMPROSUBS_SUBMENU_CATEGORIES'),
-				'index.php?option=com_categories&extension=com_ukrgb',
-				$vName == 'categories'
-						);
-						if ($vName=='categories') {
+			JText::_('COM_UKRGB_SUBMENU_EVENTS_MANAGER'),
+			'index.php?option=com_ukrgb&view=eventmanager',
+			$vName == 'eventmanager'
+		);
+				
+		JSubMenuHelper::addEntry(
+			JText::_('COM_JOOMPROSUBS_SUBMENU_CATEGORIES'),
+			'index.php?option=com_categories&extension=com_ukrgb',
+			$vName == 'categories'
+		);
+/* 						if ($vName=='categories') {
 							JToolBarHelper::title(
 							JText::sprintf('COM_CATEGORIES_CATEGORIES_TITLE',JText::_('com_ukrgb')),
 							'ukrgb-categories');
-						}
+						} */
 	}
 
 	/**

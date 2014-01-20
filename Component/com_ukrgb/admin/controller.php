@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package     Joomla.Administrator
  * @subpackage  com_ukrgb
- * 
+ *
  */
 class UkrgbController extends JControllerLegacy
 {
@@ -22,7 +22,7 @@ class UkrgbController extends JControllerLegacy
 	 * @var		string	The default view.
 	 */
 	protected $default_view = 'eventmanager';
-	
+
 	/**
 	 * Method to display a view.
 	 *
@@ -39,10 +39,8 @@ class UkrgbController extends JControllerLegacy
 		$view   = $this->input->get('view', 'eventmanager');
 		$layout = $this->input->get('layout', 'default');
 		$id     = $this->input->getInt('id');
-		//var_dump($view);echo("<br>");
-		//var_dump($layout);echo("<br>");
-		//var_dump($id);echo("<br>");
-		//die();
+			
+		
 		// Check for edit form.
 		if ($view == 'event' && $layout == 'edit' && !$this->checkEditId('com_ukrgb.edit.event', $id))
 		{

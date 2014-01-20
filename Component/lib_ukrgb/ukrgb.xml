@@ -10,17 +10,17 @@
 	<authorUrl>http://www.example.org</authorUrl>
 	<copyright>Copyright Info</copyright>
 	<license>License Info</license>
-	<!--  The version string is recorded in the components table -->
+	<!-- The version string is recorded in the components table -->
 	<version>0.1.0</version>
 	<description>The UKRGB Joomal Extention Library Proj4 php and js.</description>
-	
-	
+
+
 	<files folder="library">
 		<filename>index.html</filename>
 		<folder>proj4php</folder>
 		<folder>proj4js</folder>
 	</files>
-	
+
 
 </extension>
 

@@ -11,10 +11,10 @@ jimport('joomla.application.component.modellist');
 /**
  * Methods supporting a list of ukrgb events records.
  *
- */
+*/
 class UkrgbModelEventManager extends JModelList
 {
-	
+
 	/**
 	 * Constructor.
 	 *
@@ -25,27 +25,28 @@ class UkrgbModelEventManager extends JModelList
 	{
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
-				'id', 'a.id',
-				'title', 'a.title',
-				'alias', 'a.alias',
-				'checked_out', 'a.checked_out',
-				'checked_out_time', 'a.checked_out_time',
-				'catid', 'a.catid', 'category_title',
-				'published', 'a.published',
-				'access', 'a.access', 'access_level',
-				'created', 'a.created',
-				'created_by', 'a.created_by',
-				'publish_up', 'a.publish_up',
-				'publish_down', 'a.publish_down',
-				'group_title', 'g.title',
-				'duration', 'a.duration'
+					'id', 'a.id',
+					'title', 'a.title',
+					'alias', 'a.alias',
+					'checked_out', 'a.checked_out',
+					'checked_out_time', 'a.checked_out_time',
+					'catid', 'a.catid', 'category_title',
+					'state', 'a.state',
+					'access', 'a.access', 'access_level',
+					'created', 'a.created',
+					'created_by', 'a.created_by',
+					'ordering', 'a.ordering',
+					'publish_up', 'a.publish_up',
+					'publish_down', 'a.publish_down',
+					'group_title', 'g.title',
+					'duration', 'a.duration'
 			);
 		}
 
 		parent::__construct($config);
 	}
-	
-	
+
+
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -55,7 +56,7 @@ class UkrgbModelEventManager extends JModelList
 	protected function populateState($ordering = null, $direction = null)
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
+		//$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
 		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
@@ -69,6 +70,9 @@ class UkrgbModelEventManager extends JModelList
 
 		$categoryId = $this->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id', '');
 		$this->setState('filter.category_id', $categoryId);
+		
+		$tag = $this->getUserStateFromRequest($this->context . '.filter.tag', 'filter_tag', '');
+		$this->setState('filter.tag', $tag);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_ukrgb');
@@ -117,7 +121,7 @@ class UkrgbModelEventManager extends JModelList
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
 		$query->join('LEFT', $db->quoteName('#__users').' AS uc ON uc.id=a.checked_out');
-		
+
 		// Join over the user groups to get the group name
 		$query->select('g.title AS group_title');
 		$query->join('LEFT', $db->quoteName('#__usergroups').' AS g ON a.group_id = g.id');

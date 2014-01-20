@@ -20,7 +20,7 @@ class UkrgbControllerEventManager extends JControllerAdmin
 	/**
 	 * Proxy for getModel.
 	 */
-	public function getModel($name = 'Event', $prefix = 'EventsModel', $config = array('ignore_request' => true))
+	public function getModel($name = 'Event', $prefix = 'UkrgbModel', $config = array('ignore_request' => true))
 	{
 		$model = parent::getModel($name, $prefix, $config);
 		return $model;

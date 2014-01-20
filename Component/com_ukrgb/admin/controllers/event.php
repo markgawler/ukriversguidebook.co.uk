@@ -1,18 +1,18 @@
 <?php
 /**
- * @copyright	Copyright (C) 2011 Mark Gawler. All rights reserved.
+ * @copyright	Copyright (C) 2014 Mark Gawler. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controllerform');
+//jimport('joomla.application.component.controllerform');
 
 /**
  * ukrgb evemt controller class.
  *
- */
+*/
 class UkrgbControllerEvent extends JControllerForm
 {
 	/**
@@ -22,7 +22,7 @@ class UkrgbControllerEvent extends JControllerForm
 	 * @since  11.1
 	 */
 	protected $view_list = 'eventmanager';
-	
+
 	/**
 	 * Method override to check if you can add a new record.
 	 *
@@ -34,7 +34,7 @@ class UkrgbControllerEvent extends JControllerForm
 	{
 		// Initialise variables.
 		$user = JFactory::getUser();
-		$categoryId	= JArrayHelper::getValue($data, 'catid', JRequest::getInt('filter_category_id'), 'int');
+		$categoryId	= JArrayHelper::getValue($data, 'catid', $this->input->getInt('filter_category_id'), 'int');
 		$allow = null;
 
 		if ($categoryId) {

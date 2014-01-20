@@ -15,7 +15,7 @@ jimport('joomla.application.component.modeladmin');
  *
  * @package		Joomla.Administrator
  * @subpackage	com_ukrgb
- */
+*/
 class UkrgbModelEvent extends JModelAdmin
 {
 	/**
@@ -36,14 +36,14 @@ class UkrgbModelEvent extends JModelAdmin
 				return ;
 			}
 			$user = JFactory::getUser();
-	
+
 			if ($record->catid) {
 				return $user->authorise('core.delete', 'com_ukrgb.category.'.(int) $record->catid);
 			}
 			else {
 				return parent::canDelete($record);
 			}
-		}	
+		}
 	}
 
 	/**
@@ -71,7 +71,7 @@ class UkrgbModelEvent extends JModelAdmin
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	 */
-	public function getTable($type = 'events', $prefix = 'UkrgbEventsTable', $config = array())
+	public function getTable($type = 'event', $prefix = 'UkrgbEventTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}

@@ -13,8 +13,10 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+
 ?>
 <script type="text/javascript">
+
 	Joomla.submitbutton = function(task)
 	{
 		if (task == 'subscription.cancel' || document.formvalidator.isValid(document.id('subscription-form'))) {
@@ -27,34 +29,39 @@ JHtml::_('behavior.formvalidation');
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_joomprosubs&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="subscription-form" class="form-validate">
+<form
+	action="<?php echo JRoute::_('index.php?option=com_joomprosubs&layout=edit&id='.(int) $this->item->id); ?>"
+	method="post" name="adminForm" id="subscription-form"
+	class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo empty($this->item->id) ? JText::_('COM_JOOMPROSUBS_NEW_JOOMPROSUB') : JText::sprintf('COM_JOOMPROSUBS_EDIT_JOOMPROSUB', $this->item->id); ?></legend>
+			<legend>
+				<?php echo empty($this->item->id) ? JText::_('COM_JOOMPROSUBS_NEW_JOOMPROSUB') : JText::sprintf('COM_JOOMPROSUBS_EDIT_JOOMPROSUB', $this->item->id); ?>
+			</legend>
 			<ul class="adminformlist">
-			<li><?php echo $this->form->getLabel('title'); ?>
-			<?php echo $this->form->getInput('title'); ?></li>
+				<li><?php echo $this->form->getLabel('title'); ?> <?php echo $this->form->getInput('title'); ?>
+				</li>
 
-			<li><?php echo $this->form->getLabel('alias'); ?>
-			<?php echo $this->form->getInput('alias'); ?></li>
+				<li><?php echo $this->form->getLabel('alias'); ?> <?php echo $this->form->getInput('alias'); ?>
+				</li>
 
-			<li><?php echo $this->form->getLabel('catid'); ?>
-			<?php echo $this->form->getInput('catid'); ?></li>
-			
-			<li><?php echo $this->form->getLabel('group_id'); ?>
-			<?php echo $this->form->getInput('group_id'); ?></li>
-			
-			<li><?php echo $this->form->getLabel('duration'); ?>
-			<?php echo $this->form->getInput('duration'); ?></li>
-			
-			<li><?php echo $this->form->getLabel('published'); ?>
-			<?php echo $this->form->getInput('published'); ?></li>			
+				<li><?php echo $this->form->getLabel('catid'); ?> <?php echo $this->form->getInput('catid'); ?>
+				</li>
 
-			<li><?php echo $this->form->getLabel('access'); ?>
-			<?php echo $this->form->getInput('access'); ?></li>
+				<li><?php echo $this->form->getLabel('group_id'); ?> <?php echo $this->form->getInput('group_id'); ?>
+				</li>
 
-			<li><?php echo $this->form->getLabel('id'); ?>
-			<?php echo $this->form->getInput('id'); ?></li>
+				<li><?php echo $this->form->getLabel('duration'); ?> <?php echo $this->form->getInput('duration'); ?>
+				</li>
+
+				<li><?php echo $this->form->getLabel('published'); ?> <?php echo $this->form->getInput('published'); ?>
+				</li>
+
+				<li><?php echo $this->form->getLabel('access'); ?> <?php echo $this->form->getInput('access'); ?>
+				</li>
+
+				<li><?php echo $this->form->getLabel('id'); ?> <?php echo $this->form->getInput('id'); ?>
+				</li>
 			</ul>
 
 			<?php echo $this->form->getLabel('description'); ?>
@@ -70,27 +77,27 @@ JHtml::_('behavior.formvalidation');
 
 		<fieldset class="panelform">
 			<ul class="adminformlist">
-				<li><?php echo $this->form->getLabel('created_by'); ?>
-				<?php echo $this->form->getInput('created_by'); ?></li>
+				<li><?php echo $this->form->getLabel('created_by'); ?> <?php echo $this->form->getInput('created_by'); ?>
+				</li>
 
-				<li><?php echo $this->form->getLabel('created_by_alias'); ?>
-				<?php echo $this->form->getInput('created_by_alias'); ?></li>
+				<li><?php echo $this->form->getLabel('created_by_alias'); ?> <?php echo $this->form->getInput('created_by_alias'); ?>
+				</li>
 
-				<li><?php echo $this->form->getLabel('created'); ?>
-				<?php echo $this->form->getInput('created'); ?></li>
+				<li><?php echo $this->form->getLabel('created'); ?> <?php echo $this->form->getInput('created'); ?>
+				</li>
 
-				<li><?php echo $this->form->getLabel('publish_up'); ?>
-				<?php echo $this->form->getInput('publish_up'); ?></li>
+				<li><?php echo $this->form->getLabel('publish_up'); ?> <?php echo $this->form->getInput('publish_up'); ?>
+				</li>
 
-				<li><?php echo $this->form->getLabel('publish_down'); ?>
-				<?php echo $this->form->getInput('publish_down'); ?></li>
+				<li><?php echo $this->form->getLabel('publish_down'); ?> <?php echo $this->form->getInput('publish_down'); ?>
+				</li>
 
 				<?php if ($this->item->modified_by) : ?>
-					<li><?php echo $this->form->getLabel('modified_by'); ?>
-					<?php echo $this->form->getInput('modified_by'); ?></li>
+				<li><?php echo $this->form->getLabel('modified_by'); ?> <?php echo $this->form->getInput('modified_by'); ?>
+				</li>
 
-					<li><?php echo $this->form->getLabel('modified'); ?>
-					<?php echo $this->form->getInput('modified'); ?></li>
+				<li><?php echo $this->form->getLabel('modified'); ?> <?php echo $this->form->getInput('modified'); ?>
+				</li>
 				<?php endif; ?>
 
 			</ul>
