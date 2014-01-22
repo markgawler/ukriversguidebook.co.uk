@@ -79,6 +79,7 @@ class UkrgbModelEventManager extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
+
 		parent::populateState('a.title', 'asc');
 	}
 

@@ -9,16 +9,16 @@
 	<authorUrl>http://www.example.org</authorUrl>
 	<copyright>Copyright Info</copyright>
 	<license>License Info</license>
-	<!--  The version string is recorded in the components table -->
+	<!-- The version string is recorded in the components table -->
 	<version>0.1.0</version>
 	<description>The UKRGB Joomal Extention PayPal Donation, Maps, Etc.</description>
-	
-	
-    <install> <!-- Runs on install -->
-    	<sql>
-        	<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-        </sql>
-    </install>
+
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
 	<uninstall> <!-- Runs on uninstall -->
 		<sql>
 			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
@@ -30,42 +30,43 @@
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
 	</update>
-	
+
 	<files folder="site">
 		<filename>index.html</filename>
 		<filename>ukrgb.php</filename>
 		<folder>controller</folder>
 		<folder>view</folder>
 		<folder>model</folder>
-		
+
 	</files>
-	
+
 	<languages folder="site">
 		<language tag="en-GB">language/en-GB.com_ukrgb.ini</language>
 	</languages>
-	
+
 	<administration>
 		<!-- Administration Menu Section -->
 		<menu>UK Rivers Guidebook</menu>
 		<submenu>
-		<menu link="option=com_ukrgb" view="map" alt="UKRGB/Maps">Maps</menu>
-		<menu link="option=com_ukrgb" view="event" alt="UKRGB/Events">Events</menu>
-		
+			<menu link="option=com_ukrgb" view="map" alt="UKRGB/Maps">Maps</menu>
+			<menu link="option=com_ukrgb" view="event" alt="UKRGB/Events">Events</menu>
+
 		</submenu>
-		
+
 		<files folder="admin">
 			<filename>index.html</filename>
 			<filename>ukrgb.php</filename>
 			<filename>config.xml</filename>
-			<filename>acess.xml</filename>
+			<filename>access.xml</filename>
 			<filename>controller.php</filename>
+			<folder>controllers</folder>
 			<folder>helpers</folder>
 			<folder>views</folder>
 			<folder>models</folder>
 			<folder>tables</folder>
 			<folder>sql</folder>
 		</files>
-		
+
 		<languages folder="admin">
 			<language tag="en-GB">language/en-GB/en-GB.com_ukrgb.ini</language>
 			<language tag="en-GB">language/en-GB/en-GB.com_ukrgb.sys.ini</language>

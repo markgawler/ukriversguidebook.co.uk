@@ -11,4 +11,5 @@ defined('_JEXEC') or die;
 
 ?>
 <h2>Default View</h2>
-<p><?php echo $this->message;?>
+<p>
+	<?php echo $this->message;?>

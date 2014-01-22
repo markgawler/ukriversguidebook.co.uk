@@ -1,11 +1,11 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class UkrgbViewEventHtml extends JViewHtml
-{ 
+{
 	public $form;
-	
+
 	public $data;
-	
+
 	/**
 	 * Method to render the view.
 	 *
@@ -14,7 +14,7 @@ class UkrgbViewEventHtml extends JViewHtml
 	 */
 	function render()
 	{
-		
+
 		if ($this->layout == 'edit')
 		{
 			JHTML::_('behavior.formvalidation');

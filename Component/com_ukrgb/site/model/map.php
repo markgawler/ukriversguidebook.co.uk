@@ -20,9 +20,9 @@ class UkrgbModelMap extends JModelBase
 		$query->from('#__ukrgb_maps');
 		$query->where('id = ' . $db->Quote($mapid));
 		$db->setQuery($query);
-	
+
 		$result = $db->loadRow();
-	
+
 		$data = array("w_lng" => $result[0],
 				"s_lat" => $result[1],
 				"e_lng" => $result[2],
@@ -42,7 +42,7 @@ class UkrgbModelMap extends JModelBase
 		$query->select(array('id'));
 		$query->from('#__ukrgb_maps');
 		$query->where($db->quoteName('articleid') .' = '. $db->Quote($articleid));
-	
+
 		$db->setQuery($query);
 		try {
 			$result = $db->loadObject();
@@ -51,38 +51,38 @@ class UkrgbModelMap extends JModelBase
 			error_log($e);
 			$result = null;
 		}
-	
+
 		if ($result == null){
 			return null; //No Map
 		}
 		return $result->id;
 	}
-	
+
 	public function addMap($type, $sw ,$ne , $articleId)
 	{
 		/*
 		 * Add A Map
 		*/
-	
+
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 			
 		// Insert columns.
 		$columns = array('map_type', 'sw_corner', 'ne_corner', 'articleid');
-	
+
 		// Insert values.
 		$values = array(
 				$db->quote($type),
 				'GeomFromText('.$db->quote('POINT('.$sw->x.' '.$sw->y.')').')',
 				'GeomFromText('.$db->quote('POINT('.$ne->x.' '.$ne->y.')').')',
 				$db->quote($articleId));
-	
+
 		// Prepare the insert query.
 		$query->insert($db->quoteName('#__ukrgb_maps'))
 		->columns($db->quoteName($columns))
 		->values(implode(',', $values));
 		// Reset the query using our newly populated query object.
-	
+
 		$db->setQuery($query);
 		try {
 			$result = $db->query();
@@ -90,7 +90,7 @@ class UkrgbModelMap extends JModelBase
 			error_log($e);
 		}
 	}
-	
+
 	public function updateMap($type, $sw ,$ne , $articleId)
 	{
 		/*
@@ -105,7 +105,7 @@ class UkrgbModelMap extends JModelBase
 				$db->quoteName('map_type').' = '.$db->quote($type),
 				$db->quoteName('sw_corner').' = '.'GeomFromText('.$db->quote('POINT('.$sw->x.' '.$sw->y.')').')',
 				$db->quoteName('ne_corner').' = '.'GeomFromText('.$db->quote('POINT('.$ne->x.' '.$ne->y.')').')');
-	
+
 		// Prepare the insert query.
 		$query->update($db->quoteName('#__ukrgb_maps'))->set($fields)->where('articleid = '.$articleId);
 		$db->setQuery($query);
@@ -115,6 +115,6 @@ class UkrgbModelMap extends JModelBase
 			error_log($e);
 		}
 	}
-	
+
 }
 

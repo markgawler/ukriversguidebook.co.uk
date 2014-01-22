@@ -1,16 +1,16 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class UkrgbViewMapHtml extends JViewHtml
-{ 
+{
 	function render()
 	{
-		$app = JFactory::getApplication();		
+		$app = JFactory::getApplication();
 		$mapId = $this->map->id;
 		//$this->params = JComponentHelper::getParams('com_ukrgb');
 
 		//retrieve task list from model
 		$model = new UkrgbModelMap();
-		
+
 		$mapParameters = $model->getMapParameters($mapId);
 
 		JHtml::_('behavior.framework');
@@ -22,10 +22,10 @@ class UkrgbViewMapHtml extends JViewHtml
 		$params = json_encode(array(
 				'url' => JURI::base() . 'index.php?option=com_ukrgb&tmpl=raw&format=json',
 				'mapdata' => $mapParameters));
-		
+
 		$document = &JFactory::getDocument();
 		$document->addScriptDeclaration('var params = ' .$params.';');
-		
+
 		//display
 		return parent::render();
 	}

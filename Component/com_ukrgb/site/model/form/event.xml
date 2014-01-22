@@ -1,113 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 	<fieldset name="eventSummary" lable="Summary">
-		<field name="eventTitle"
-			type="text"
-			label="Title"
-			description="Event title to appear in the calendar."
-			maxlength="100"
-			required="true"
-			filter="string"
-			class="input-xxlarge"
-			/>
-		
-		<field name="eventStart" 
-			type="calendar" 
-			label="Select an start date" 
-			description="The start date of the Event (dd-mm-yy)" 
-			format="%d-%m-%Y" 
-			required="true"
-			class="input-small"
-			/>
-		
-		<field name="eventEnd" 
-			type="calendar" 
-			label="Select an end date" 
-			description="The start date of the Event (dd-mm-yy)" 
-			format="%d-%m-%Y" 
-			required="false"
-			class="input-small"
-			/>
-			
-		<field name="eventAllDay"
-			label="All Day Event"
-			type="checkbox"
-			value="1"
-			default="1"
-			lable="All Day Event"
-			description="Select if this is an all day or multiple day event, times will be ignored when selected"
-			/>
-			
-		<field name="eventLocation"
-			type="text"
-			label="Location"
-			description="Where the event bing held"
-			maxlength="60"
-			required="true"
-			filter="string"
-			class="input-large"
-			/>
-		
-		
-		<field name="eventProvider"
-			label="Provider"
+		<field name="eventTitle" type="text" label="Title"
+			description="Event title to appear in the calendar." maxlength="100"
+			required="true" filter="string" class="input-xxlarge" />
+
+		<field name="eventStart" type="calendar" label="Select an start date"
+			description="The start date of the Event (dd-mm-yy)" format="%d-%m-%Y"
+			required="true" class="input-small" />
+
+		<field name="eventEnd" type="calendar" label="Select an end date"
+			description="The start date of the Event (dd-mm-yy)" format="%d-%m-%Y"
+			required="false" class="input-small" />
+
+		<field name="eventAllDay" label="All Day Event" type="checkbox"
+			value="1" default="1" lable="All Day Event"
+			description="Select if this is an all day or multiple day event, times will be ignored when selected" />
+
+		<field name="eventLocation" type="text" label="Location"
+			description="Where the event bing held" maxlength="60" required="true"
+			filter="string" class="input-large" />
+
+
+		<field name="eventProvider" label="Provider"
 			description="The name of the cotch, coaching company or Outdore / Traning Centre"
-			type="text"
-			maxlength="60"
-			filter="string"
-			/>
-			
-		<filed name="eventDiciplin"
-			label="Diciplin"
-			description="The Compotition Diciplin"
-			type="text"
-			maxlength="30"
-			/>
-		
-		<field name="eventSummary"
-			label="Summary"
+			type="text" maxlength="60" filter="string" />
+
+		<filed name="eventDiciplin" label="Diciplin" description="The Compotition Diciplin"
+			type="text" maxlength="30" />
+
+		<field name="eventSummary" label="Summary"
 			description="A summary of the event to apear in the calendar. Do not include any HTML or BBCodes"
-			type="textarea"
-			rows="4"
-			cols="100"
-			required="true"
-			filter="string"
-			class="input-xxlarge"
-			/>
+			type="textarea" rows="4" cols="100" required="true" filter="string"
+			class="input-xxlarge" />
 	</fieldset>
-	
+
 	<fieldset name="eventDetails" lable="Details">
-		
-		<field name="eventDescription"
-			label="Description"
+
+		<field name="eventDescription" label="Description"
 			description="A description of the event to that will be posted in the forum along with other details in this form. Do not include any HTML, BBCodes can be included"
-			type="textarea"
-			rows="10"
-			cols="100"
-			required="true"
-			class="input-xxlarge"
-			/>
+			type="textarea" rows="10" cols="100" required="true" class="input-xxlarge" />
 	</fieldset>
-	
+
 	<fieldset name="eventNotused" lable="Details">
-		<field name="eventStartTime"
-			label="Start Time"
+		<field name="eventStartTime" label="Start Time"
 			description="An optionl Start time, this is only applicable when this is not an all day event"
-			type="text"
-			default="00:00"
-			maxlength="5"
-			class="input-small"
-			/>
-		
-		<field name="eventEndTime"
-			label="End Time"
+			type="text" default="00:00" maxlength="5" class="input-small" />
+
+		<field name="eventEndTime" label="End Time"
 			description="An optionl End time, this is only applicable when this is not an all day event"
-			type="text"
-			default="00:00"
-			maxlength="5"
-			filter="string"
-			class="input-small"
-			/>
+			type="text" default="00:00" maxlength="5" filter="string" class="input-small" />
 	</fieldset>
-			
+
 </form>

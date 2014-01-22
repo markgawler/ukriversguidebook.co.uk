@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 class UkrgbControllerEventSubmit extends JControllerBase
-{     
+{
 	/**
 	 * Application object - Redeclared for proper typehinting
 	 *
@@ -34,7 +34,7 @@ class UkrgbControllerEventSubmit extends JControllerBase
 		$user = JFactory::getUser();
 		if ($user->guest)
 		{
-		
+
 			$this->app->enqueueMessage(JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'), 'error');
 			return;
 		}
@@ -43,7 +43,7 @@ class UkrgbControllerEventSubmit extends JControllerBase
 		$form  = $formModel->getForm();
 		$data  = $this->input->post->get('jform', array(), 'array');
 		$id = $this->input->getInt('evid', 0);
-		
+
 		$model = new UkrgbModelEvent();
 		if (!empty($id))
 		{
@@ -52,49 +52,49 @@ class UkrgbControllerEventSubmit extends JControllerBase
 				$this->app->enqueueMessage(JText::_('COM_UKRGB_EVENT_AUTH_EDIT'), 'error');
 				return;
 			}
-		}		
-		
+		}
+
 		// Validate the posted data.
 		$return = $formModel->validate($form, $data);
-	
+
 		// Check for validation errors.
 		if ($return === false)
 		{
 			/*
 			 * The validate method enqueued all messages for us, so we just need to redirect back.
 			*/
-			
+				
 			// Save the data in the session.
 			$this->app->setUserState('com_ukrgb.event.data', $data);
-							
+				
 			// Redirect back to the edit screen.
-			$this->app->redirect(JRoute::_('index.php?option=com_ukrgb&task=event&layout=edit', false));		
+			$this->app->redirect(JRoute::_('index.php?option=com_ukrgb&task=event&layout=edit', false));
 		}
-		
+
 		// Attempt to save the configuration.
 		$data = $return;
 		$ev = $formModel->formArrayToEventObject($data);
 		$model->store($ev,$id);
-		
-		
+
+
 		// Check the return value.
 		if ($return === false)
 		{
 			/*
 			 * The save method enqueued all messages for us, so we just need to redirect back.
 			*/
-		
+
 			// Save the data in the session.
-			$this->app->setUserState('com_ukrgb.event.data', $data);				
-			
+			$this->app->setUserState('com_ukrgb.event.data', $data);
+				
 			// Save failed, go back to the screen and display a notice.
 			$this->app->redirect(JRoute::_('index.php?option=com_ukrgb&task=event&layout=edit', false));
 		}
-		
+
 		// Redirect back to com_config display
 		$this->app->enqueueMessage(JText::_('Evens Saved Sucsessfully'));
 		$this->app->redirect(JRoute::_('index.php?option=com_ukrgb&task=event', false));
-		
+
 		return true;
 	}
 }

@@ -7,12 +7,12 @@ class UkrgbViewDefaultHtml extends JViewHtml
 		$app = JFactory::getApplication();
 		$layout = $this->getLayout();
 
-		
+
 		$this->params = JComponentHelper::getParams('com_ukrgb');
 
 		//retrieve task list from model
 		$model = new UkrgbModelDefault();
-		
+
 		$this->message = $model->getMessage();
 
 		//if($layout == 'list')

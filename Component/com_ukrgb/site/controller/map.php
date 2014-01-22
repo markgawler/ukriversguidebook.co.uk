@@ -20,18 +20,18 @@ class UkrgbControllerMap extends JControllerBase
 
 		$viewClass  = $this->prefix . 'View' . ucfirst($viewName) . ucfirst($viewFormat);
 		$modelClass = $this->prefix . 'Model' . ucfirst($viewName);
-		
+
 		if (class_exists($viewClass))
 		{
 			$model = new $modelClass;
 			$view = new $viewClass($model, $paths);
-				
+
 			$view->setLayout('default');
-			
+				
 			// Push document object into the view.
 			$view->document = $document;
-			$view->map->id = $mapId;	
-			
+			$view->map->id = $mapId;
+				
 			// Render view.
 			echo $view->render();
 		}

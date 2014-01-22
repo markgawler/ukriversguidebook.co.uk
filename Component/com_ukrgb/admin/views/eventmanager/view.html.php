@@ -65,7 +65,7 @@ class UkrgbViewEventManager extends JViewLegacy
 		// Add export toolbar
 		$bar = JToolBar::getInstance('toolbar');
 		//$bar->appendButton('Link', 'export', 'COM_JOOMPROSrgbUBS_TOOLBAR_CSVREPORT',
-		//	'index.php?option=com_joomprosubs&task=submanager.csvreport');
+		//	'index.php?option=com_ukrgb&task=submanager.csvreport');
 
 		if ($canDo->get('core.edit.state')) {
 

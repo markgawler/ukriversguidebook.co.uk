@@ -16,15 +16,15 @@ class UkrgbModelEventform
 	{
 		if (!empty($ev))
 		{
-			$data = $this->eventObjectToFormArray($ev);			
+			$data = $this->eventObjectToFormArray($ev);
 		}
-		else 
+		else
 		{
 			$data = array();
 		}
-		
+
 		$app = JFactory::getApplication();
-		
+
 		// If data is empty set load_data to load data from userState
 		$form = $this->loadForm('com_ukrgb.event', 'event',
 				array('control' => 'jform', 'load_data' => empty($data)));
@@ -40,7 +40,7 @@ class UkrgbModelEventform
 		}
 		return $form;
 	}
-	
+
 	/**
 	 * Method to get a form object.
 	 *
@@ -57,28 +57,28 @@ class UkrgbModelEventform
 	{
 		// Handle the optional arguments.
 		$options['control'] = JArrayHelper::getValue($options, 'control', false);
-	
+
 		// Create a signature hash.
 		$hash = sha1($source . serialize($options));
-	
+
 		// Check if we can use a previously loaded form.
 		if (isset($this->_forms[$hash]) && !$clear)
 		{	//@TODO I dont think form caching is working
 			return $this->_forms[$hash];
 		}
-	
+
 		// Get the form.
 		// Register the paths for the form -- failing here
 		$paths = new SplPriorityQueue;
 		$paths->insert(JPATH_COMPONENT . '/model/form', 'normal');
-	
+
 		// Solution until JForm supports splqueue
 		JForm::addFormPath(JPATH_COMPONENT . '/model/form');
-	
+
 		try
 		{
 			$form = JForm::getInstance($name, $source, $options, false, $xpath);
-			
+				
 			if (isset($options['load_data']) && $options['load_data'])
 			{
 				// Get the data for the form.
@@ -88,17 +88,17 @@ class UkrgbModelEventform
 			{
 				$data = array();
 			}
-			
+				
 			// Load the data into the form after the plugins have operated.
 			$form->bind($data);
 		}
 		catch (Exception $e)
 		{
 			JFactory::getApplication()->enqueueMessage($e->getMessage());
-	
+
 			return false;
 		}
-	
+
 		// Store the form for later.
 		$this->_forms[$hash] = $form;
 			
@@ -120,15 +120,15 @@ class UkrgbModelEventform
 		// Filter and validate the form data.
 		$data   = $form->filter($data);
 		$return = $form->validate($data, $group);
-	
+
 		// Check for an error.
 		if ($return instanceof Exception)
 		{
 			JFactory::getApplication()->enqueueMessage($return->getMessage(), 'error');
-	
+
 			return false;
 		}
-	
+
 		// Check the validation results.
 		if ($return === false)
 		{
@@ -139,7 +139,7 @@ class UkrgbModelEventform
 			}
 			return false;
 		}
-	
+
 		//validate times
 		if (!$this->validateDateTime($data['eventStart']))
 		{
@@ -153,7 +153,7 @@ class UkrgbModelEventform
 		}
 		return $data;
 	}
-	
+
 	/**
 	 * Method to get the data that should be injected in the form.
 	 *
@@ -163,7 +163,7 @@ class UkrgbModelEventform
 	{
 		$app =& JFactory::getApplication();
 		$data = $app->getUserState( 'com_ukrgb.event.data', null );
-	
+
 		if ($data != null)
 		{
 			// load event data from the user state as event is still beaing created.
@@ -171,21 +171,21 @@ class UkrgbModelEventform
 			$data['eventEnd'] = '';   //@TODO http://forum.joomla.org/viewtopic.php?f=727&t=826469
 			return $data;
 		}
-		
+
 		return array();
 	}
-	
+
 	private function validateDateTime($dateString)
 	{
 		$phptime = DateTime::createFromFormat('d-m-Y', $dateString);
-	
+
 		if ($phptime)
 		{
 			return true;
 		}
 		return false;
 	}
-	
+
 	private function sqlDateTime($dateString)
 	{
 		$phptime = DateTime::createFromFormat('d-m-Y', $dateString);
@@ -197,10 +197,10 @@ class UkrgbModelEventform
 		}
 		return $phptime;
 	}
-	
-	
+
+
 	function eventObjectToFormArray ($ev)
-	{	
+	{
 		$data = array(
 				'eventId' => $ev->id,
 				'eventTitle' => $ev->title,
@@ -216,7 +216,7 @@ class UkrgbModelEventform
 				'eventEndTime' => '00:00');
 		return $data;
 	}
-	
+
 	function formArrayToEventObject ($data)
 	{
 		// Insert columns.
@@ -231,11 +231,11 @@ class UkrgbModelEventform
 		$ev->course_provider = $data['eventProvider'];
 		$ev->summary = $data['eventSummary'];
 		$ev->description = $data['eventDescription'];
-		
+
 		return $ev;
 	}
-	
-	
-	
-	
+
+
+
+
 }

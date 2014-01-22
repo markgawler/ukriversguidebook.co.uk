@@ -32,7 +32,7 @@ class UkrgbModelEvent extends JModelAdmin
 	protected function canDelete($record)
 	{
 		if (!empty($record->id)) {
-			if ($record->published != -2) {
+			if ($record->state != -2) {
 				return ;
 			}
 			$user = JFactory::getUser();
@@ -54,6 +54,7 @@ class UkrgbModelEvent extends JModelAdmin
 	 */
 	protected function canEditState($record)
 	{
+		if (!empty($record->id))
 		$user = JFactory::getUser();
 
 		if (!empty($record->catid)) {
@@ -71,7 +72,7 @@ class UkrgbModelEvent extends JModelAdmin
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	 */
-	public function getTable($type = 'event', $prefix = 'UkrgbEventTable', $config = array())
+	public function getTable($type = 'event', $prefix = 'UkrgbTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -85,6 +86,7 @@ class UkrgbModelEvent extends JModelAdmin
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
+		
 		// Initialise variables.
 		$app	= JFactory::getApplication();
 
@@ -106,13 +108,15 @@ class UkrgbModelEvent extends JModelAdmin
 		// Modify the form based on access controls.
 		if (!$this->canEditState((object) $data)) {
 			// Disable fields for display.
-			$form->setFieldAttribute('published', 'disabled', 'true');
+			$form->setFieldAttribute('ordering', 'disabled', 'true');
+			$form->setFieldAttribute('state', 'disabled', 'true');
 			$form->setFieldAttribute('publish_up', 'disabled', 'true');
 			$form->setFieldAttribute('publish_down', 'disabled', 'true');
 
 			// Disable fields while saving.
 			// The controller has already verified this is a record you can edit.
-			$form->setFieldAttribute('published', 'filter', 'unset');
+			$form->setFieldAttribute('ordering', 'filter', 'unset');
+			$form->setFieldAttribute('state', 'filter', 'unset');
 			$form->setFieldAttribute('publish_up', 'filter', 'unset');
 			$form->setFieldAttribute('publish_down', 'filter', 'unset');
 		}
@@ -129,16 +133,20 @@ class UkrgbModelEvent extends JModelAdmin
 	{
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState('com_ukrgb.edit.event.data', array());
-
+		
 		if (empty($data)) {
+				
 			$data = $this->getItem();
 
 			// Prime some default values.
 			if ($this->getState('event.id') == 0) {
+				
 				$app = JFactory::getApplication();
-				$data->set('catid', JRequest::getInt('catid', $app->getUserState('com_ukrgb.eventmanager.filter.category_id')));
+				$data->set('catid', $app->input->get('catid', $app->getUserState('com_ukrgb.eventmanager.filter.category_id'), 'int'));
 			}
 		}
+
+		$this->preprocessData('com_ukrgb.event', $data);
 
 		return $data;
 	}
@@ -150,8 +158,10 @@ class UkrgbModelEvent extends JModelAdmin
 	protected function prepareTable(&$table)
 	{
 		$table->alias = JApplication::stringURLSafe($table->alias);
+		
 		if (empty($table->alias)) {
 			$table->alias = JApplication::stringURLSafe($table->title);
 		}
+		
 	}
 }

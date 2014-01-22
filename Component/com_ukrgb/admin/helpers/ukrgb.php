@@ -32,7 +32,7 @@ class UkrgbHelper extends JHelperContent
 		);
 				
 		JSubMenuHelper::addEntry(
-			JText::_('COM_JOOMPROSUBS_SUBMENU_CATEGORIES'),
+			JText::_('COM_UKRGB_SUBMENU_CATEGORIES'),
 			'index.php?option=com_categories&extension=com_ukrgb',
 			$vName == 'categories'
 		);

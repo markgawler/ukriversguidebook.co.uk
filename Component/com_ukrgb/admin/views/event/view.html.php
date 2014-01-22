@@ -27,11 +27,12 @@ class UkrgbViewEvent extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		
 		// Initialiase variables.
+		
 		$this->form		= $this->get('Form');
 		$this->item		= $this->get('Item');
 		$this->state	= $this->get('State');
+		
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -40,6 +41,7 @@ class UkrgbViewEvent extends JViewLegacy
 		}
 
 		$this->addToolbar();
+		
 		parent::display($tpl);
 	}
 
@@ -54,7 +56,8 @@ class UkrgbViewEvent extends JViewLegacy
 		$user = JFactory::getUser();
 		$isNew = ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
-		$canDo = UkrgbHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
+		//$canDo = UkrgbHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
+		$canDo		= JHelperContent::getActions($this->item->catid, 0, 'com_weblinks');
 		
 		
 		JToolBarHelper::title(JText::_('COM_UKRGB_MANAGER_EVENT'), 'newfeeds.png');
@@ -62,8 +65,8 @@ class UkrgbViewEvent extends JViewLegacy
 		// If not checked out, can save the item.
 		if (!$checkedOut && ($canDo->get('core.edit')||(count($user->getAuthorisedCategories('com_ukrgb', 'core.create')))))
 		{
-			JToolBarHelper::apply('event.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('event.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::apply('event.apply');
+			JToolBarHelper::save('event.save');
 		}
 		if (!$checkedOut && (count($user->getAuthorisedCategories('com_ukrgb', 'core.create')))){
 			JToolBarHelper::custom('event.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
@@ -73,7 +76,7 @@ class UkrgbViewEvent extends JViewLegacy
 			JToolBarHelper::custom('ukrgb.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 		if (empty($this->item->id)) {
-			JToolBarHelper::cancel('ukrgb.cancel', 'JTOOLBAR_CANCEL');
+			JToolBarHelper::cancel('ukrgb.cancel');
 		}
 		else {
 			JToolBarHelper::cancel('ukrgb.cancel', 'JTOOLBAR_CLOSE');

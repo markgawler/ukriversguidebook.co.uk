@@ -1,9 +1,8 @@
 <?php
 /**
- * @version		$Id: edit.php 272 2011-08-11 00:32:05Z dextercowley $
  * @package		Joomla.Administrator
- * @subpackage	com_joomprosubs
- * @copyright	Copyright (C) 2011 Mark Dexter and Louis Landry. All rights reserved.
+ * @subpackage	com_ukrgb
+ * @copyright	Copyright (C) 2012 Mark Gawler. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -11,102 +10,71 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
-JHtml::_('behavior.tooltip');
+
 JHtml::_('behavior.formvalidation');
+JHtml::_('formbehavior.chosen', 'select');
 
 ?>
 <script type="text/javascript">
 
 	Joomla.submitbutton = function(task)
 	{
-		if (task == 'subscription.cancel' || document.formvalidator.isValid(document.id('subscription-form'))) {
+		if (task == 'event.cancel' || document.formvalidator.isValid(document.id('event-form'))) {
 			<?php echo $this->form->getField('description')->save(); ?>
-			Joomla.submitform(task, document.getElementById('subscription-form'));
-		}
-		else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+			Joomla.submitform(task, document.getElementById('event-form'));
 		}
 	}
 </script>
 
 <form
-	action="<?php echo JRoute::_('index.php?option=com_joomprosubs&layout=edit&id='.(int) $this->item->id); ?>"
-	method="post" name="adminForm" id="subscription-form"
-	class="form-validate">
-	<div class="width-60 fltlft">
-		<fieldset class="adminform">
-			<legend>
-				<?php echo empty($this->item->id) ? JText::_('COM_JOOMPROSUBS_NEW_JOOMPROSUB') : JText::sprintf('COM_JOOMPROSUBS_EDIT_JOOMPROSUB', $this->item->id); ?>
-			</legend>
-			<ul class="adminformlist">
-				<li><?php echo $this->form->getLabel('title'); ?> <?php echo $this->form->getInput('title'); ?>
-				</li>
+	action="<?php echo JRoute::_('index.php?option=com_ukrgb&layout=edit&id='.(int) $this->item->id); ?>"
+	method="post" name="adminForm" id="event-form" class="form-validate">
 
-				<li><?php echo $this->form->getLabel('alias'); ?> <?php echo $this->form->getInput('alias'); ?>
-				</li>
+	<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
+	
+	<div class="form-horizontal">
+		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'details')); ?>
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'details', empty($this->item->id) ? JText::_('COM_UKRGB_NEW_EVENT', true) : JText::sprintf('COM_UKRGB_EDIT_EVENT', $this->item->id, true)); ?>
+		<div class="row-fluid">
+			<div class="span9">
+				<div class="form-vertical">
+					<?php echo $this->form->getControlGroup('url'); ?>
+					<?php echo $this->form->getControlGroup('description'); ?>
+				</div>
+			</div>
+			<div class="span3">
+				<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
+			</div>
+		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'images', JText::_('JGLOBAL_FIELDSET_IMAGE_OPTIONS', true)); ?>
+			<div class="row-fluid">
+				<div class="span6">
+					<?php echo $this->form->getControlGroup('images'); ?>
+					<?php foreach ($this->form->getGroup('images') as $field) : ?>
+						<?php echo $field->getControlGroup(); ?>
+					<?php endforeach; ?>
+				</div>
+			</div>
 
-				<li><?php echo $this->form->getLabel('catid'); ?> <?php echo $this->form->getInput('catid'); ?>
-				</li>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<div class="span6">
+				<?php echo JLayoutHelper::render('joomla.edit.publishingdata', $this); ?>
+			</div>
+			<div class="span6">
+				<?php echo JLayoutHelper::render('joomla.edit.metadata', $this); ?>
+			</div>
+		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-				<li><?php echo $this->form->getLabel('group_id'); ?> <?php echo $this->form->getInput('group_id'); ?>
-				</li>
+		<?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
 
-				<li><?php echo $this->form->getLabel('duration'); ?> <?php echo $this->form->getInput('duration'); ?>
-				</li>
+		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 
-				<li><?php echo $this->form->getLabel('published'); ?> <?php echo $this->form->getInput('published'); ?>
-				</li>
-
-				<li><?php echo $this->form->getLabel('access'); ?> <?php echo $this->form->getInput('access'); ?>
-				</li>
-
-				<li><?php echo $this->form->getLabel('id'); ?> <?php echo $this->form->getInput('id'); ?>
-				</li>
-			</ul>
-
-			<?php echo $this->form->getLabel('description'); ?>
-			<div class="clr"></div>
-			<?php echo $this->form->getInput('description'); ?>
-
-		</fieldset>
 	</div>
-	<div class="width-40 fltrt">
-		<?php echo JHtml::_('sliders.start','joomprosubs-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
-
-		<fieldset class="panelform">
-			<ul class="adminformlist">
-				<li><?php echo $this->form->getLabel('created_by'); ?> <?php echo $this->form->getInput('created_by'); ?>
-				</li>
-
-				<li><?php echo $this->form->getLabel('created_by_alias'); ?> <?php echo $this->form->getInput('created_by_alias'); ?>
-				</li>
-
-				<li><?php echo $this->form->getLabel('created'); ?> <?php echo $this->form->getInput('created'); ?>
-				</li>
-
-				<li><?php echo $this->form->getLabel('publish_up'); ?> <?php echo $this->form->getInput('publish_up'); ?>
-				</li>
-
-				<li><?php echo $this->form->getLabel('publish_down'); ?> <?php echo $this->form->getInput('publish_down'); ?>
-				</li>
-
-				<?php if ($this->item->modified_by) : ?>
-				<li><?php echo $this->form->getLabel('modified_by'); ?> <?php echo $this->form->getInput('modified_by'); ?>
-				</li>
-
-				<li><?php echo $this->form->getLabel('modified'); ?> <?php echo $this->form->getInput('modified'); ?>
-				</li>
-				<?php endif; ?>
-
-			</ul>
-		</fieldset>
-
-		<?php echo JHtml::_('sliders.end'); ?>
-
-		<input type="hidden" name="task" value="" />
-		<?php echo JHtml::_('form.token'); ?>
-	</div>
-	<div class="clr"></div>
+	<input type="hidden" name="task" value="" />
+	<?php echo JHtml::_('form.token'); ?>
 </form>
