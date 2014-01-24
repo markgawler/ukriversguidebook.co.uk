@@ -111,61 +111,110 @@ class UkrgbModelEventManager extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		// Create a new query object.
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
+				// Create a new query object.
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+		$user = JFactory::getUser();
 
 		// Select the required fields from the table.
-		$query->select('a.*');
-		$query->from($db->quoteName('#__ukrgb_cal_events').' AS a');
+		$query->select(
+			$this->getState(
+				'list.select',
+				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid,' .
+					'a.state, a.access, a.ordering,' .
+					'a.language, a.publish_up, a.publish_down'
+			)
+		);
+		$query->from($db->quoteName('#__ukrgb_cal_events') . ' AS a');
+
+		// Join over the language
+		$query->select('l.title AS language_title')
+			->join('LEFT', $db->quoteName('#__languages') . ' AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
-		$query->select('uc.name AS editor');
-		$query->join('LEFT', $db->quoteName('#__users').' AS uc ON uc.id=a.checked_out');
+		$query->select('uc.name AS editor')
+			->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
 
-		// Join over the user groups to get the group name
-		$query->select('g.title AS group_title');
-		$query->join('LEFT', $db->quoteName('#__usergroups').' AS g ON a.group_id = g.id');
+		// Join over the asset groups.
+		$query->select('ag.title AS access_level')
+			->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
 
 		// Join over the categories.
-		$query->select('c.title AS category_title');
-		$query->join('LEFT', $db->quoteName('#__categories').' AS c ON c.id = a.catid');
+		$query->select('c.title AS category_title')
+			->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
 		// Filter by access level.
-		if ($access = $this->getState('filter.access')) {
-			$query->where('a.access = '.(int) $access);
+		if ($access = $this->getState('filter.access'))
+		{
+			$query->where('a.access = ' . (int) $access);
+		}
+
+		// Implement View Level Access
+		if (!$user->authorise('core.admin'))
+		{
+			$groups = implode(',', $user->getAuthorisedViewLevels());
+			$query->where('a.access IN (' . $groups . ')');
 		}
 
 		// Filter by published state
 		$published = $this->getState('filter.state');
-		if (is_numeric($published)) {
-			$query->where('a.published = '.(int) $published);
-		} else if ($published === '') {
-			$query->where('(a.published IN (0, 1))');
+		if (is_numeric($published))
+		{
+			$query->where('a.state = ' . (int) $published);
+		}
+		elseif ($published === '')
+		{
+			$query->where('(a.state IN (0, 1))');
 		}
 
 		// Filter by category.
 		$categoryId = $this->getState('filter.category_id');
-		if (is_numeric($categoryId)) {
-			$query->where('a.catid = '.(int) $categoryId);
+		if (is_numeric($categoryId))
+		{
+			$query->where('a.catid = ' . (int) $categoryId);
 		}
 
 		// Filter by search in title
 		$search = $this->getState('filter.search');
-		if (!empty($search)) {
-			if (stripos($search, 'id:') === 0) {
-				$query->where('a.id = '.(int) substr($search, 3));
-			} else {
-				$search = $db->quote('%'.$db->escape($search, true).'%');
-				$query->where('(a.title LIKE '.$search.' OR a.alias LIKE '.$search.')');
+		if (!empty($search))
+		{
+			if (stripos($search, 'id:') === 0)
+			{
+				$query->where('a.id = ' . (int) substr($search, 3));
+			}
+			else
+			{
+				$search = $db->quote('%' . $db->escape($search, true) . '%');
+				$query->where('(a.title LIKE ' . $search . ' OR a.alias LIKE ' . $search . ')');
 			}
 		}
 
-		// Add the list ordering clause.
-		$orderCol	= $this->state->get('list.ordering');
-		$orderDirn	= $this->state->get('list.direction');
+		// Filter on the language.
+		if ($language = $this->getState('filter.language'))
+		{
+			$query->where('a.language = ' . $db->quote($language));
+		}
 
-		$query->order($db->escape($orderCol.' '.$orderDirn));
+		$tagId = $this->getState('filter.tag');
+		// Filter by a single tag.
+		if (is_numeric($tagId))
+		{
+			$query->where($db->quoteName('tagmap.tag_id') . ' = ' . (int) $tagId)
+				->join(
+					'LEFT', $db->quoteName('#__contentitem_tag_map', 'tagmap')
+					. ' ON ' . $db->quoteName('tagmap.content_item_id') . ' = ' . $db->quoteName('a.id')
+					. ' AND ' . $db->quoteName('tagmap.type_alias') . ' = ' . $db->quote('com_ukrgb.event')
+				);
+		}
+
+		// Add the list ordering clause.
+		$orderCol = $this->state->get('list.ordering');
+		$orderDirn = $this->state->get('list.direction');
+		if ($orderCol == 'a.ordering' || $orderCol == 'category_title')
+		{
+			$orderCol = 'c.title ' . $orderDirn . ', a.ordering';
+		}
+		$query->order($db->escape($orderCol . ' ' . $orderDirn));
 
 		return $query;
 	}

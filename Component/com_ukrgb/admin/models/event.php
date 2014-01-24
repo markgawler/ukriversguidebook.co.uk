@@ -54,13 +54,14 @@ class UkrgbModelEvent extends JModelAdmin
 	 */
 	protected function canEditState($record)
 	{
-		if (!empty($record->id))
 		$user = JFactory::getUser();
 
-		if (!empty($record->catid)) {
+		if (!empty($record->catid)) 
+		{
 			return $user->authorise('core.edit.state', 'com_ukrgb.category.'.(int) $record->catid);
 		}
-		else {
+		else 
+		{
 			return parent::canEditState($record);
 		}
 	}
@@ -157,11 +158,89 @@ class UkrgbModelEvent extends JModelAdmin
 	 */
 	protected function prepareTable(&$table)
 	{
+		$date = JFactory::getDate();
+		$user = JFactory::getUser();
+		
+		$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias = JApplication::stringURLSafe($table->alias);
 		
 		if (empty($table->alias)) {
 			$table->alias = JApplication::stringURLSafe($table->title);
 		}
 		
+		if (empty($table->id))
+		{
+			// Set the values
+		
+			// Set ordering to the last item if not set
+			if (empty($table->ordering))
+			{
+				$db = JFactory::getDbo();
+				$db->setQuery('SELECT MAX(ordering) FROM #__ukrgb_cal_events');
+				$max = $db->loadResult();
+		
+				$table->ordering = $max + 1;
+			}
+			else
+			{
+				// Set the values
+				$table->modified    = $date->toSql();
+				$table->modified_by = $user->get('id');
+			}
+		}
+		
+		// Increment the event version number.
+		$table->version++;
+		
 	}
+	
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param   array  $data  The form data.
+	 *
+	 * @return  boolean  True on success.
+	 */
+	public function save($data)
+	{
+		$app = JFactory::getApplication();
+	
+		// Alter the title for save as copy
+		if ($app->input->get('task') == 'save2copy')
+		{
+			list($name, $alias) = $this->generateNewTitle($data['catid'], $data['alias'], $data['title']);
+			$data['title']	= $name;
+			$data['alias']	= $alias;
+			$data['state']	= 0;
+		}
+		return parent::save($data);
+	}
+	
+	/**
+	 * Method to change the title & alias.
+	 *
+	 * @param   integer  $category_id  The id of the parent.
+	 * @param   string   $alias        The alias.
+	 * @param   string   $name         The title.
+	 *
+	 * @return  array  Contains the modified title and alias.
+	 */
+	protected function generateNewTitle($category_id, $alias, $name)
+	{
+		// Alter the title & alias
+		$table = $this->getTable();
+	
+		while ($table->load(array('alias' => $alias, 'catid' => $category_id)))
+		{
+			if ($name == $table->title)
+			{
+				$name = JString::increment($name);
+			}
+	
+			$alias = JString::increment($alias, 'dash');
+		}
+	
+		return array($name, $alias);
+	}
+	
 }

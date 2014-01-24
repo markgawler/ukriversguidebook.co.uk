@@ -34,6 +34,8 @@ class UkrgbController extends JControllerLegacy
 	 */
 	public function display($cachable = false, $urlparams = false)
 	{
+		
+		
 		require_once JPATH_COMPONENT.'/helpers/ukrgb.php';
 
 		$view   = $this->input->get('view', 'eventmanager');

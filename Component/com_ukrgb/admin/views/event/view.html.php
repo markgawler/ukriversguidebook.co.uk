@@ -1,17 +1,14 @@
 <?php
 /**
- * @version		$Id: view.html.php 284 2011-11-11 16:17:14Z dextercowley $
- * @copyright	Copyright (C) 2011 Mark Dexter and Louis Landry. All rights reserved.
+ * @copyright	Copyright (C) 2011 Mark Gawler. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.view');
-
 /**
- * View to edit a contact.
+ * View to edit a event.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_ukrgb
@@ -57,32 +54,40 @@ class UkrgbViewEvent extends JViewLegacy
 		$isNew = ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 		//$canDo = UkrgbHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
-		$canDo		= JHelperContent::getActions($this->item->catid, 0, 'com_weblinks');
+		$canDo		= JHelperContent::getActions($this->item->catid, 0, 'com_ukrgb');
 		
 		
-		JToolBarHelper::title(JText::_('COM_UKRGB_MANAGER_EVENT'), 'newfeeds.png');
+		JToolbarHelper::title(JText::_('COM_UKRGB_MANAGER_EVENT'), 'newfeeds.png');
 
 		// If not checked out, can save the item.
 		if (!$checkedOut && ($canDo->get('core.edit')||(count($user->getAuthorisedCategories('com_ukrgb', 'core.create')))))
 		{
-			JToolBarHelper::apply('event.apply');
-			JToolBarHelper::save('event.save');
+			JToolbarHelper::apply('event.apply');
+			JToolbarHelper::save('event.save');
 		}
-		if (!$checkedOut && (count($user->getAuthorisedCategories('com_ukrgb', 'core.create')))){
-			JToolBarHelper::custom('event.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+		if (!$checkedOut && (count($user->getAuthorisedCategories('com_ukrgb', 'core.create'))))
+		{
+			JToolbarHelper::save2new('event.save2new');
 		}
 		// If an existing item, can save to a copy.
-		if (!$isNew && (count($user->getAuthorisedCategories('com_ukrgb', 'core.create')) > 0)) {
-			JToolBarHelper::custom('ukrgb.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+		if (!$isNew && (count($user->getAuthorisedCategories('com_ukrgb', 'core.create')) > 0))
+		{
+			JToolbarHelper::save2copy('event.save2copy');
 		}
 		if (empty($this->item->id)) {
-			JToolBarHelper::cancel('ukrgb.cancel');
+			JToolbarHelper::cancel('event.cancel');
 		}
-		else {
-			JToolBarHelper::cancel('ukrgb.cancel', 'JTOOLBAR_CLOSE');
+		else
+		{
+			if ($this->state->params->get('save_history', 0) && $user->authorise('core.edit'))
+			{
+				JToolbarHelper::versions('com_ukrgb.event', $this->item->id);
+			}
+
+			JToolbarHelper::cancel('event.cancel', 'JTOOLBAR_CLOSE');
 		}
 
-		JToolBarHelper::divider();
-		JToolBarHelper::help('', '', JText::_('COM_UKRGB_EVENT_HELP_LINK'));
+		JToolbarHelper::divider();
+		JToolbarHelper::help('COM_UKRGB_EVENT_HELP_LINK');
 	}
 }
