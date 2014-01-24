@@ -59,8 +59,11 @@ class plgContentUkrgbMap extends JPlugin {
 	
 	public function onContentAfterSave($context, $article, $isNew)
 	{
-		$model = new UkrgbModelMappoint;
-		$model->updateMapPoints($article->introtext, $article->id, $article->title);				
+		if ($context == 'com_content.article')
+		{
+			$model = new UkrgbModelMappoint;
+			$model->updateMapPoints($article->introtext, $article->id, $article->title);
+		}				
 	}
 }
 ?>
