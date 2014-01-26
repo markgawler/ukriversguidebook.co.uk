@@ -111,9 +111,6 @@ $sortFields = $this->getSortFields();
 						<th width="5%" class="nowrap hidden-phone">
 							<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?>
 						</th>
-						<th width="5%" class="nowrap center hidden-phone">
-							<?php echo JHtml::_('grid.sort', 'JGLOBAL_HITS', 'a.hits', $listDirn, $listOrder); ?>
-						</th>
 						<th width="5%" class="nowrap hidden-phone">
 							<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
 						</th>
@@ -186,9 +183,6 @@ $sortFields = $this->getSortFields();
 						</td>
 						<td class="small hidden-phone">
 							<?php echo $this->escape($item->access_level); ?>
-						</td>
-						<td class="center hidden-phone">
-							<?php echo $item->hits; ?>
 						</td>
 						<td class="small nowrap hidden-phone">
 							<?php if ($item->language == '*'):?>

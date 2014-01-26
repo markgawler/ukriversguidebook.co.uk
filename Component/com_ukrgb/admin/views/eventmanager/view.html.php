@@ -140,7 +140,6 @@ class UkrgbViewEventManager extends JViewLegacy
 	 *
 	 * @return  array  Array containing the field name to sort by as the key and display text as value
 	 *
-	 * @since   3.0
 	 */
 	protected function getSortFields()
 	{
@@ -149,7 +148,6 @@ class UkrgbViewEventManager extends JViewLegacy
 			'a.state' => JText::_('JSTATUS'),
 			'a.title' => JText::_('JGLOBAL_TITLE'),
 			'a.access' => JText::_('JGRID_HEADING_ACCESS'),
-			'a.hits' => JText::_('JGLOBAL_HITS'),
 			'a.language' => JText::_('JGRID_HEADING_LANGUAGE'),
 			'a.id' => JText::_('JGRID_HEADING_ID')
 		);
