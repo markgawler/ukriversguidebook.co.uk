@@ -26,8 +26,11 @@ class UkrgbViewEventManager extends JViewLegacy
 	{
 		$this->state = $this->get('State');
 		$this->items = $this->get('Items');
+		$this->authors = $this->get('Authors');
 		$this->pagination = $this->get('Pagination');
-
+		$this->filterForm    = $this->get('FilterForm');
+		$this->activeFilters = $this->get('ActiveFilters');
+		
 		UkrgbHelper::addSubmenu('eventmanager');	
                 
 		// Check for errors.
@@ -48,7 +51,7 @@ class UkrgbViewEventManager extends JViewLegacy
 	protected function addToolbar()
 	{
 		//JLoader::register('UkrgbHelper', JPATH_COMPONENT.'/helpers/ukrgb.php');
-		require_once JPATH_COMPONENT . '/helpers/ukrgb.php';
+		//require_once JPATH_COMPONENT . '/helpers/ukrgb.php';
 
 		$state	= $this->get('State');
 		$canDo	= JHelperContent::getActions($state->get('filter.category_id'), 0, 'com_ukrgb');
@@ -58,7 +61,8 @@ class UkrgbViewEventManager extends JViewLegacy
 		// Get the toolbar object instance
 		$bar = JToolBar::getInstance('toolbar');
 
-		JToolbarHelper::title(JText::_('COM_UKRGB_MANAGER_EVENTMANAGER'), 'link eventmanager');
+		JToolbarHelper::title(JText::_('COM_UKRGB_MANAGER_EVENTMANAGER'), 'stack eventmanager');
+		
 		if (count($user->getAuthorisedCategories('com_ukrgb', 'core.create')) > 0)
 		{
 			JToolbarHelper::addNew('event.add');
@@ -100,7 +104,7 @@ class UkrgbViewEventManager extends JViewLegacy
 		}
 
 		JToolbarHelper::help('JHELP_COMPONENTS_EVENTMANAGER_LINKS');
-
+/*
 		JHtmlSidebar::setAction('index.php?option=com_ukrgb&view=eventmanager');
 
 		JHtmlSidebar::addFilter(
@@ -132,7 +136,7 @@ class UkrgbViewEventManager extends JViewLegacy
 		'filter_tag',
 		JHtml::_('select.options', JHtml::_('tag.options', true, true), 'value', 'text', $this->state->get('filter.tag'))
 		);
-
+*/
 	}
 
 	/**

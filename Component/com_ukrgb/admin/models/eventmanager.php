@@ -39,7 +39,10 @@ class UkrgbModelEventManager extends JModelList
 					'publish_up', 'a.publish_up',
 					'publish_down', 'a.publish_down',
 					'group_title', 'g.title',
-					'duration', 'a.duration'
+					'duration', 'a.duration',
+					'author_id',
+					'category_id',
+					'tag'
 			);
 		}
 
@@ -55,15 +58,15 @@ class UkrgbModelEventManager extends JModelList
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
-		// Initialise variables.
-		//$app = JFactory::getApplication('administrator');
-
 		// Load the filter state.
 		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
 		$accessId = $this->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
 		$this->setState('filter.access', $accessId);
+		
+		$authorId = $this->getUserStateFromRequest($this->context . '.filter.author_id', 'filter_author_id');
+		$this->setState('filter.author_id', $authorId);
 
 		$published = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $published);
@@ -99,6 +102,7 @@ class UkrgbModelEventManager extends JModelList
 		$id.= ':' . $this->getState('filter.search');
 		$id.= ':' . $this->getState('filter.access');
 		$id.= ':' . $this->getState('filter.state');
+		$id.= ':' . $this->getState('filter.author_id');
 		$id.= ':' . $this->getState('filter.category_id');
 
 		return parent::getStoreId($id);
@@ -111,7 +115,7 @@ class UkrgbModelEventManager extends JModelList
 	 */
 	protected function getListQuery()
 	{
-				// Create a new query object.
+		// Create a new query object.
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 		$user = JFactory::getUser();
@@ -122,7 +126,8 @@ class UkrgbModelEventManager extends JModelList
 				'list.select',
 				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid,' .
 					'a.state, a.access, a.ordering,' .
-					'a.language, a.publish_up, a.publish_down'
+					'a.language, a.publish_up, a.publish_down,' .
+					'a.created_by'
 			)
 		);
 		$query->from($db->quoteName('#__ukrgb_cal_events') . ' AS a');
@@ -142,6 +147,10 @@ class UkrgbModelEventManager extends JModelList
 		// Join over the categories.
 		$query->select('c.title AS category_title')
 			->join('LEFT', '#__categories AS c ON c.id = a.catid');
+		
+		// Join over the users for the author.
+		$query->select('ua.name AS author_name')
+		->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
 
 		// Filter by access level.
 		if ($access = $this->getState('filter.access'))
@@ -174,6 +183,16 @@ class UkrgbModelEventManager extends JModelList
 			$query->where('a.catid = ' . (int) $categoryId);
 		}
 
+		
+		// Filter by author
+		$authorId = $this->getState('filter.author_id');
+		if (is_numeric($authorId))
+		{
+			$type = $this->getState('filter.author_id.include', true) ? '= ' : '<>';
+			$query->where('a.created_by ' . $type . (int) $authorId);
+		}
+		
+		
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 		if (!empty($search))
@@ -217,5 +236,31 @@ class UkrgbModelEventManager extends JModelList
 		$query->order($db->escape($orderCol . ' ' . $orderDirn));
 
 		return $query;
+	}
+	/**
+	 * Build a list of authors
+	 *
+	 * @return  JDatabaseQuery
+	 *
+	
+	 */
+	public function getAuthors()
+	{
+		// Create a new query object.
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+	
+		// Construct the query
+		$query->select('u.id AS value, u.name AS text')
+		->from('#__users AS u')
+		->join('INNER', '#__ukrgb_cal_events AS c ON c.created_by = u.id')
+		->group('u.id, u.name')
+		->order('u.name');
+	
+		// Setup the query
+		$db->setQuery($query);
+	
+		// Return the result
+		return $db->loadObjectList();
 	}
 }
