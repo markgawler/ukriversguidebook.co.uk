@@ -164,6 +164,12 @@ class UkrgbModelEvent extends JModelAdmin
 		$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias = JApplication::stringURLSafe($table->alias);
 		
+		
+		//$sdate= new JData($table->start_date);
+		//var_dump($table->start_date);die();
+		
+		
+		
 		if (empty($table->alias)) {
 			$table->alias = JApplication::stringURLSafe($table->title);
 		}

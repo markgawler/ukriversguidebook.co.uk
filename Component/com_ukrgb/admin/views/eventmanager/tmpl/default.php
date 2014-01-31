@@ -76,8 +76,8 @@ $sortFields = $this->getSortFields();
 						<th width="1%" style="min-width:55px" class="nowrap center">
 							<?php echo JHtml::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
 						</th>
-						<th class="title">
-							<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
+						<th>
+							<?php echo JHtml::_('searchtools.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
 						</th>
 						<th width="10%" class="nowrap hidden-phone">
 							<?php echo JHtml::_('searchtools.sort',  'JAUTHOR', 'a.created_by', $listDirn, $listOrder); ?>
@@ -94,23 +94,14 @@ $sortFields = $this->getSortFields();
 
 					</tr>
 				</thead>
-
-
-				<tfoot>
-					<tr>
-						<td colspan="10">
-							<?php echo $this->pagination->getListFooter(); ?>
-						</td>
-					</tr>
-				</tfoot>
 				<tbody>
 					<?php foreach ($this->items as $i => $item) :
 					$ordering	= ($listOrder == 'a.ordering');
 					$item->cat_link	= JRoute::_('index.php?option=com_categories&extension=com_ukrgb&task=edit&type=other&cid[]='. $item->catid);
-					$canCreate = $user->authorise('core.create', 'com_ukrgb.category.'.$item->catid);
-					$canEdit = $user->authorise('core.edit', 'com_ukrgb.category.'.$item->catid);
+					$canCreate  = $user->authorise('core.create', 'com_ukrgb.category.'.$item->catid);
+					$canEdit    = $user->authorise('core.edit', 'com_ukrgb.category.'.$item->catid);
 					$canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out==$user->get('id') || $item->checked_out==0;
-					$canChange = $user->authorise('core.edit.state', 'com_ukrgb.category.'.$item->catid) && $canCheckin;
+					$canChange  = $user->authorise('core.edit.state', 'com_ukrgb.category.'.$item->catid) && $canCheckin;
 					?>
 					<tr class="row<?php echo $i % 2; ?>" sortable-group-id="<?php echo $item->catid?>">
 						<td class="order nowrap center hidden-phone">
@@ -181,14 +172,12 @@ $sortFields = $this->getSortFields();
 				</tbody>
 			</table>
 		<?php endif; ?>
-
+		<?php echo $this->pagination->getListFooter(); ?>
 		<?php //Load the batch processing form. ?>
 		<?php echo $this->loadTemplate('batch'); ?>
 
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="boxchecked" value="0" />
-		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>

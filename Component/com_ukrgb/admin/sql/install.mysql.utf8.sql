@@ -46,8 +46,11 @@ CREATE TABLE IF NOT EXISTS `#__ukrgb_cal_events` (
   `title` varchar(250) NOT NULL DEFAULT '',
   `alias` varchar(255) NOT NULL DEFAULT '' ,
   `description` text NOT NULL ,
-  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `group_id` int(11) NOT NULL DEFAULT '0',
+  `summary` text NOT NULL,
+  `location` varchar(255) NOT NULL DEFAULT '' ,
+  `start_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `all_day` boolean DEFAULT 1, /* tru is the event is an all day event*/
   `duration` int(11) NOT NULL DEFAULT '0',
   `hits` int(11) NOT NULL DEFAULT '0',
   `state` tinyint(1) NOT NULL DEFAULT '0',
@@ -79,17 +82,6 @@ CREATE TABLE IF NOT EXISTS `#__ukrgb_cal_events` (
   KEY `idx_createdby` (`created_by`),
   KEY `idx_language` (`language`),
   KEY `idx_xreference` (`xreference`)
-    
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
   
-
-
-DROP TABLE IF EXISTS `#__ukrgb_event_mapping`;
-CREATE TABLE  `#__ukrgb_event_mapping` (
-  `event_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #_joompro_subscriptions.id',
-  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__users.id',
-  `start_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`event_id`, `user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;

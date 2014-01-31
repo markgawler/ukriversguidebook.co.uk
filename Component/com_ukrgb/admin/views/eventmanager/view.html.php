@@ -41,6 +41,7 @@ class UkrgbViewEventManager extends JViewLegacy
 
 		$this->addToolbar();
 		$this->sidebar = JHtmlSidebar::render();
+		
 		parent::display($tpl);
 	}
 
@@ -50,9 +51,6 @@ class UkrgbViewEventManager extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		//JLoader::register('UkrgbHelper', JPATH_COMPONENT.'/helpers/ukrgb.php');
-		//require_once JPATH_COMPONENT . '/helpers/ukrgb.php';
-
 		$state	= $this->get('State');
 		$canDo	= JHelperContent::getActions($state->get('filter.category_id'), 0, 'com_ukrgb');
 		//$canDo	= UkrgbHelper::getActions($state->get('filter.category_id'));
@@ -104,39 +102,7 @@ class UkrgbViewEventManager extends JViewLegacy
 		}
 
 		JToolbarHelper::help('JHELP_COMPONENTS_EVENTMANAGER_LINKS');
-/*
-		JHtmlSidebar::setAction('index.php?option=com_ukrgb&view=eventmanager');
 
-		JHtmlSidebar::addFilter(
-			JText::_('JOPTION_SELECT_PUBLISHED'),
-			'filter_state',
-			JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true)
-		);
-
-		JHtmlSidebar::addFilter(
-			JText::_('JOPTION_SELECT_CATEGORY'),
-			'filter_category_id',
-			JHtml::_('select.options', JHtml::_('category.options', 'com_ukrgb'), 'value', 'text', $this->state->get('filter.category_id'))
-		);
-
-		JHtmlSidebar::addFilter(
-			JText::_('JOPTION_SELECT_ACCESS'),
-			'filter_access',
-			JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'))
-		);
-
-		JHtmlSidebar::addFilter(
-			JText::_('JOPTION_SELECT_LANGUAGE'),
-			'filter_language',
-			JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', $this->state->get('filter.language'))
-		);
-
-		JHtmlSidebar::addFilter(
-		JText::_('JOPTION_SELECT_TAG'),
-		'filter_tag',
-		JHtml::_('select.options', JHtml::_('tag.options', true, true), 'value', 'text', $this->state->get('filter.tag'))
-		);
-*/
 	}
 
 	/**

@@ -25,22 +25,17 @@ class UkrgbHelper extends JHelperContent
 	 */
 	public static function addSubmenu($vName = 'eventmanager')
 	{
-		JSubMenuHelper::addEntry(
+		JHtmlSidebar::addEntry(
 			JText::_('COM_UKRGB_SUBMENU_EVENTS_MANAGER'),
 			'index.php?option=com_ukrgb&view=eventmanager',
 			$vName == 'eventmanager'
 		);
 				
-		JSubMenuHelper::addEntry(
+		JHtmlSidebar::addEntry(
 			JText::_('COM_UKRGB_SUBMENU_CATEGORIES'),
 			'index.php?option=com_categories&extension=com_ukrgb',
 			$vName == 'categories'
 		);
-/* 						if ($vName=='categories') {
-							JToolBarHelper::title(
-							JText::sprintf('COM_CATEGORIES_CATEGORIES_TITLE',JText::_('com_ukrgb')),
-							'ukrgb-categories');
-						} */
 	}
 
 	/**
@@ -49,7 +44,7 @@ class UkrgbHelper extends JHelperContent
 	 * @param	int		The category ID.
 	 * @return	JObject
 	 */
-	public static function getActions($categoryId = 0)
+	/*public static function getActions($categoryId = 0)
 	{
 		$user	= JFactory::getUser();
 		$result	= new JObject;
@@ -69,5 +64,5 @@ class UkrgbHelper extends JHelperContent
 		}
 
 		return $result;
-	}
+	}*/
 }

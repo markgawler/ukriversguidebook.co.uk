@@ -6,31 +6,43 @@
 		<field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
 			readonly="true" class="readonly" description="JGLOBAL_FIELD_ID_DESC" />
 
-		<field name="title" type="text" class="inputbox" size="40"
-			label="JGLOBAL_TITLE" description="COM_UKRGB_FIELD_TITLE_DESC"
+		<field name="title" type="text" class="inputbox input-xxlarge input-large-text" size="40"
+			label="JGLOBAL_TITLE" description="COM_UKRGB_FIELD_EVENT_TITLE_DESC"
 			required="true" />
-
+			
 		<field name="alias" type="text" class="inputbox" size="40"
 			label="JFIELD_ALIAS_LABEL" description="COM_UKRGB_FIELD_ALIAS_DESC" />
+
+		<field name="start_date" type="calendar" label="COM_UKRGB_EVENT_START_DATE"
+			description="COM_UKRGB_EVENT_START_DATE_DESC" format="%Y-%m-%d %H:%M:%S"
+			required="true" class="input-medium" />
+
+		<field name="end_date" type="calendar" label="COM_UKRGB_EVENT_END_DATE"
+			description="COM_UKRGB_EVENT_END_DATE_DESC" format="%Y-%m-%d %H:%M:%S"
+			required="false" class="input-medium" />
 
 		<field name="catid" type="category" extension="COM_UKRGB"
 			label="JCATEGORY" description="COM_UKRGB_FIELD_CATEGORY_DESC"
 			class="inputbox">
 		</field>
 
-		<field name="group_id" type="usergroup"
-			label="COM_UKRGB_FIELD_USERGROUP_LABEL" description="COM_UKRGB_FIELD_USERGROUP_DESC"
-			default="0" size="1">
-		</field>
-
 		<field name="duration" type="integer" filter="integer" first="15"
 			last="90" step="15" default="30" label="COM_UKRGB_FIELD_DURATION_LABEL"
 			description="COM_UKRGB_FIELD_DURATION_DESC" />
+
+		<field name="summary" label="Summary"
+			description="A summary of the event to apear in the calendar. Do not include any HTML or BBCodes"
+			type="textarea" rows="3" cols="100" required="true" filter="string"
+			class="input-block-level"/>
 
 		<field name="description" type="editor" buttons="true" hide="pagebreak,readmore"
 			class="inputbox" 
 			filter="JComponentHelper::filterText"
 			label="JGLOBAL_DESCRIPTION" description="COM_UKRGB_FIELD_DESCRIPTION_DESC" />
+
+		<field name="location" type="text" class="inputbox input-block-level input-large-text" size="40"
+			label="COM_UKRGB_EVENT_LOCATION" description="COM_UKRGB_EVENT_LOCATION_DESC"
+			required="true" />
 
 		<field
 			name="state"
