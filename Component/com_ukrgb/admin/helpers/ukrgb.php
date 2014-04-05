@@ -36,6 +36,12 @@ class UkrgbHelper extends JHelperContent
 			'index.php?option=com_categories&extension=com_ukrgb',
 			$vName == 'categories'
 		);
+		
+		JHtmlSidebar::addEntry(
+			JText::_('COM_UKRGB_SUBMENU_CALENDAR'),
+			'index.php?option=com_ukrgb&view=calendarmanager',
+			$vName == 'calendar'
+		);
 	}
 
 	/**
