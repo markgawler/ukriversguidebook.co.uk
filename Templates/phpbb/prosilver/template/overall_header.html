@@ -90,28 +90,10 @@ xmlns:fb="https://www.facebook.com/2008/fbml" >
 </script>
 <!-- Twitter -->
 <script>
-//!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];
-//if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
-//js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);
-//}}(document,"script","twitter-wjs");
-
-window.twttr = (function (d,s,id) {
-  var t, js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-  js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-  return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
-}(document, "script", "twitter-wjs"));
-
-function trackTwitter(intent_event) {
-    if (intent_event) {
-	  ga('send', 'twitter', 'tweet', '{BOARD_URL}viewtopic.php?t={S_TOPIC_ID}');
-    }
-  }
-
-  //- Wait for async js to load
-  twttr.ready(function (twttr) {
-    twttr.events.bind('tweet', trackTwitter);
-  });
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];
+if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
+js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);
+}}(document,"script","twitter-wjs");
 
 </script>
 
@@ -147,7 +129,13 @@ function trackTwitter(intent_event) {
     //FB.init();
     
 	FB.Event.subscribe('edge.create', function(targetUrl) {
-		  ga('send', 'facebook', 'like', targetUrl);
+		  //ga('send', 'facebook', 'like', targetUrl);
+		  ga('send', {
+			  'hitType': 'social',
+			  'socialNetwork': 'facebook',
+			  'socialAction': 'like',
+			  'socialTarget': targetUrl,
+			});
 		});
 	};
 		
