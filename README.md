@@ -1,3 +1,5 @@
+This repository is obsolite, the main repository is ukriversguidebook.co.uk.core 
+
 ukriversguidebook.co.uk
 =======================
 
